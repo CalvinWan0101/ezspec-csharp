@@ -17,7 +17,7 @@ namespace ezspec_csharp_test {
         public string FeatureText {
             get {
                 string featureText = "Feature: " + Name;
-                if (Description != "") {
+                if ("" != Description) {
                     featureText += "\n\n" + Description;
                 }
                 return featureText;

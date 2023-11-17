@@ -7,19 +7,19 @@ namespace ezspec_csharp_test {
     public class RuleTest {
 
         [TestMethod]
-        public void create_rule_with_name() {
-            Rule rule = Rule.New("name");
-
-            Assert.AreEqual("name", rule.Name);
-            Assert.AreEqual("", rule.Description);
-        }
-
-        [TestMethod]
         public void create_rule_with_name_and_description() {
             Rule rule = Rule.New("name", "description");
 
             Assert.AreEqual("name", rule.Name);
             Assert.AreEqual("description", rule.Description);
+        }
+
+        [TestMethod]
+        public void create_rule_with_name() {
+            Rule rule = Rule.New("name");
+
+            Assert.AreEqual("name", rule.Name);
+            Assert.AreEqual("", rule.Description);
         }
 
         [TestMethod]
