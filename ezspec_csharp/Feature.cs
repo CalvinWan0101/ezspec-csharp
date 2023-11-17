@@ -1,5 +1,6 @@
-﻿namespace ezspec_csharp_test {
-    
+﻿
+namespace ezspec_csharp_test {
+
     public class Feature {
 
         private string name;
@@ -9,8 +10,18 @@
             get { return name; }
         }
 
-        public string Description { 
+        public string Description {
             get { return description; }
+        }
+
+        public string FeatureText {
+            get {
+                string featureText = "Feature: " + Name;
+                if (Description != "") {
+                    featureText += "\n\n" + Description;
+                }
+                return featureText;
+            }
         }
 
         private Feature(string name, string description) {
@@ -26,6 +37,8 @@
             return new Feature(name, description);
         }
 
+        public override string ToString() {
+            return FeatureText;
+        }
     }
-
 }
