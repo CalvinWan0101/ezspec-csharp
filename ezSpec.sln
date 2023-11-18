@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34031.279
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ezSpec", "ezspec\ezSpec.csproj", "{50B3D8D2-88FB-42B1-95BF-4A5FDE7E3B4B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ezSpec_test", "ezspec_test\ezSpec_test.csproj", "{9EDC5B78-B5B3-4627-9FC8-8DA7CD286266}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{50B3D8D2-88FB-42B1-95BF-4A5FDE7E3B4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50B3D8D2-88FB-42B1-95BF-4A5FDE7E3B4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50B3D8D2-88FB-42B1-95BF-4A5FDE7E3B4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50B3D8D2-88FB-42B1-95BF-4A5FDE7E3B4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EDC5B78-B5B3-4627-9FC8-8DA7CD286266}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EDC5B78-B5B3-4627-9FC8-8DA7CD286266}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EDC5B78-B5B3-4627-9FC8-8DA7CD286266}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EDC5B78-B5B3-4627-9FC8-8DA7CD286266}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CB4ED56A-9DB2-4C11-831E-895DED871010}
+	EndGlobalSection
+EndGlobal

@@ -1,7 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ezspec_csharp;
 
-namespace ezspec_csharp_test {
+namespace ezSpec.Test {
 
     [TestClass]
     public class RuleTest {

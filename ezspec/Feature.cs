@@ -1,5 +1,4 @@
-﻿
-namespace ezspec_csharp_test {
+﻿namespace ezSpec {
 
     public class Feature {
 

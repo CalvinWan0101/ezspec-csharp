@@ -1,4 +1,4 @@
-﻿namespace ezspec_csharp {
+﻿namespace ezSpec {
 
     public class Rule {
 
