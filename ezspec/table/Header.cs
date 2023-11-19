@@ -63,5 +63,7 @@ namespace ezSpec.table
             }
             return result.ToString();
         }
+
     }
+
 }

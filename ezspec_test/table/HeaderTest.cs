@@ -3,7 +3,7 @@
 namespace ezSpec.table.test {
 
     [TestClass]
-    public class TableTest {
+    public class HeaderTest {
 
         [TestMethod]
         public void create_empty_header() {
