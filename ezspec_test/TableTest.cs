@@ -1,0 +1,97 @@
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+
+namespace ezSpec.table.test {
+
+    [TestClass]
+    public class TableTest {
+
+        [TestMethod]
+        public void create_empty_header() {
+            Header header = Header.Create();
+
+            Assert.AreEqual(0, header.Size);
+        }
+
+        [TestMethod]
+        public void create_header_with_data() {
+            List<string> data = new List<string>() {
+                "column1", "column2"
+            };
+
+            Header header = Header.Create(data);
+
+            Assert.AreEqual(2, header.Size);
+            Assert.AreEqual("column1", header.Get(0));
+            Assert.AreEqual("column2", header.Get(1));
+        }
+
+        [TestMethod]
+        public void get_header() {
+            List<string> data = new List<string>() {
+                "column1", "column2"
+            };
+            Header header = Header.Create(data);
+
+            IList<string> headerData = header.ColumnNames;
+
+            Assert.AreEqual(2, headerData.Count);
+            Assert.AreEqual("column1", headerData[0]);
+            Assert.AreEqual("column2", headerData[1]);
+        }
+
+        [TestMethod]
+        public void clear_header() {
+            List<string> data = new List<string>() {
+                "column1", "column2"
+            };
+            Header header = Header.Create(data);
+            Assert.AreEqual(2, header.Size);
+
+            header.Clear();
+
+            Assert.AreEqual(0, header.Size);
+        }
+
+        [TestMethod]
+        public void reset_header() {
+            Header header = Header.Create();
+            Assert.AreEqual(0, header.Size);
+
+            List<string> data = new List<string>() {
+                "column1", "column2"
+            };
+            header.Reset(data);
+
+            Assert.AreEqual(2, header.Size);
+            Assert.AreEqual("column1", header.Get(0));
+            Assert.AreEqual("column2", header.Get(1));
+        }
+
+        [TestMethod]
+        public void header_tostring() {
+            List<string> data = new List<string>() {
+                "column1", "column2"
+            };
+            Header header = Header.Create(data);
+
+            string headerStr = header.ToString();
+
+            Assert.AreEqual("|\tcolumn1\t|\tcolumn2\t|", headerStr);
+        }
+
+        [TestMethod]
+        public void header_tostring_builtify() {
+            List<string> data = new List<string>() {
+                "column1", "column2"
+            };
+            Header header = Header.Create(data);
+
+            List<int> columnsLength = new List<int>() {
+                10, 15
+            };
+            string headerStr = header.ToString(columnsLength);
+
+            Assert.AreEqual("| column1  | column2       |", headerStr);
+        }
+    }
+}
