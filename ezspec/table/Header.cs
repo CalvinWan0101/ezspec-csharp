@@ -54,6 +54,10 @@ namespace ezSpec.table
         }
 
         public string ToString(IList<int> columnsLength) {
+            if (columnsLength.Count != header.Count) {
+                throw new Exception("The count of columnsLength didn't match the count of header.");
+            }
+
             StringBuilder result = new StringBuilder("|");
             for (int i = 0; i < header.Count; i++) {
                 result.Append(" ");

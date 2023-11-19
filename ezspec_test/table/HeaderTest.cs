@@ -93,5 +93,18 @@ namespace ezSpec.table.test {
 
             Assert.AreEqual("| column1  | column2       |", headerStr);
         }
+
+        [TestMethod]
+        public void header_toString_with_wrong_amount_of_column() {
+            List<string> data = new List<string>() {
+                "column1", "column2"
+            };
+            Header header = Header.Create(data);
+
+            List<int> columnsLength = new List<int>() {
+                10
+            };
+            Assert.ThrowsException<Exception>(() => header.ToString(columnsLength));
+        }
     }
 }
