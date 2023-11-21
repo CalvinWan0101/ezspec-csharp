@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Text;
 
 namespace ezSpec.table {
     public class Row {
@@ -24,8 +25,36 @@ namespace ezSpec.table {
                     return columns[i];
                 }
             }
+            throw new SystemException($"Unable to get the \"{columnName}\"");
+        }
+
+        public string GetOrEmpty(string columnName) {
+            for (int i = 0; i < columns.Count; i++) {
+                if (header.Get(i) == columnName) {
+                    return columns[i];
+                }
+            }
             return "";
         }
 
+        public override string ToString() {
+            StringBuilder sb = new StringBuilder("|");
+            foreach (string column in columns) {
+                sb.Append($"\t{column}\t|");
+            }
+            return sb.ToString();
+        }
+
+        public string ToString(IList<int> columnsLength) { 
+            StringBuilder sb = new StringBuilder("|");
+            for (int i = 0; i < columns.Count; i++) {
+                sb.Append(" ");
+                sb.Append(columns[i]);
+                sb.Append(new string(' ', columnsLength[i] - columns[i].Length - 1));
+                sb.Append("|");
+            }
+
+            return sb.ToString();
+        }
     }
 }

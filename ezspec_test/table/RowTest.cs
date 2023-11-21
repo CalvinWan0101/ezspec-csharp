@@ -50,5 +50,63 @@ namespace ezSpec.table.test {
             Assert.AreEqual("data1", row.Get("column1"));
             Assert.AreEqual("data2", row.Get("column2"));
         }
+
+        [TestMethod]
+        public void get_column_by_name_not_exist() {
+            List<string> rowData = new List<string>() {
+                "data1", "data2"
+            };
+            Row row = new Row(header, rowData);
+
+            Assert.ThrowsException<SystemException>(() => {
+                row.Get("columnNotExist");
+            });
+        }
+
+        [TestMethod]
+        public void get_column_or_empty_by_name() {
+            List<string> rowData = new List<string>() {
+                "data1", "data2"
+            };
+            Row row = new Row(header, rowData);
+
+            Assert.AreEqual("data1", row.GetOrEmpty("column1"));
+            Assert.AreEqual("data2", row.GetOrEmpty("column2"));
+        }
+
+        [TestMethod]
+        public void get_column_or_empty_by_name_not_exist() {
+            List<string> rowData = new List<string>() {
+                "data1", "data2"
+            };
+            Row row = new Row(header, rowData);
+
+            Assert.AreEqual("", row.GetOrEmpty("columnNotExist"));
+        }
+
+        [TestMethod]
+        public void to_string() {
+            List<string> rowData = new List<string>() {
+                "data1", "data2"
+            };
+            Row row = new Row(header, rowData);
+
+            Assert.AreEqual("|\tdata1\t|\tdata2\t|", row.ToString());
+        }
+
+        [TestMethod]
+        public void to_string_beautify() {
+            List<string> rowData = new List<string>() {
+                "data1", "data2"
+            };
+            Row row = new Row(header, rowData);
+
+            List<int> columnsLength = new List<int>() {
+                10, 15
+            };
+
+            Assert.AreEqual("| data1    | data2         |", row.ToString(columnsLength));
+
+        }
     }
 }
