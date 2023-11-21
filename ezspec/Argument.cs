@@ -15,7 +15,7 @@ namespace ezSpec {
             get { return value; }
         }
 
-        static public Argument Create(string expression) {
+        static public Argument New(string expression) {
             return new Argument(expression);
         }
 

@@ -38,7 +38,7 @@ namespace ezSpec {
                 GroupCollection groups = matchs[0].Groups;
 
                 foreach(Match match in matchs) {
-                    arguments.Add(Argument.Create(match.Groups[0].Value));
+                    arguments.Add(Argument.New(match.Groups[0].Value));
                 }
 
                 return arguments;

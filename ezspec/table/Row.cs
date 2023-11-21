@@ -15,6 +15,11 @@ namespace ezSpec.table {
             this.columns = new List<string>(columns);
         }
 
+        public Row(Row row) {
+            this.header = Header.New(row.header);
+            this.columns = new List<string>(row.columns);
+        }
+
         public string Get(int index) {
             return columns[index];
         }

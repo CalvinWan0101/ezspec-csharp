@@ -7,7 +7,7 @@ namespace ezSpec.table.test {
 
         [TestMethod]
         public void create_empty_header() {
-            Header header = Header.Create();
+            Header header = Header.New();
 
             Assert.AreEqual(0, header.Size);
         }
@@ -18,7 +18,7 @@ namespace ezSpec.table.test {
                 "column1", "column2"
             };
 
-            Header header = Header.Create(data);
+            Header header = Header.New(data);
 
             Assert.AreEqual(2, header.Size);
             Assert.AreEqual("column1", header.Get(0));
@@ -26,11 +26,23 @@ namespace ezSpec.table.test {
         }
 
         [TestMethod]
+        public void create_header_with_header() {
+            List<string> data = new List<string>() {
+                "column1", "column2"
+            };
+            Header header = Header.New(data);
+            Header headerCopy = Header.New(header);
+
+            data[0] = "column";
+            Assert.AreEqual("column1", headerCopy.Get(0));
+        }
+
+        [TestMethod]
         public void get_header() {
             List<string> data = new List<string>() {
                 "column1", "column2"
             };
-            Header header = Header.Create(data);
+            Header header = Header.New(data);
 
             IList<string> headerData = header.ColumnNames;
 
@@ -44,7 +56,7 @@ namespace ezSpec.table.test {
             List<string> data = new List<string>() {
                 "column1", "column2"
             };
-            Header header = Header.Create(data);
+            Header header = Header.New(data);
             Assert.AreEqual(2, header.Size);
 
             header.Clear();
@@ -54,7 +66,7 @@ namespace ezSpec.table.test {
 
         [TestMethod]
         public void reset_header() {
-            Header header = Header.Create();
+            Header header = Header.New();
             Assert.AreEqual(0, header.Size);
 
             List<string> data = new List<string>() {
@@ -72,7 +84,7 @@ namespace ezSpec.table.test {
             List<string> data = new List<string>() {
                 "column1", "column2"
             };
-            Header header = Header.Create(data);
+            Header header = Header.New(data);
 
             string headerStr = header.ToString();
 
@@ -82,7 +94,7 @@ namespace ezSpec.table.test {
         [TestMethod]
         public void empty_header_to_string() {
             List<string> data = new List<string>() {};
-            Header header = Header.Create(data);
+            Header header = Header.New(data);
 
             string headerStr = header.ToString();
 
@@ -94,7 +106,7 @@ namespace ezSpec.table.test {
             List<string> data = new List<string>() {
                 "column1", "column2"
             };
-            Header header = Header.Create(data);
+            Header header = Header.New(data);
 
             List<int> columnsLength = new List<int>() {
                 10, 15
@@ -107,7 +119,7 @@ namespace ezSpec.table.test {
         [TestMethod]
         public void empty_header_to_string_beautify() {
             List<string> data = new List<string>() {};
-            Header header = Header.Create(data);
+            Header header = Header.New(data);
 
             List<int> columnsLength = new List<int> {};
             string headerStr = header.ToString(columnsLength);
@@ -120,7 +132,7 @@ namespace ezSpec.table.test {
             List<string> data = new List<string>() {
                 "column1", "column2"
             };
-            Header header = Header.Create(data);
+            Header header = Header.New(data);
 
             List<int> columnsLength = new List<int>() {
                 10

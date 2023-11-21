@@ -23,12 +23,20 @@ namespace ezSpec.table
             header = new List<string>(data);
         }
 
-        static public Header Create() {
+        private Header(Header header) {
+            this.header = new List<string>(header.header);
+        }
+
+        static public Header New() {
             return new Header();
         }
 
-        static public Header Create(IList<string> data) {
+        static public Header New(IList<string> data) {
             return new Header(data);
+        }
+
+        static public Header New(Header header) {
+            return new Header(header);
         }
 
         public string Get(int index) {

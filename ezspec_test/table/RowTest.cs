@@ -13,7 +13,7 @@ namespace ezSpec.table.test {
                 "column1", "column2"
             };
 
-            header = Header.Create(data);
+            header = Header.New(data);
         }
 
         [TestMethod]
@@ -27,6 +27,19 @@ namespace ezSpec.table.test {
             Assert.AreEqual(2, columns.Count);
             Assert.AreEqual("data1", columns[0]);
             Assert.AreEqual("data2", columns[1]);
+        }
+
+        [TestMethod]
+        public void create_row_with_row() {
+            List<string> rowData = new List<string>() {
+                "data1", "data2"
+            };
+            Row row = new Row(header, rowData);
+            Row rowCopy = new Row(row);
+
+            Assert.AreEqual(2, rowCopy.Columns.Count);
+            Assert.AreEqual(row.Columns[0], rowCopy.Columns[0]);
+            Assert.AreEqual(row.Columns[1], rowCopy.Columns[1]);
         }
 
         [TestMethod]
