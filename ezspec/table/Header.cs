@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Data.Common;
 using System.Text;
 
 namespace ezSpec.table
@@ -45,17 +46,17 @@ namespace ezSpec.table
         public override string ToString() {
             StringBuilder result = new StringBuilder("|");
             foreach (string columnName in header) {
-                result.Append('\t');
-                result.Append(columnName);
-                result.Append('\t');
-                result.Append('|');
+                result.Append($"\t{columnName}\t|");
+            }
+            if (0 == header.Count) {
+                result.Append("|");
             }
             return result.ToString();
         }
 
         public string ToString(IList<int> columnsLength) {
             if (columnsLength.Count != header.Count) {
-                throw new Exception("The count of columnsLength didn't match the count of header.");
+                throw new SystemException("The count of columnsLength didn't match the count of header.");
             }
 
             StringBuilder result = new StringBuilder("|");
@@ -63,6 +64,9 @@ namespace ezSpec.table
                 result.Append(" ");
                 result.Append(header[i]);
                 result.Append(new string(' ', columnsLength[i] - header[i].Length - 1));
+                result.Append("|");
+            }
+            if (0 == header.Count) {
                 result.Append("|");
             }
             return result.ToString();

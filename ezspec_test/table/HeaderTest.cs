@@ -68,7 +68,7 @@ namespace ezSpec.table.test {
         }
 
         [TestMethod]
-        public void header_tostring() {
+        public void header_to_string() {
             List<string> data = new List<string>() {
                 "column1", "column2"
             };
@@ -80,7 +80,17 @@ namespace ezSpec.table.test {
         }
 
         [TestMethod]
-        public void header_tostring_builtify() {
+        public void empty_header_to_string() {
+            List<string> data = new List<string>() {};
+            Header header = Header.Create(data);
+
+            string headerStr = header.ToString();
+
+            Assert.AreEqual("||", headerStr);
+        }
+
+        [TestMethod]
+        public void header_to_string_beautify() {
             List<string> data = new List<string>() {
                 "column1", "column2"
             };
@@ -95,7 +105,18 @@ namespace ezSpec.table.test {
         }
 
         [TestMethod]
-        public void header_toString_with_wrong_amount_of_column() {
+        public void empty_header_to_string_beautify() {
+            List<string> data = new List<string>() {};
+            Header header = Header.Create(data);
+
+            List<int> columnsLength = new List<int> {};
+            string headerStr = header.ToString(columnsLength);
+
+            Assert.AreEqual("||", headerStr);
+        }
+
+        [TestMethod]
+        public void header_to_string_with_wrong_amount_of_column() {
             List<string> data = new List<string>() {
                 "column1", "column2"
             };
@@ -104,7 +125,7 @@ namespace ezSpec.table.test {
             List<int> columnsLength = new List<int>() {
                 10
             };
-            Assert.ThrowsException<Exception>(() => header.ToString(columnsLength));
+            Assert.ThrowsException<SystemException>(() => header.ToString(columnsLength));
         }
     }
 }

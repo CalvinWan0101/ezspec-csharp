@@ -85,7 +85,7 @@ namespace ezSpec.table.test {
         }
 
         [TestMethod]
-        public void to_string() {
+        public void row_to_string() {
             List<string> rowData = new List<string>() {
                 "data1", "data2"
             };
@@ -95,7 +95,15 @@ namespace ezSpec.table.test {
         }
 
         [TestMethod]
-        public void to_string_beautify() {
+        public void empty_row_to_string() {
+            List<string> rowData = new List<string>() {};
+            Row row = new Row(header, rowData);
+
+            Assert.AreEqual("||", row.ToString());
+        }
+
+        [TestMethod]
+        public void row_to_string_beautify() {
             List<string> rowData = new List<string>() {
                 "data1", "data2"
             };
@@ -106,7 +114,30 @@ namespace ezSpec.table.test {
             };
 
             Assert.AreEqual("| data1    | data2         |", row.ToString(columnsLength));
+        }
 
+        [TestMethod]
+        public void empty_row_to_string_beautify() {
+            List<string> rowData = new List<string>() {};
+            Row row = new Row(header, rowData);
+
+            List<int> columnsLength = new List<int>() {};
+
+            Assert.AreEqual("||", row.ToString(columnsLength));
+        }
+
+        [TestMethod]
+        public void row_to_string_with_wrong_amount_of_column() {
+            List<string> rowData = new List<string>() {
+                "data1", "data2"
+            };
+            Row row = new Row(header, rowData);
+
+            List<int> columnsLength = new List<int>() {
+                10
+            };
+
+            Assert.ThrowsException<SystemException>(() => row.ToString(columnsLength));
         }
     }
 }

@@ -42,10 +42,17 @@ namespace ezSpec.table {
             foreach (string column in columns) {
                 sb.Append($"\t{column}\t|");
             }
+            if (0 == columns.Count) {
+                sb.Append("|");
+            }
             return sb.ToString();
         }
 
         public string ToString(IList<int> columnsLength) { 
+            if (columnsLength.Count != columns.Count) {
+                throw new SystemException("The count of columnsLength didn't match the count of row.");
+            }
+
             StringBuilder sb = new StringBuilder("|");
             for (int i = 0; i < columns.Count; i++) {
                 sb.Append(" ");
@@ -53,7 +60,9 @@ namespace ezSpec.table {
                 sb.Append(new string(' ', columnsLength[i] - columns[i].Length - 1));
                 sb.Append("|");
             }
-
+            if (0 == columns.Count) {
+                sb.Append("|");
+            }
             return sb.ToString();
         }
     }
