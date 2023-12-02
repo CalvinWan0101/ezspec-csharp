@@ -6,7 +6,7 @@ namespace ezSpec.table {
         private Header header;
         private IList<string> columns;
 
-        public IList<string> Columns {
+        public ReadOnlyCollection<string> Columns {
             get { return new ReadOnlyCollection<string>(columns); }
         }
 

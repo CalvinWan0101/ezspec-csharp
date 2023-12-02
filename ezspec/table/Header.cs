@@ -11,7 +11,7 @@ namespace ezSpec.table
             get { return header.Count; }
         }
 
-        public IList<string> ColumnNames {
+        public ReadOnlyCollection<string> ColumnNames {
             get { return new ReadOnlyCollection<string>(header); }
         }
 
