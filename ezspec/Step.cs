@@ -1,17 +1,12 @@
 ﻿using System.Text.RegularExpressions;
 
 namespace ezSpec {
-    public class Step {
 
+    public class Step {
         public delegate void StepCallback();
 
-        static public bool ContinuousAfterFailure {
-            get { return true; }
-        }
-
-        static public bool TerminateAfterFailure {
-            get { return false; }
-        }
+        public static readonly bool ContinuousAfterFailure = true;
+        public static readonly bool TerminateAfterFailure = false;
 
         private string description;
         private StepCallback callback;
