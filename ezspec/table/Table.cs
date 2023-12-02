@@ -18,29 +18,28 @@ namespace ezSpec.table {
             get { return rows; }
         }
 
-        // TODO: The table with empty header may not be necessary.
-        public Table() {
-            this.header = Header.New();
-            this.rows = new List<Row>();
-            this.rawData = "";
-        }
+        //public Table() {
+        //    this.header = Header.New();
+        //    this.rows = new List<Row>();
+        //    this.rawData = "";
+        //}
 
-        public Table(Header header) {
-            this.header = Header.New(header);
-            this.rows = new List<Row>();
-            this.rawData = "";
-        }
+        //public Table(Header header) {
+        //    this.header = Header.New(header);
+        //    this.rows = new List<Row>();
+        //    this.rawData = "";
+        //}
 
-        public Table(Header header, IList<Row> rows) {
+        private Table(Header header, IList<Row> rows) {
             this.header = Header.New(header);
             this.rows = new List<Row>();
             foreach (Row row in rows) {
-                this.rows.Add(new Row(row));
+                this.rows.Add(Row.New(row));
             }
             this.rawData = "";
         }
 
-        public Table(string rawData) {
+        private Table(string rawData) {
             this.rawData = rawData;
             rawData = rawData.Replace("\r\n", "\n");
             List<string> lines = rawData.Split('\n').ToList();
@@ -51,17 +50,38 @@ namespace ezSpec.table {
             this.rows = new List<Row>();
             for (int i = 1; i < lines.Count; i++) {
                 List<string> columns = ConvertLineStringToRowData(lines[i]);
-                this.rows.Add(new Row(this.header, columns));
+                this.rows.Add(Row.New(this.header, columns));
             }
         }
 
-        public Table(Table table) {
+        private Table(Table table) {
             this.header = Header.New(table.header);
             this.rows = new List<Row>();
             foreach (Row row in table.rows) {
-                this.rows.Add(new Row(row));
+                this.rows.Add(Row.New(row));
             }
             this.rawData = table.rawData;
+        }
+
+        // TODO: The table with empty header may not be necessary.
+        public static Table New() {
+            return new Table(Header.New(), new List<Row>());
+        }
+
+        public static Table New(Header header) {
+            return new Table(header, new List<Row>());
+        }
+
+        public static Table New(Header header, List<Row> rows) {
+            return new Table(header, rows);
+        }
+
+        public static Table New(string rawData) {
+            return new Table(rawData);
+        }
+
+        public static Table New(Table table) {
+            return new Table(table);
         }
 
         private List<string> ConvertLineStringToRowData(string line) {
@@ -87,11 +107,11 @@ namespace ezSpec.table {
         }
 
         //public void AddRow(Row row) {
-        //    rows.Add(new Row(row));
+        //    rows.Add(Row.New(row));
         //}
 
         //public void AddRow(IList<string> columns) {
-        //    rows.Add(new Row(header, columns));
+        //    rows.Add(Row.New(header, columns));
         //}
 
         //public void Clear() {

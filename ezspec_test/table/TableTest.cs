@@ -15,14 +15,14 @@ namespace ezSpec.table.test {
             header = Header.New(headerData);
 
             rows = new List<Row>();
-            rows.Add(new Row(header, new List<string>() { "10001", "Joe", "60" }));
-            rows.Add(new Row(header, new List<string>() { "10002", "Calvin", "80" }));
-            rows.Add(new Row(header, new List<string>() { "10003", "Howard", "100" }));
+            rows.Add(Row.New(header, new List<string>() { "10001", "Joe", "60" }));
+            rows.Add(Row.New(header, new List<string>() { "10002", "Calvin", "80" }));
+            rows.Add(Row.New(header, new List<string>() { "10003", "Howard", "100" }));
         }
 
         [TestMethod]
         public void create_table() {
-            Table table = new Table();
+            Table table = Table.New();
 
             Assert.AreEqual(0, table.Header.Size);
             Assert.AreEqual(0, table.Rows.Count);
@@ -31,7 +31,7 @@ namespace ezSpec.table.test {
 
         [TestMethod]
         public void create_table_with_header() {
-            Table table = new Table(header);
+            Table table = Table.New(header);
 
             Assert.AreEqual(3, table.Header.Size);
             Assert.AreEqual("id", table.Header.Get(0));
@@ -43,7 +43,7 @@ namespace ezSpec.table.test {
 
         [TestMethod]
         public void create_table_with_header_and_rows() {
-            Table table = new Table(header, rows);
+            Table table = Table.New(header, rows);
 
             List<int> beautify = new List<int>() {
                 7, 8, 5
@@ -65,7 +65,7 @@ namespace ezSpec.table.test {
                 | 10002 | Calvin |  80   |
                 | 10003 | Howard |  100  |";
 
-            Table table = new Table(rawData);
+            Table table = Table.New(rawData);
 
             List<int> beautify = new List<int>() {
                 7, 8, 7
@@ -82,9 +82,9 @@ namespace ezSpec.table.test {
 
         [TestMethod]
         public void create_table_from_table() {
-            Table table = new Table(header, rows);
+            Table table = Table.New(header, rows);
 
-            Table newTable = new Table(table);
+            Table newTable = Table.New(table);
 
             List<int> beautify = new List<int>() {
                 7, 8, 7
@@ -106,9 +106,9 @@ namespace ezSpec.table.test {
                 | 10001 |  Joe   |  60   |
                 | 10002 | Calvin |  80   |
                 | 10003 | Howard |  100  |";
-            Table table = new Table(rawData);
+            Table table = Table.New(rawData);
 
-            Table newTable = new Table(table);
+            Table newTable = Table.New(table);
 
             List<int> beautify = new List<int>() {
                 7, 8, 7
@@ -125,7 +125,7 @@ namespace ezSpec.table.test {
 
         [TestMethod]
         public void get_row_by_index() {
-            Table table = new Table(header, rows);
+            Table table = Table.New(header, rows);
 
             Assert.AreEqual(rows[0].ToString(), table.GetRow(0).ToString());
             Assert.AreEqual(rows[1].ToString(), table.GetRow(1).ToString());
@@ -134,7 +134,7 @@ namespace ezSpec.table.test {
 
         [TestMethod]
         public void get_row_by_first_column() {
-            Table table = new Table(header, rows);
+            Table table = Table.New(header, rows);
 
             Assert.AreEqual(rows[0].ToString(), table.GetRow("10001").ToString());
             Assert.AreEqual(rows[1].ToString(), table.GetRow("10002").ToString());
@@ -143,14 +143,14 @@ namespace ezSpec.table.test {
 
         [TestMethod]
         public void get_row_by_first_column_with_illegal_column() {
-            Table table = new Table(header, rows);
+            Table table = Table.New(header, rows);
 
             Assert.ThrowsException<SystemException>(() => table.GetRow("10004"));
         }
 
         //[TestMethod]
         //public void add_new_row_to_table() {
-        //    Table table = new Table(header, rows);
+        //    Table table = Table.New(header, rows);
         //    Row newRow = new Row(header, new List<string>() { "10004", "Annie", "40" });
         //    table.AddRow(newRow);
 
@@ -160,7 +160,7 @@ namespace ezSpec.table.test {
 
         //[TestMethod]
         //public void add_new_row_to_table_by_list_of_string() {
-        //    Table table = new Table(header, rows);
+        //    Table table = Table.New(header, rows);
 
         //    List<string> columns = new List<string>();
         //    columns.Add("10004");
@@ -176,7 +176,7 @@ namespace ezSpec.table.test {
 
         //[TestMethod]
         //public void clear_table() {
-        //    Table table = new Table(header, rows);
+        //    Table table = Table.New(header, rows);
         //    table.Clear();
 
         //    Assert.AreEqual(0, table.Rows.Count);
@@ -184,7 +184,7 @@ namespace ezSpec.table.test {
 
         [TestMethod]
         public void table_to_string() {
-            Table table = new Table(header, rows);
+            Table table = Table.New(header, rows);
 
             string expected =
                 "|\tid\t|\tname\t|\tscore\t|\n" +
@@ -197,7 +197,7 @@ namespace ezSpec.table.test {
 
         [TestMethod]
         public void table_to_string_with_beautify() {
-            Table table = new Table(header, rows);
+            Table table = Table.New(header, rows);
 
             string expected =
                 "| id    | name   | score |\n" +

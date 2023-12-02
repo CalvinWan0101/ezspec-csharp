@@ -7,7 +7,7 @@ namespace ezSpec.Test {
 
         [TestMethod]
         public void create_runtime_scenario_with_name_and_rule() {
-            RuntimeScenario runtimeScenario = new RuntimeScenario("name");
+            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
             Assert.AreEqual("name", runtimeScenario.Name);
         }
 

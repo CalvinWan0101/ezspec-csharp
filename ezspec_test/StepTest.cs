@@ -7,14 +7,14 @@ namespace ezSpec.Test {
 
         [TestMethod]
         public void create_step() {
-            Step step = new Step("description", () => {});
+            Step step = Step.New("description", () => {});
             Assert.AreEqual("description", step.Description);
             Assert.IsFalse(step.IsContinuousAfterFailure);
         }
 
         [TestMethod]
         public void create_step_with_continous() {
-            Step step = new Step("description", Step.ContinuousAfterFailure, () => {});
+            Step step = Step.New("description", Step.ContinuousAfterFailure, () => {});
             Assert.AreEqual("description", step.Description);
             Assert.IsTrue(step.IsContinuousAfterFailure);
         }
@@ -22,7 +22,7 @@ namespace ezSpec.Test {
         [TestMethod]
         public void invoke_step_callback() {
             int notifyCount = 0;
-            Step step = new Step("description", () => {
+            Step step = Step.New("description", () => {
                 notifyCount++;
             });
 
@@ -33,7 +33,7 @@ namespace ezSpec.Test {
 
         [TestMethod]
         public void description_with_dollar_sign_argument() {
-            Step step = new Step("With argument $123", () => {});
+            Step step = Step.New("With argument $123", () => {});
 
             List<Argument> arguments = step.Arguments;
 
@@ -44,7 +44,7 @@ namespace ezSpec.Test {
 
         [TestMethod]
         public void description_with_equal_sign_argument_in_curly_brackets() {
-            Step step = new Step("With argument ${arg=123}", () => {});
+            Step step = Step.New("With argument ${arg=123}", () => {});
 
             List<Argument> arguments = step.Arguments;
 
@@ -55,7 +55,7 @@ namespace ezSpec.Test {
 
         [TestMethod]
         public void description_with_colon_argument_in_curly_brackets() {
-            Step step = new Step("With argument ${arg:123}", () => { });
+            Step step = Step.New("With argument ${arg:123}", () => { });
 
             List<Argument> arguments = step.Arguments;
 
@@ -66,7 +66,7 @@ namespace ezSpec.Test {
 
         [TestMethod]
         public void description_with_many_arguments() {
-            Step step = new Step("With arrguments ${arg1:abc}, $$210 , and ${arg2=123}", () => {});
+            Step step = Step.New("With arrguments ${arg1:abc}, $$210 , and ${arg2=123}", () => {});
 
             List<Argument> arguments = step.Arguments;
 

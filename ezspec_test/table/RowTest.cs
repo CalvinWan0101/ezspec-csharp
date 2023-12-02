@@ -21,7 +21,7 @@ namespace ezSpec.table.test {
             List<string> rowData = new List<string>() {
                 "data1", "data2"
             };
-            Row row = new Row(header, rowData);
+            Row row = Row.New(header, rowData);
             IList<string> columns = row.Columns;
 
             Assert.AreEqual(2, columns.Count);
@@ -34,8 +34,8 @@ namespace ezSpec.table.test {
             List<string> rowData = new List<string>() {
                 "data1", "data2"
             };
-            Row row = new Row(header, rowData);
-            Row rowCopy = new Row(row);
+            Row row = Row.New(header, rowData);
+            Row rowCopy = Row.New(row);
 
             Assert.AreEqual(2, rowCopy.Columns.Count);
             Assert.AreEqual(row.Columns[0], rowCopy.Columns[0]);
@@ -47,7 +47,7 @@ namespace ezSpec.table.test {
             List<string> rowData = new List<string>() {
                 "data1", "data2"
             };
-            Row row = new Row(header, rowData);
+            Row row = Row.New(header, rowData);
 
             Assert.AreEqual("data1", row.Get(0));
             Assert.AreEqual("data2", row.Get(1));
@@ -58,7 +58,7 @@ namespace ezSpec.table.test {
             List<string> rowData = new List<string>() {
                 "data1", "data2"
             };
-            Row row = new Row(header, rowData);
+            Row row = Row.New(header, rowData);
 
             Assert.AreEqual("data1", row.Get("column1"));
             Assert.AreEqual("data2", row.Get("column2"));
@@ -69,7 +69,7 @@ namespace ezSpec.table.test {
             List<string> rowData = new List<string>() {
                 "data1", "data2"
             };
-            Row row = new Row(header, rowData);
+            Row row = Row.New(header, rowData);
 
             Assert.ThrowsException<SystemException>(() => {
                 row.Get("columnNotExist");
@@ -81,7 +81,7 @@ namespace ezSpec.table.test {
             List<string> rowData = new List<string>() {
                 "data1", "data2"
             };
-            Row row = new Row(header, rowData);
+            Row row = Row.New(header, rowData);
 
             Assert.AreEqual("data1", row.GetOrEmpty("column1"));
             Assert.AreEqual("data2", row.GetOrEmpty("column2"));
@@ -92,7 +92,7 @@ namespace ezSpec.table.test {
             List<string> rowData = new List<string>() {
                 "data1", "data2"
             };
-            Row row = new Row(header, rowData);
+            Row row = Row.New(header, rowData);
 
             Assert.AreEqual("", row.GetOrEmpty("columnNotExist"));
         }
@@ -102,7 +102,7 @@ namespace ezSpec.table.test {
             List<string> rowData = new List<string>() {
                 "data1", "data2"
             };
-            Row row = new Row(header, rowData);
+            Row row = Row.New(header, rowData);
 
             Assert.AreEqual("|\tdata1\t|\tdata2\t|", row.ToString());
         }
@@ -110,7 +110,7 @@ namespace ezSpec.table.test {
         [TestMethod]
         public void empty_row_to_string() {
             List<string> rowData = new List<string>() {};
-            Row row = new Row(header, rowData);
+            Row row = Row.New(header, rowData);
 
             Assert.AreEqual("||", row.ToString());
         }
@@ -120,7 +120,7 @@ namespace ezSpec.table.test {
             List<string> rowData = new List<string>() {
                 "data1", "data2"
             };
-            Row row = new Row(header, rowData);
+            Row row = Row.New(header, rowData);
 
             List<int> columnsLength = new List<int>() {
                 10, 15
@@ -132,7 +132,7 @@ namespace ezSpec.table.test {
         [TestMethod]
         public void empty_row_to_string_beautify() {
             List<string> rowData = new List<string>() {};
-            Row row = new Row(header, rowData);
+            Row row = Row.New(header, rowData);
 
             List<int> columnsLength = new List<int>() {};
 
@@ -144,7 +144,7 @@ namespace ezSpec.table.test {
             List<string> rowData = new List<string>() {
                 "data1", "data2"
             };
-            Row row = new Row(header, rowData);
+            Row row = Row.New(header, rowData);
 
             List<int> columnsLength = new List<int>() {
                 10

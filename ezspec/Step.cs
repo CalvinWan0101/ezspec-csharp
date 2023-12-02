@@ -45,16 +45,18 @@ namespace ezSpec {
             }
         }
 
-        public Step(string description, StepCallback callback) { 
-            this.description = description;
-            this.continousAfterFailure = false;
-            this.callback = callback;
-        }
-
-        public Step(string description, bool continous, StepCallback callback) {
+        private Step(string description, bool continous, StepCallback callback) {
             this.description = description;
             this.continousAfterFailure = continous;
             this.callback= callback;
+        }
+
+        public static Step New(string description, StepCallback callback) {
+            return new Step(description, TerminateAfterFailure, callback);
+        }
+
+        public static Step New(string description, bool continous, StepCallback callback) {
+            return new Step(description, continous, callback);
         }
     }
 }

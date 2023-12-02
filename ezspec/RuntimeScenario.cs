@@ -6,8 +6,12 @@
             get { return name; }
         }
 
-        public RuntimeScenario(string name) {
+        private RuntimeScenario(string name) {
             this.name = name;
+        }
+
+        public static RuntimeScenario New(string name) {
+            return new RuntimeScenario(name);
         }
 
         //public void Given(string v, Action value) {

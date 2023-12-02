@@ -28,11 +28,11 @@
             this.description = description;
         }
 
-        static public Feature New(string name) {
+        public static Feature New(string name) {
             return new Feature(name, "");
         }
 
-        static public Feature New(string name, string description) {
+        public static Feature New(string name, string description) {
             return new Feature(name, description);
         }
 

@@ -18,11 +18,11 @@
             this.description = description;
         }
 
-        static public Rule New(string name) {
+        public static Rule New(string name) {
             return new Rule(name, "");
         }
 
-        static public Rule New(string name, string description) {
+        public static Rule New(string name, string description) {
             return new Rule(name, description);
         }
 
