@@ -53,7 +53,21 @@ namespace ezSpec.table {
         public override string ToString() {
             StringBuilder sb = new StringBuilder("|");
             foreach (string column in columns) {
-                sb.Append($"\t{column}\t|");
+                if (Table.ContainsTable(column)) {
+                    sb.Append("\t|");
+                }
+                else {
+                    sb.Append($"\t{column}\t|");
+                }
+            }
+
+            for (int i = 0; i < columns.Count; i++) {
+                if (Table.ContainsTable(columns[i])) {
+                    sb.Append("\n");
+                    sb.Append($"\t<{header.Get(i)}>\n");
+                    sb.Append("\t");
+                    sb.Append(Table.New(columns[i]).ToString().Replace("\n", "\n\t"));
+                }
             }
             if (0 == columns.Count) {
                 sb.Append("|");
@@ -61,17 +75,32 @@ namespace ezSpec.table {
             return sb.ToString();
         }
 
-        public string ToString(IList<int> columnsLength) { 
+        public string ToString(IList<int> columnsLength) {
             if (columnsLength.Count != columns.Count) {
                 throw new SystemException("The count of columnsLength didn't match the count of row.");
             }
 
             StringBuilder sb = new StringBuilder("|");
             for (int i = 0; i < columns.Count; i++) {
-                sb.Append(" ");
-                sb.Append(columns[i]);
-                sb.Append(new string(' ', columnsLength[i] - columns[i].Length - 1));
-                sb.Append("|");
+                if (Table.ContainsTable(columns[i])) { 
+                    sb.Append(new string(' ', columnsLength[i]));
+                    sb.Append("|");
+                }
+                else {
+                    sb.Append(" ");
+                    sb.Append(columns[i]);
+                    sb.Append(new string(' ', columnsLength[i] - columns[i].Length - 1));
+                    sb.Append("|");
+                }
+            }
+
+            for (int i = 0; i < columns.Count; i++) {
+                if (Table.ContainsTable(columns[i])) {
+                    sb.Append("\n");
+                    sb.Append($"\t<{header.Get(i)}>\n");
+                    sb.Append("\t");
+                    sb.Append(Table.New(columns[i]).ToStringBeautify().Replace("\n", "\n\t"));
+                }
             }
             if (0 == columns.Count) {
                 sb.Append("|");

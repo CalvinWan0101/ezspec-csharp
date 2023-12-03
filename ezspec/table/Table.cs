@@ -18,18 +18,6 @@ namespace ezSpec.table {
             get { return rows; }
         }
 
-        //public Table() {
-        //    this.header = Header.New();
-        //    this.rows = new List<Row>();
-        //    this.rawData = "";
-        //}
-
-        //public Table(Header header) {
-        //    this.header = Header.New(header);
-        //    this.rows = new List<Row>();
-        //    this.rawData = "";
-        //}
-
         private Table(Header header, IList<Row> rows) {
             this.header = Header.New(header);
             this.rows = new List<Row>();
@@ -106,6 +94,7 @@ namespace ezSpec.table {
             throw new SystemException($"Unable to get the row with the first column \"{firstColumn}\"");
         }
 
+        // TODO: The change of the table may be unnecessary.
         //public void AddRow(Row row) {
         //    rows.Add(Row.New(row));
         //}
@@ -146,6 +135,9 @@ namespace ezSpec.table {
         private int GetMaxColumnLength(int columnIndex) {
             int max = header.Get(columnIndex).Length;
             foreach (Row row in rows) {
+                if (ContainsTable(row.Get(columnIndex))) {
+                    break;
+                }
                 if (row.Get(columnIndex).Length > max) {
                     max = row.Get(columnIndex).Length;
                 }

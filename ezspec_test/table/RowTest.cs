@@ -109,10 +109,36 @@ namespace ezSpec.table.test {
 
         [TestMethod]
         public void empty_row_to_string() {
-            List<string> rowData = new List<string>() {};
+            List<string> rowData = new List<string>() { };
             Row row = Row.New(header, rowData);
 
             Assert.AreEqual("||", row.ToString());
+        }
+
+        [TestMethod]
+        public void row_contains_table_to_string() {
+            Header header = Header.New(new List<string>() {
+                "origin_struct", "delete_node", "except_struct"
+            });
+            Row row = Row.New(header, new List<string>() {
+                            "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user1 | /users/user1 | users  |\n| user2 | /users/user2 | users  |",
+                            "/users/user1",
+                            "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user2 | /users/user2 | users  |"
+                      });
+
+            string except =
+                    "|\t|\t/users/user1\t|\t|\n" +
+                    "\t<origin_struct>\n" +
+                    "\t|\tname\t|\tpath\t|\tparent\t|\n" +
+                    "\t|\tusers\t|\t/users\t|\tnull\t|\n" +
+                    "\t|\tuser1\t|\t/users/user1\t|\tusers\t|\n" +
+                    "\t|\tuser2\t|\t/users/user2\t|\tusers\t|\n" +
+                    "\t<except_struct>\n" +
+                    "\t|\tname\t|\tpath\t|\tparent\t|\n" +
+                    "\t|\tusers\t|\t/users\t|\tnull\t|\n" +
+                    "\t|\tuser2\t|\t/users/user2\t|\tusers\t|";
+
+            Assert.AreEqual(except, row.ToString());
         }
 
         [TestMethod]
@@ -130,11 +156,40 @@ namespace ezSpec.table.test {
         }
 
         [TestMethod]
+        public void row_contains_table_to_string_beautify() {
+            Header header = Header.New(new List<string>() {
+                "origin_struct", "delete_node", "except_struct"
+            });
+            Row row = Row.New(header, new List<string>() {
+                            "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user1 | /users/user1 | users  |\n| user2 | /users/user2 | users  |",
+                            "/users/user1",
+                            "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user2 | /users/user2 | users  |"
+                      });
+            List<int> columnsLength = new List<int>() {
+                5, 14, 5
+            };
+
+            string except =
+                    "|     | /users/user1 |     |\n" +
+                    "\t<origin_struct>\n" +
+                    "\t| name  | path         | parent |\n" +
+                    "\t| users | /users       | null   |\n" +
+                    "\t| user1 | /users/user1 | users  |\n" +
+                    "\t| user2 | /users/user2 | users  |\n" +
+                    "\t<except_struct>\n" +
+                    "\t| name  | path         | parent |\n" +
+                    "\t| users | /users       | null   |\n" +
+                    "\t| user2 | /users/user2 | users  |";
+
+            Assert.AreEqual(except, row.ToString(columnsLength));
+        }
+
+        [TestMethod]
         public void empty_row_to_string_beautify() {
-            List<string> rowData = new List<string>() {};
+            List<string> rowData = new List<string>() { };
             Row row = Row.New(header, rowData);
 
-            List<int> columnsLength = new List<int>() {};
+            List<int> columnsLength = new List<int>() { };
 
             Assert.AreEqual("||", row.ToString(columnsLength));
         }
