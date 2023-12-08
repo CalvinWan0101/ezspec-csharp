@@ -10,12 +10,12 @@ namespace ezSpec.table {
             get { return new ReadOnlyCollection<string>(columns); }
         }
 
-        private Row(Header header, IList<string> columns) {
+        protected Row(Header header, IList<string> columns) {
             this.header = header;
             this.columns = new List<string>(columns);
         }
 
-        private Row(Row row) {
+        protected Row(Row row) {
             this.header = Header.New(row.header);
             this.columns = new List<string>(row.columns);
         }
