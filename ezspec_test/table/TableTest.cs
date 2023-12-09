@@ -81,6 +81,13 @@ namespace ezSpec.table.test {
         }
 
         [TestMethod]
+        public void create_table_from_illegal_raw_data() {
+            string rawData = "RFTYGUHIJOUYTGH*(&^123";
+
+            Assert.ThrowsException<SystemException>(() => Table.New(rawData));
+        }
+
+        [TestMethod]
         public void create_table_from_table() {
             Table table = Table.New(header, rows);
 

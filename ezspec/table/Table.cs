@@ -28,6 +28,10 @@ namespace ezSpec.table {
         }
 
         private Table(string rawData) {
+            if (!ContainsTable(rawData)) { 
+                throw new SystemException("The raw data contains no table.");
+            }
+
             this.rawData = rawData;
             rawData = rawData.Replace("\r\n", "\n");
             List<string> lines = rawData.Split('\n').ToList();

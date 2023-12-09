@@ -98,6 +98,47 @@ namespace ezSpec.table.test {
         }
 
         [TestMethod]
+        public void get_table_by_index() {
+            Header header = Header.New(new List<string>() {
+                "origin_struct", "delete_node", "except_struct"
+            });
+            Row row = Row.New(header, new List<string>() {
+                            "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user1 | /users/user1 | users  |\n| user2 | /users/user2 | users  |",
+                            "/users/user1",
+                            "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user2 | /users/user2 | users  |"
+                      });
+
+            string except =
+                    "|\tname\t|\tpath\t|\tparent\t|\n" +
+                    "|\tusers\t|\t/users\t|\tnull\t|\n" +
+                    "|\tuser1\t|\t/users/user1\t|\tusers\t|\n" +
+                    "|\tuser2\t|\t/users/user2\t|\tusers\t|";
+
+            Assert.AreEqual(except, row.GetTable(0).ToString());
+        }
+
+        [TestMethod]
+        public void get_table_by_name() {
+            Header header = Header.New(new List<string>() {
+                "origin_struct", "delete_node", "except_struct"
+            });
+            Row row = Row.New(header, new List<string>() {
+                            "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user1 | /users/user1 | users  |\n| user2 | /users/user2 | users  |",
+                            "/users/user1",
+                            "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user2 | /users/user2 | users  |"
+                      });
+
+            string except =
+                    "|\tname\t|\tpath\t|\tparent\t|\n" +
+                    "|\tusers\t|\t/users\t|\tnull\t|\n" +
+                    "|\tuser1\t|\t/users/user1\t|\tusers\t|\n" +
+                    "|\tuser2\t|\t/users/user2\t|\tusers\t|";
+
+            Assert.AreEqual(except, row.GetTable("origin_struct").ToString());
+        }
+
+
+        [TestMethod]
         public void row_to_string() {
             List<string> rowData = new List<string>() {
                 "data1", "data2"

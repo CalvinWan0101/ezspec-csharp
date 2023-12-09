@@ -50,6 +50,19 @@ namespace ezSpec.table {
             return "";
         }
 
+        public Table GetTable(int index) {
+            return Table.New(columns[index]);
+        }
+
+        public Table GetTable(string columnName) { 
+            for (int i = 0; i < columns.Count; i++) {
+                if (header.Get(i) == columnName) {
+                    return Table.New(columns[i]);
+                }
+            }
+            throw new SystemException($"Unable to get the \"{columnName}\"");
+        }
+
         public override string ToString() {
             StringBuilder sb = new StringBuilder("|");
             foreach (string column in columns) {
