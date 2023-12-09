@@ -5,7 +5,7 @@ namespace ezSpec {
         protected Example(Row row): base(row) {
         }
 
-        public Example New(Row row) {
+        public static Example New(Row row) {
             return new Example(row);
         }
     }

@@ -33,7 +33,7 @@ namespace ezSpec.Test {
         }
 
         [TestMethod]
-        public void key_value_argument_place_in_curly_brackets_with_colon () {
+        public void key_value_argument_place_in_curly_brackets_with_colon() {
             Assert.AreEqual("price", Argument.New("${price:21,000}").Key);
             Assert.AreEqual("21,000", Argument.New("${price:21,000}").Value);
             Assert.AreEqual("price", Argument.New("${price:  21,000     }").Key);
@@ -44,6 +44,29 @@ namespace ezSpec.Test {
             Assert.AreEqual("21,000", Argument.New("${ price   :   21,000 }").Value);
             Assert.AreEqual("price", Argument.New("${price:$21,000}").Key);
             Assert.AreEqual("$21,000", Argument.New("${price:$21,000}").Value);
+        }
+
+        [TestMethod]
+        public void copy_value_argument_start_with_dollar_sign() {
+            Argument argument = Argument.New("$1");
+            Assert.AreEqual("1", Argument.New(argument).Value);
+            Assert.AreEqual("", Argument.New(argument).Key);
+        }
+
+        [TestMethod]
+        public void copy_key_value_argument_place_in_curly_brackets_with_equal_sign() {
+            Argument argument = Argument.New("${price=21,000}");
+            Assert.AreEqual("price", Argument.New(argument).Key);
+            Assert.AreEqual("21,000", Argument.New(argument).Value);
+
+        }
+
+        [TestMethod]
+        public void copy_key_value_argument_place_in_curly_brackets_with_colon() {
+            Argument argument = Argument.New("${price:21,000}");
+            Assert.AreEqual("price", Argument.New(argument).Key);
+            Assert.AreEqual("21,000", Argument.New(argument).Value);
+
         }
 
     }

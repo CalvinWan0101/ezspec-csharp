@@ -19,12 +19,21 @@ namespace ezSpec {
             return new Argument(expression);
         }
 
-        public Argument(string expression) {
+        static public Argument New(Argument argument) {
+            return new Argument(argument);
+        }
+
+        private Argument(string expression) {
             if (IsKeyValuePair(expression)) {
                 InitializeWithKeyValuePair(expression);
             } else {
                 InitializeWithValue(expression);
             }
+        }
+        
+        private Argument(Argument argument) {
+            this.key = argument.Key;
+            this.value = argument.Value;
         }
 
         private bool IsKeyValuePair(string expression) {
