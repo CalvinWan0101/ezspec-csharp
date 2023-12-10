@@ -8,14 +8,14 @@ namespace ezSpec.Test {
 
         [TestMethod]
         public void create_step() {
-            Step step = Step.New("description", env => { });
+            Step step = TestStep.New("description", env => { });
             Assert.AreEqual("description", step.Description);
             Assert.IsFalse(step.IsContinuousAfterFailure);
         }
 
         [TestMethod]
         public void create_step_with_continous() {
-            Step step = Step.New("description", Step.ContinuousAfterFailure, env => { });
+            Step step = TestStep.New("description", Step.ContinuousAfterFailure, env => { });
             Assert.AreEqual("description", step.Description);
             Assert.IsTrue(step.IsContinuousAfterFailure);
         }
@@ -23,7 +23,7 @@ namespace ezSpec.Test {
         [TestMethod]
         public void invoke_step_callback() {
             int notifyCount = 0;
-            Step step = Step.New("description", env => {
+            Step step = TestStep.New("description", env => {
                 notifyCount++;
             });
 
@@ -36,7 +36,7 @@ namespace ezSpec.Test {
 
         [TestMethod]
         public void description_with_dollar_sign_argument() {
-            Step step = Step.New("With argument ${123}", env => { });
+            Step step = TestStep.New("With argument ${123}", env => { });
 
             List<Argument> arguments = step.Arguments;
 
@@ -47,7 +47,7 @@ namespace ezSpec.Test {
 
         [TestMethod]
         public void description_with_equal_sign_argument_in_curly_brackets() {
-            Step step = Step.New("With argument ${arg=123}", env => { });
+            Step step = TestStep.New("With argument ${arg=123}", env => { });
 
             List<Argument> arguments = step.Arguments;
 
@@ -58,7 +58,7 @@ namespace ezSpec.Test {
 
         [TestMethod]
         public void description_with_colon_argument_in_curly_brackets() {
-            Step step = Step.New("With argument ${arg:123}", env => { });
+            Step step = TestStep.New("With argument ${arg:123}", env => { });
 
             List<Argument> arguments = step.Arguments;
 
@@ -69,7 +69,7 @@ namespace ezSpec.Test {
 
         [TestMethod]
         public void description_with_many_arguments() {
-            Step step = Step.New("With arrguments ${arg1:abc}, ${$210}, and ${arg2=123}", env => { });
+            Step step = TestStep.New("With arrguments ${arg1:abc}, ${$210}, and ${arg2=123}", env => { });
 
             List<Argument> arguments = step.Arguments;
 
@@ -84,7 +84,7 @@ namespace ezSpec.Test {
 
         [TestMethod]
         public void set_and_get_result() {
-            Step step = Step.New("description", env => { });
+            Step step = TestStep.New("description", env => { });
 
             Result successExpect = Result.Success();
 
@@ -99,9 +99,33 @@ namespace ezSpec.Test {
 
         [TestMethod]
         public void erase_reversed_words() {
-            Step step = Step.New("With arrguments ${arg1:abc}, ${$210}, and ${arg2=123}", env => { });
+            Step step = TestStep.New("With arrguments ${arg1:abc}, ${$210}, and ${arg2=123}", env => { });
 
             Assert.AreEqual("With arrguments abc, $210, and 123", step.EraseReversedWords);
+        }
+
+        [TestMethod]
+        public void get_name() { 
+            Step step = TestStep.New("description", env => { });
+
+            Assert.AreEqual("TestStep", step.Name);
+        }
+
+        private class TestStep : Step {
+            public override string Name {
+                get { return "TestStep"; }
+            }
+
+            public TestStep(string description, bool continuous, StepCallback callback) : base(description, continuous, callback) {
+            }
+
+            public static TestStep New(string description, StepCallback callback) { 
+                return new TestStep(description, TerminateAfterFailure, callback);
+            }
+
+            public static TestStep New(string description, bool continuous, StepCallback callback) {
+                return new TestStep(description, continuous, callback);
+            }
         }
     }
 }

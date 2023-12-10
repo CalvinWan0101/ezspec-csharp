@@ -3,7 +3,7 @@ using System.Text.RegularExpressions;
 
 namespace ezSpec {
 
-    public class Step {
+    public abstract class Step {
         public delegate void StepCallback(ScenarioEnvironment env);
 
         public static readonly bool ContinuousAfterFailure = true;
@@ -13,6 +13,8 @@ namespace ezSpec {
         private StepCallback callback;
         private bool continousAfterFailure;
         private Result result;
+
+        public abstract string Name { get; }
 
         public string Description {
             get { return description; }
@@ -61,18 +63,10 @@ namespace ezSpec {
             }
         }
 
-        private Step(string description, bool continous, StepCallback callback) {
+        protected Step(string description, bool continous, StepCallback callback) {
             this.description = description;
             this.continousAfterFailure = continous;
             this.callback = callback;
-        }
-
-        public static Step New(string description, StepCallback callback) {
-            return new Step(description, TerminateAfterFailure, callback);
-        }
-
-        public static Step New(string description, bool continous, StepCallback callback) {
-            return new Step(description, continous, callback);
         }
     }
 }
