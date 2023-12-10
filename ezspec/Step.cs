@@ -1,9 +1,10 @@
-﻿using System.Text.RegularExpressions;
+﻿using System.Text;
+using System.Text.RegularExpressions;
 
 namespace ezSpec {
 
     public class Step {
-        public delegate void StepCallback();
+        public delegate void StepCallback(ScenarioEnvironment env);
 
         public static readonly bool ContinuousAfterFailure = true;
         public static readonly bool TerminateAfterFailure = false;
@@ -11,12 +12,13 @@ namespace ezSpec {
         private string description;
         private StepCallback callback;
         private bool continousAfterFailure;
+        private Result result;
 
-        public string Description { 
+        public string Description {
             get { return description; }
         }
 
-        public StepCallback Callback { 
+        internal StepCallback Callback {
             get { return callback; }
         }
 
@@ -24,15 +26,19 @@ namespace ezSpec {
             get { return continousAfterFailure; }
         }
 
+        public Result Result {
+            get { return result; }
+            set { result = value; }
+        }
+
         public List<Argument> Arguments {
             get {
                 List<Argument> arguments = new List<Argument>();
 
-                Regex reg = new Regex("\\s\\$\\{([^}]+)\\}|\\s\\$([\\S^{]+)");
+                Regex reg = new Regex("\\$\\{([^{}]+)\\}");
                 MatchCollection matchs = reg.Matches(description);
-                GroupCollection groups = matchs[0].Groups;
 
-                foreach(Match match in matchs) {
+                foreach (Match match in matchs) {
                     arguments.Add(Argument.New(match.Groups[0].Value));
                 }
 
@@ -40,10 +46,25 @@ namespace ezSpec {
             }
         }
 
+        public string EraseReversedWords {
+            get {
+                string result = description;
+
+                Regex reg = new Regex("\\$\\{([^{}]+)\\}");
+                MatchCollection matchs = reg.Matches(description);
+
+                foreach (Match match in matchs) {
+                    Argument argument = Argument.New(match.Groups[0].Value);
+                    result = result.Replace(match.Groups[0].Value, argument.Value);
+                }
+                return result;
+            }
+        }
+
         private Step(string description, bool continous, StepCallback callback) {
             this.description = description;
             this.continousAfterFailure = continous;
-            this.callback= callback;
+            this.callback = callback;
         }
 
         public static Step New(string description, StepCallback callback) {
