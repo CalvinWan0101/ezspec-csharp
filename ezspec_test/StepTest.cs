@@ -111,6 +111,25 @@ namespace ezSpec.Test {
             Assert.AreEqual("TestStep", step.Name);
         }
 
+        [TestMethod]
+        public void step_keywords() {
+            Step given = new Given("description", false, env => { });
+            Step when = new When("description", false, env => { });
+            Step then = new Then("description", false, env => { });
+            Step and = new And("description", false, env => { });
+            Step but = new But("description", false, env => { });
+            Step thenSuccess = new ThenSuccess("description", false, env => { });
+            Step thenFailure = new ThenFailure("description", false, env => { });
+
+            Assert.AreEqual(given.Name, "Given");
+            Assert.AreEqual(when.Name, "When");
+            Assert.AreEqual(then.Name, "Then");
+            Assert.AreEqual(and.Name, "And");
+            Assert.AreEqual(but.Name, "But");
+            Assert.AreEqual(thenSuccess.Name, "ThenSuccess");
+            Assert.AreEqual(thenFailure.Name, "ThenFailure");
+        }
+
         private class TestStep : Step {
             public override string Name {
                 get { return "TestStep"; }
