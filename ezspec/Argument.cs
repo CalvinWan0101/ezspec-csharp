@@ -26,36 +26,40 @@ namespace ezSpec {
         private Argument(string expression) {
             if (IsKeyValuePair(expression)) {
                 InitializeWithKeyValuePair(expression);
-            } else {
+            }
+            else {
                 InitializeWithValue(expression);
             }
         }
-        
+
         private Argument(Argument argument) {
             this.key = argument.Key;
             this.value = argument.Value;
         }
 
         private bool IsKeyValuePair(string expression) {
-            return expression.Trim().StartsWith("${") && expression.Trim().EndsWith("}");
+            return expression.Trim().StartsWith("${")
+                && expression.Trim().EndsWith("}")
+                && (expression.Contains(":") || expression.Contains("="));
         }
 
         private void InitializeWithKeyValuePair(string expression) {
-            Regex reg = new Regex("^([^=:]+)[=:](.+)$");
+            Regex reg = new Regex("\\${([^=:{}]*)[=:]([^{}]+)}");
             MatchCollection matchs = reg.Matches(expression);
             GroupCollection groups = matchs[0].Groups;
 
-            key = groups[1].Value.Trim().Substring(2).Trim();
-            value = groups[2].Value.Trim().Substring(0, groups[2].Value.Trim().Length - 1).Trim();
+            key = groups[1].Value.Trim();
+            value = groups[2].Value.Trim();
         }
 
         private void InitializeWithValue(string expression) {
-            Regex reg = new Regex("\\$(\\S)+");
+            Regex reg = new Regex("\\${(([^{}=:])+)}");
             MatchCollection matchs = reg.Matches(expression);
             GroupCollection groups = matchs[0].Groups;
 
             key = "";
-            value = groups[0].Value.Trim().Substring(1);
+            value = groups[1].Value.Trim();
+            //value = value.Substring(2, value.Length - 3).Trim();
         }
 
     }
