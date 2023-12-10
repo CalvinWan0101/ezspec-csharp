@@ -19,7 +19,7 @@ namespace ezSpec {
                 string projectDirectory = Directory.GetParent(Environment.CurrentDirectory)!
                         .Parent!.Parent!.Parent!.FullName;
                 return exception.StackTrace
-                    .Replace($"in {projectDirectory}\\", "")
+                    .Replace($"{projectDirectory}\\", "")
                     .Replace("\r", "");
             }
         }

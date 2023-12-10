@@ -62,7 +62,7 @@ namespace ezSpec.test {
 
             string except =
                 "   at System.Collections.Generic.List`1.get_Item(Int32 index)\n" +
-                "   at ezSpec.test.ResultTest.get_failure_exception_message() ezspec_test\\ResultTest.cs:line 56";
+                "   at ezSpec.test.ResultTest.get_failure_exception_message() in ezspec_test\\ResultTest.cs:line 56";
             Assert.AreEqual(except, result.ExceptionMessage);
         }
     }
