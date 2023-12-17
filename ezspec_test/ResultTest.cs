@@ -18,7 +18,7 @@ namespace ezSpec.test {
 
         [TestMethod]
         public void execute_pending() {
-            Exception exception = new PendingException();
+            Exception exception = PendingException.New();
             Result result = Result.Pending(exception);
 
             Assert.IsTrue(result.IsPending);

@@ -105,7 +105,7 @@ namespace ezSpec.Test {
         }
 
         [TestMethod]
-        public void get_name() { 
+        public void get_name() {
             Step step = TestStep.New("description", env => { });
 
             Assert.AreEqual("TestStep", step.Name);
@@ -130,6 +130,44 @@ namespace ezSpec.Test {
             Assert.AreEqual(thenFailure.Name, "ThenFailure");
         }
 
+        [TestMethod]
+        public void step_to_string() {
+            Step given = new Given("give description", false, env => { });
+            Step when = new When("when description", false, env => { });
+            Step then = new Then("then description", false, env => { });
+            Step and = new And("and description", false, env => { });
+            Step but = new But("but description", false, env => { });
+            Step thenSuccess = new ThenSuccess("then success description", false, env => { });
+            Step thenFailure = new ThenFailure("then failure description", false, env => { });
+
+            Assert.AreEqual("[Pending] Given give description", given.ToString());
+            Assert.AreEqual("[Pending] When when description", when.ToString());
+            Assert.AreEqual("[Pending] Then then description", then.ToString());
+            Assert.AreEqual("[Pending] And and description", and.ToString());
+            Assert.AreEqual("[Pending] But but description", but.ToString());
+            Assert.AreEqual("[Pending] ThenSuccess then success description", thenSuccess.ToString());
+            Assert.AreEqual("[Pending] ThenFailure then failure description", thenFailure.ToString());
+        }
+
+        [TestMethod]
+        public void step_contains_more_than_one_line_description() {
+            Step given = new Given("give description line 1\ngive description line 2", false, env => { });
+            Step when = new When("when description line 1\nwhen description line 2", false, env => { });
+            Step then = new Then("then description line 1\nthen description line 2", false, env => { });
+            Step and = new And("and description line 1\nand description line 2", false, env => { });
+            Step but = new But("but description line 1\nbut description line 2", false, env => { });
+            Step thenSuccess = new ThenSuccess("then success description line 1\nthen success description line 1", false, env => { });
+            Step thenFailure = new ThenFailure("then failure description line 1\nthen failure description line 2", false, env => { });
+
+            Assert.AreEqual("[Pending] Given give description line 1\n          give description line 2", given.ToString());
+            Assert.AreEqual("[Pending] When when description line 1\n          when description line 2", when.ToString());
+            Assert.AreEqual("[Pending] Then then description line 1\n          then description line 2", then.ToString());
+            Assert.AreEqual("[Pending] And and description line 1\n          and description line 2", and.ToString());
+            Assert.AreEqual("[Pending] But but description line 1\n          but description line 2", but.ToString());
+            Assert.AreEqual("[Pending] ThenSuccess then success description line 1\n          then success description line 1", thenSuccess.ToString());
+            Assert.AreEqual("[Pending] ThenFailure then failure description line 1\n          then failure description line 2", thenFailure.ToString());
+        }
+
         private class TestStep : Step {
             public override string Name {
                 get { return "TestStep"; }
@@ -138,7 +176,7 @@ namespace ezSpec.Test {
             public TestStep(string description, bool continuous, StepCallback callback) : base(description, continuous, callback) {
             }
 
-            public static TestStep New(string description, StepCallback callback) { 
+            public static TestStep New(string description, StepCallback callback) {
                 return new TestStep(description, TerminateAfterFailure, callback);
             }
 

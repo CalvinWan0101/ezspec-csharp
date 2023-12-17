@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using ezSpec.exception;
+using System.Text;
 using System.Text.RegularExpressions;
 
 namespace ezSpec {
@@ -12,7 +13,7 @@ namespace ezSpec {
         private string description;
         private StepCallback callback;
         private bool continousAfterFailure;
-        private Result result;
+        private Result stepResult;
 
         public abstract string Name { get; }
 
@@ -29,8 +30,8 @@ namespace ezSpec {
         }
 
         public Result Result {
-            get { return result; }
-            set { result = value; }
+            get { return stepResult; }
+            set { stepResult = value; }
         }
 
         public List<Argument> Arguments {
@@ -63,10 +64,22 @@ namespace ezSpec {
             }
         }
 
+        public override string ToString() {
+            StringBuilder result = new StringBuilder();
+            result.Append("[");
+            result.Append(stepResult.ToString());
+            result.Append("] ");
+            result.Append(Name);
+            result.Append(" ");
+            result.Append(description.Replace("\n", "\n          "));
+            return result.ToString();
+        }
+
         protected Step(string description, bool continous, StepCallback callback) {
             this.description = description;
             this.continousAfterFailure = continous;
             this.callback = callback;
+            this.stepResult = Result.Pending(PendingException.New());
         }
     }
 }

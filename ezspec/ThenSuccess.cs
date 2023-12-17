@@ -1,5 +1,5 @@
 ﻿namespace ezSpec {
-    public class ThenSuccess : Step {
+    public class ThenSuccess : Step, ConcurrentGroup {
 
         public override string Name {
             get { return "ThenSuccess"; }
