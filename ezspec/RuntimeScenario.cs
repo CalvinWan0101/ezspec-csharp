@@ -114,11 +114,11 @@ namespace ezSpec {
 
         public override string ToString() {
             StringBuilder result = new StringBuilder();
+            result.Append("Scenario: ");
+            result.Append(name);
             for (int i = 0; i < steps.Count; i++) {
+                result.Append("\n");
                 result.Append(steps[i].ToString());
-                if (i != steps.Count - 1) {
-                    result.Append("\n");
-                }
             }
             return result.ToString();
         }

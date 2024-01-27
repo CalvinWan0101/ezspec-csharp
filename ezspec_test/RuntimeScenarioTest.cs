@@ -482,6 +482,14 @@ namespace ezSpec.Test {
         }
 
         [TestMethod]
+        public void runtime_scenario_without_steps_to_string() {
+            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+
+            string except = "Scenario: name";
+            Assert.AreEqual(except, runtimeScenario.ToString());
+        }
+
+        [TestMethod]
         public void runtime_scenario_to_string() {
             RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
             Assert.ThrowsException<EzSpecError>(() => {
@@ -503,6 +511,7 @@ namespace ezSpec.Test {
             });
 
             string except =
+                "Scenario: name\n" +
                 "[Success] Given a given step\n" +
                 "[Success] When I run when step\n" +
                 "[Failure] Then this step failure\n" +
@@ -534,15 +543,16 @@ namespace ezSpec.Test {
             });
 
             string except =
+                "Scenario: name\n" +
                 "[Success] Given a given step line 1\n" +
-                "          a given step line 2\n"+
+                "          a given step line 2\n" +
                 "[Success] When I run when step line 1\n" +
                 "          I run when step line 2\n" +
                 "[Failure] Then this step failure line 1\n" +
                 "          this step failure line 2\n" +
                 "[Success] And this step success line 1\n" +
                 "          this step success line 2\n" +
-                "[Success] But nothing line 1\n"+
+                "[Success] But nothing line 1\n" +
                 "          nothing line 2";
 
             Assert.AreEqual(except, runtimeScenario.ToString());
@@ -575,6 +585,7 @@ namespace ezSpec.Test {
             });
 
             string except =
+                "Scenario: name\n" +
                 "[Success] Given a given step line 1\n" +
                 "          a given step line 2\n" +
                 "[Success] When I run when step line 1\n" +
