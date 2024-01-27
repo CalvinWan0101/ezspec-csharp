@@ -1,9 +1,13 @@
-﻿namespace ezSpec {
+﻿using System.Diagnostics;
+using System.Text;
+
+namespace ezSpec {
 
     public class Rule {
 
         private string name;
         private string description;
+        private IList<RuntimeScenario> scenarios;
 
         public string Name {
             get { return name; }
@@ -13,9 +17,14 @@
             get { return description; }
         }
 
+        public IList<RuntimeScenario> Scenarios {
+            get { return scenarios; }
+        }
+
         private Rule(string name, string description) {
             this.name = name;
             this.description = description;
+            this.scenarios = new List<RuntimeScenario>();
         }
 
         public static Rule New(string name) {
@@ -26,12 +35,34 @@
             return new Rule(name, description);
         }
 
+        public RuntimeScenario NewScenario(string name) {
+            scenarios.Add(RuntimeScenario.New(name));
+            return scenarios.Last();
+        }
+
+        public RuntimeScenario NewScenario() {
+            scenarios.Add(RuntimeScenario.New(GetNewScenarioCallerFunctionName()));
+            return scenarios.Last();
+        }
+
         public override string ToString() {
-            string result = "Rule: " + name;
+            StringBuilder result = new StringBuilder();
+            result.Append("Rule: ");
+            result.Append(name);
             if ("" != description) {
-                result += "\n" + description;
+                result.Append("\n");
+                result.Append(description);
             }
-            return result;
+            foreach (RuntimeScenario scenario in scenarios) {
+                result.Append("\n\n");
+                result.Append(scenario.ToString());
+            }
+            return result.ToString();
+        }
+
+        private string GetNewScenarioCallerFunctionName() {
+            StackTrace stackTrace = new StackTrace();
+            return stackTrace.GetFrame(2)!.GetMethod()!.Name.Replace("_", " ");
         }
 
     }
