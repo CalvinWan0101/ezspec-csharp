@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
 
-namespace ezSpec.Test {
+namespace ezSpec.keyword.step.Test {
 
     [TestClass]
     public class StepTest {

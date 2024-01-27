@@ -1,4 +1,4 @@
-﻿namespace ezSpec {
+﻿namespace ezSpec.keyword.step {
     public class When : Step, ConcurrentGroup {
 
         public override string Name {

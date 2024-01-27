@@ -1,4 +1,4 @@
-﻿namespace ezSpec {
+﻿namespace ezSpec.keyword.step {
     public class And : Step {
 
         public override string Name {

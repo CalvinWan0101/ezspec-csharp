@@ -1,7 +1,8 @@
 ﻿using ezSpec.exception;
+using ezSpec.keyword.step;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ezSpec.Test {
+namespace ezSpec.keyword.Test {
 
     [TestClass]
     public class RuntimeScenarioTest {
@@ -456,7 +457,7 @@ namespace ezSpec.Test {
         public void more_than_one_step_description_contain_table() {
             RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
             runtimeScenario
-                .Given(@"
+                .Given(@"s
                     a table 
                     | name  |     path     | parent |
                     | users |    /users    |  null  |

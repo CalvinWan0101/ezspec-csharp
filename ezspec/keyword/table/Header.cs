@@ -1,9 +1,7 @@
 ﻿using System.Collections.ObjectModel;
-using System.Data.Common;
 using System.Text;
 
-namespace ezSpec.table
-{
+namespace ezSpec.keyword.table {
     public class Header {
         private IList<string> header;
 

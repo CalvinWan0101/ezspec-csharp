@@ -1,6 +1,6 @@
-﻿using ezSpec.table;
+﻿using ezSpec.keyword.table;
 
-namespace ezSpec {
+namespace ezSpec.keyword {
     public class ScenarioEnvironment {
 
         private int executionCount;
@@ -38,22 +38,22 @@ namespace ezSpec {
         }
 
         protected ScenarioEnvironment(ScenarioEnvironment env) {
-            this.executionCount = 0;
-            this.arguments = new List<Argument>();
-            this.historicalArguments = new List<Argument>();
+            executionCount = 0;
+            arguments = new List<Argument>();
+            historicalArguments = new List<Argument>();
             foreach (Argument argument in env.historicalArguments) {
-                this.historicalArguments.Add(Argument.New(argument));
+                historicalArguments.Add(Argument.New(argument));
             }
-            this.input = Example.New(env.input);
-            this.anonymousTable = Table.New(env.anonymousTable);
-            this.context = new Dictionary<string, object>(env.context);
+            input = Example.New(env.input);
+            anonymousTable = Table.New(env.anonymousTable);
+            context = new Dictionary<string, object>(env.context);
         }
 
         public static ScenarioEnvironment New() {
             return new ScenarioEnvironment();
         }
 
-        public static ScenarioEnvironment New(ScenarioEnvironment env) { 
+        public static ScenarioEnvironment New(ScenarioEnvironment env) {
             return new ScenarioEnvironment(env);
         }
 
@@ -69,7 +69,7 @@ namespace ezSpec {
             this.arguments.Clear();
             foreach (Argument argument in arguments) {
                 this.arguments.Add(Argument.New(argument));
-                this.historicalArguments.Add(Argument.New(argument));
+                historicalArguments.Add(Argument.New(argument));
             }
         }
 

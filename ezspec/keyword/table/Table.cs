@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace ezSpec.table {
+namespace ezSpec.keyword.table {
     public class Table {
         private string rawData;
         private Header header;
@@ -24,11 +24,11 @@ namespace ezSpec.table {
             foreach (Row row in rows) {
                 this.rows.Add(Row.New(row));
             }
-            this.rawData = "";
+            rawData = "";
         }
 
         private Table(string rawData) {
-            if (!ContainsTable(rawData)) { 
+            if (!ContainsTable(rawData)) {
                 throw new SystemException("The raw data contains no table.");
             }
 
@@ -37,22 +37,22 @@ namespace ezSpec.table {
             List<string> lines = rawData.Split('\n').ToList();
             lines = lines.FindAll(line => line.Contains("|"));
 
-            this.header = Header.New(ConvertLineStringToRowData(lines[0]));
+            header = Header.New(ConvertLineStringToRowData(lines[0]));
 
-            this.rows = new List<Row>();
+            rows = new List<Row>();
             for (int i = 1; i < lines.Count; i++) {
                 List<string> columns = ConvertLineStringToRowData(lines[i]);
-                this.rows.Add(Row.New(this.header, columns));
+                rows.Add(Row.New(header, columns));
             }
         }
 
         private Table(Table table) {
-            this.header = Header.New(table.header);
-            this.rows = new List<Row>();
+            header = Header.New(table.header);
+            rows = new List<Row>();
             foreach (Row row in table.rows) {
-                this.rows.Add(Row.New(row));
+                rows.Add(Row.New(row));
             }
-            this.rawData = table.rawData;
+            rawData = table.rawData;
         }
 
         // TODO: The table with empty header may not be necessary.

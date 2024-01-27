@@ -1,9 +1,6 @@
-﻿namespace ezSpec.exception
-{
-    public class EzSpecError : Exception
-    {
-        public EzSpecError(string message) : base(message)
-        {
+﻿namespace ezSpec.exception {
+    public class EzSpecError : Exception {
+        public EzSpecError(string message) : base(message) {
         }
     }
 }

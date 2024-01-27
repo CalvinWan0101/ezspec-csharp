@@ -1,9 +1,9 @@
 ﻿namespace ezSpec.exception {
     public class PendingException : Exception {
-        private PendingException(): base() {
+        private PendingException() : base() {
         }
 
-        private PendingException(string message): base(message) {
+        private PendingException(string message) : base(message) {
         }
 
         static public PendingException New() {

@@ -1,8 +1,8 @@
-﻿using ezSpec.table;
+﻿using ezSpec.keyword.table;
 
-namespace ezSpec {
+namespace ezSpec.keyword {
     public class Example : Row {
-        protected Example(Row row): base(row) {
+        protected Example(Row row) : base(row) {
         }
 
         public static Example New(Row row) {

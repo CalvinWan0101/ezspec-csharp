@@ -1,4 +1,4 @@
-﻿namespace ezSpec {
+﻿namespace ezSpec.keyword {
     public enum StepExecutionOutcome {
         Pending,
         Success,

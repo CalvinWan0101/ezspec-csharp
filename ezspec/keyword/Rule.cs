@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Text;
 
-namespace ezSpec {
+namespace ezSpec.keyword {
 
     public class Rule {
 
@@ -24,7 +24,7 @@ namespace ezSpec {
         private Rule(string name, string description) {
             this.name = name;
             this.description = description;
-            this.scenarios = new List<RuntimeScenario>();
+            scenarios = new List<RuntimeScenario>();
         }
 
         public static Rule New(string name) {

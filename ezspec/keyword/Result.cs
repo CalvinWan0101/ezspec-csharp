@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace ezSpec {
+﻿namespace ezSpec.keyword {
     public class Result {
 
         private StepExecutionOutcome executionOutcome;
@@ -45,7 +43,7 @@ namespace ezSpec {
         }
 
         protected Result(StepExecutionOutcome outcome, Exception exception) {
-            this.executionOutcome = outcome;
+            executionOutcome = outcome;
             this.exception = exception;
         }
 

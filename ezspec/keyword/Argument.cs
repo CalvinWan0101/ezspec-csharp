@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace ezSpec {
+namespace ezSpec.keyword {
 
     public class Argument {
 
@@ -33,8 +33,8 @@ namespace ezSpec {
         }
 
         private Argument(Argument argument) {
-            this.key = argument.Key;
-            this.value = argument.Value;
+            key = argument.Key;
+            value = argument.Value;
         }
 
         private bool IsKeyValuePair(string expression) {

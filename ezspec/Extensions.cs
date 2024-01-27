@@ -8,9 +8,10 @@
 
         List<string> lines = code.Split(newline).ToList();
 
-        if(lines.Count == 0) {
+        if (lines.Count == 0) {
             return "";
-        } else if (lines.Count == 1) {
+        }
+        else if (lines.Count == 1) {
             return lines[0];
         }
         return lines[0] + "\n" + string.Join("\n",

@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ezSpec.table.test {
+namespace ezSpec.keyword.table.Test {
 
     [TestClass]
     public class TableTest {

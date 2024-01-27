@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Text;
 
-namespace ezSpec.table {
+namespace ezSpec.keyword.table {
     public class Row {
         private Header header;
         private IList<string> columns;
@@ -16,8 +16,8 @@ namespace ezSpec.table {
         }
 
         protected Row(Row row) {
-            this.header = Header.New(row.header);
-            this.columns = new List<string>(row.columns);
+            header = Header.New(row.header);
+            columns = new List<string>(row.columns);
         }
 
         public static Row New(Header header, IList<string> columns) {
@@ -54,7 +54,7 @@ namespace ezSpec.table {
             return Table.New(columns[index]);
         }
 
-        public Table GetTable(string columnName) { 
+        public Table GetTable(string columnName) {
             for (int i = 0; i < columns.Count; i++) {
                 if (header.Get(i) == columnName) {
                     return Table.New(columns[i]);
@@ -95,7 +95,7 @@ namespace ezSpec.table {
 
             StringBuilder sb = new StringBuilder("|");
             for (int i = 0; i < columns.Count; i++) {
-                if (Table.ContainsTable(columns[i])) { 
+                if (Table.ContainsTable(columns[i])) {
                     sb.Append(new string(' ', columnsLength[i]));
                     sb.Append("|");
                 }

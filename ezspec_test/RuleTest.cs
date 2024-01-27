@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ezSpec.Test {
+namespace ezSpec.keyword.Test {
 
     [TestClass]
     public class RuleTest {

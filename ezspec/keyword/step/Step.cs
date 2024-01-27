@@ -2,7 +2,7 @@
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace ezSpec {
+namespace ezSpec.keyword.step {
 
     public abstract class Step {
         public delegate void StepCallback(ScenarioEnvironment env);
@@ -77,9 +77,9 @@ namespace ezSpec {
 
         protected Step(string description, bool continous, StepCallback callback) {
             this.description = description;
-            this.continousAfterFailure = continous;
+            continousAfterFailure = continous;
             this.callback = callback;
-            this.stepResult = Result.Pending(PendingException.New());
+            stepResult = Result.Pending(PendingException.New());
         }
     }
 }

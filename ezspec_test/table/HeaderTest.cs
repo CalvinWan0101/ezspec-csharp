@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ezSpec.table.test {
+namespace ezSpec.keyword.table.Test {
 
     [TestClass]
     public class HeaderTest {
@@ -93,7 +93,7 @@ namespace ezSpec.table.test {
 
         [TestMethod]
         public void empty_header_to_string() {
-            List<string> data = new List<string>() {};
+            List<string> data = new List<string>() { };
             Header header = Header.New(data);
 
             string headerStr = header.ToString();
@@ -118,10 +118,10 @@ namespace ezSpec.table.test {
 
         [TestMethod]
         public void empty_header_to_string_beautify() {
-            List<string> data = new List<string>() {};
+            List<string> data = new List<string>() { };
             Header header = Header.New(data);
 
-            List<int> columnsLength = new List<int> {};
+            List<int> columnsLength = new List<int> { };
             string headerStr = header.ToString(columnsLength);
 
             Assert.AreEqual("||", headerStr);
