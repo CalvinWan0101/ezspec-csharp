@@ -55,11 +55,6 @@ namespace ezSpec.keyword.table {
             rawData = table.rawData;
         }
 
-        // TODO: The table with empty header may not be necessary.
-        public static Table New() {
-            return new Table(Header.New(), new List<Row>());
-        }
-
         public static Table New(Header header) {
             return new Table(header, new List<Row>());
         }
@@ -97,19 +92,6 @@ namespace ezSpec.keyword.table {
             }
             throw new SystemException($"Unable to get the row with the first column \"{firstColumn}\"");
         }
-
-        // TODO: The change of the table may be unnecessary.
-        //public void AddRow(Row row) {
-        //    rows.Add(Row.New(row));
-        //}
-
-        //public void AddRow(IList<string> columns) {
-        //    rows.Add(Row.New(header, columns));
-        //}
-
-        //public void Clear() {
-        //    rows.Clear();
-        //}
 
         public override string ToString() {
             StringBuilder result = new StringBuilder();

@@ -103,9 +103,14 @@ namespace ezSpec.keyword.table.Test {
                 "origin_struct", "delete_node", "except_struct"
             });
             Row row = Row.New(header, new List<string>() {
-                            "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user1 | /users/user1 | users  |\n| user2 | /users/user2 | users  |",
+                            "| name  |     path     | parent |\n" +
+                            "| users |    /users    |  null  |\n" +
+                            "| user1 | /users/user1 | users  |\n" +
+                            "| user2 | /users/user2 | users  |",
                             "/users/user1",
-                            "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user2 | /users/user2 | users  |"
+                            "| name  |     path     | parent |\n" +
+                            "| users |    /users    |  null  |\n" +
+                            "| user2 | /users/user2 | users  |"
                       });
 
             string except =
@@ -123,9 +128,14 @@ namespace ezSpec.keyword.table.Test {
                 "origin_struct", "delete_node", "except_struct"
             });
             Row row = Row.New(header, new List<string>() {
-                            "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user1 | /users/user1 | users  |\n| user2 | /users/user2 | users  |",
+                            "| name  |     path     | parent |\n" +
+                            "| users |    /users    |  null  |\n" +
+                            "| user1 | /users/user1 | users  |\n" +
+                            "| user2 | /users/user2 | users  |",
                             "/users/user1",
-                            "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user2 | /users/user2 | users  |"
+                            "| name  |     path     | parent |\n" +
+                            "| users |    /users    |  null  |\n" +
+                            "| user2 | /users/user2 | users  |"
                       });
 
             string except =
@@ -162,9 +172,14 @@ namespace ezSpec.keyword.table.Test {
                 "origin_struct", "delete_node", "except_struct"
             });
             Row row = Row.New(header, new List<string>() {
-                            "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user1 | /users/user1 | users  |\n| user2 | /users/user2 | users  |",
+                            "| name  |     path     | parent |\n" +
+                            "| users |    /users    |  null  |\n" +
+                            "| user1 | /users/user1 | users  |\n" +
+                            "| user2 | /users/user2 | users  |",
                             "/users/user1",
-                            "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user2 | /users/user2 | users  |"
+                            "| name  |     path     | parent |\n" +
+                            "| users |    /users    |  null  |\n" +
+                            "| user2 | /users/user2 | users  |"
                       });
 
             string except =
@@ -202,9 +217,14 @@ namespace ezSpec.keyword.table.Test {
                 "origin_struct", "delete_node", "except_struct"
             });
             Row row = Row.New(header, new List<string>() {
-                            "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user1 | /users/user1 | users  |\n| user2 | /users/user2 | users  |",
+                            "| name  |     path     | parent |\n" +
+                            "| users |    /users    |  null  |\n" +
+                            "| user1 | /users/user1 | users  |\n" +
+                            "| user2 | /users/user2 | users  |",
                             "/users/user1",
-                            "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user2 | /users/user2 | users  |"
+                            "| name  |     path     | parent |\n" +
+                            "| users |    /users    |  null  |\n" +
+                            "| user2 | /users/user2 | users  |"
                       });
             List<int> columnsLength = new List<int>() {
                 5, 14, 5

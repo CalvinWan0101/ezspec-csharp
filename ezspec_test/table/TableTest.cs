@@ -22,15 +22,6 @@ namespace ezSpec.keyword.table.Test {
 
         [TestMethod]
         public void create_table() {
-            Table table = Table.New();
-
-            Assert.AreEqual(0, table.Header.Size);
-            Assert.AreEqual(0, table.Rows.Count);
-            Assert.AreEqual("", table.RawData);
-        }
-
-        [TestMethod]
-        public void create_table_with_header() {
             Table table = Table.New(header);
 
             Assert.AreEqual(3, table.Header.Size);
@@ -42,7 +33,7 @@ namespace ezSpec.keyword.table.Test {
         }
 
         [TestMethod]
-        public void create_table_with_header_and_rows() {
+        public void create_table_with_rows() {
             Table table = Table.New(header, rows);
 
             List<int> beautify = new List<int>() {
@@ -155,40 +146,6 @@ namespace ezSpec.keyword.table.Test {
             Assert.ThrowsException<SystemException>(() => table.GetRow("10004"));
         }
 
-        //[TestMethod]
-        //public void add_new_row_to_table() {
-        //    Table table = Table.New(header, rows);
-        //    Row newRow = new Row(header, new List<string>() { "10004", "Annie", "40" });
-        //    table.AddRow(newRow);
-
-        //    Assert.AreEqual(4, table.Rows.Count);
-        //    Assert.AreEqual(newRow.ToString(), table.GetRow(3).ToString());
-        //}
-
-        //[TestMethod]
-        //public void add_new_row_to_table_by_list_of_string() {
-        //    Table table = Table.New(header, rows);
-
-        //    List<string> columns = new List<string>();
-        //    columns.Add("10004");
-        //    columns.Add("Annie");
-        //    columns.Add("40");
-        //    table.AddRow(columns);
-
-        //    Assert.AreEqual(4, table.Rows.Count);
-        //    Assert.AreEqual(columns[0], table.GetRow(3).Columns[0]);
-        //    Assert.AreEqual(columns[1], table.GetRow(3).Columns[1]);
-        //    Assert.AreEqual(columns[2], table.GetRow(3).Columns[2]);
-        //}
-
-        //[TestMethod]
-        //public void clear_table() {
-        //    Table table = Table.New(header, rows);
-        //    table.Clear();
-
-        //    Assert.AreEqual(0, table.Rows.Count);
-        //}
-
         [TestMethod]
         public void table_to_string() {
             Table table = Table.New(header, rows);
@@ -223,14 +180,24 @@ namespace ezSpec.keyword.table.Test {
             });
             List<Row> rows = new List<Row>() {
                 Row.New(header, new List<string>(){
-                    "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user1 | /users/user1 | users  |\n| user2 | /users/user2 | users  |",
+                    "| name  |     path     | parent |\n" +
+                    "| users |    /users    |  null  |\n" +
+                    "| user1 | /users/user1 | users  |\n" +
+                    "| user2 | /users/user2 | users  |",
                     "/users/user1",
-                    "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user2 | /users/user2 | users  |"
+                    "| name  |     path     | parent |\n" +
+                    "| users |    /users    |  null  |\n" +
+                    "| user2 | /users/user2 | users  |"
                 }),
                 Row.New(header, new List<string>(){
-                    "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user1 | /users/user1 | users  |\n| user2 | /users/user2 | users  |",
+                    "| name  |     path     | parent |\n" +
+                    "| users |    /users    |  null  |\n" +
+                    "| user1 | /users/user1 | users  |\n" +
+                    "| user2 | /users/user2 | users  |",
                     "/users/user2",
-                    "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user1 | /users/user1 | users  |"
+                    "| name  |     path     | parent |\n" +
+                    "| users |    /users    |  null  |\n" +
+                    "| user1 | /users/user1 | users  |"
                 })
             };
             Table table = Table.New(header, rows);
@@ -267,14 +234,24 @@ namespace ezSpec.keyword.table.Test {
             });
             List<Row> rows = new List<Row>() {
                 Row.New(header, new List<string>(){
-                    "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user1 | /users/user1 | users  |\n| user2 | /users/user2 | users  |",
+                    "| name  |     path     | parent |\n" +
+                    "| users |    /users    |  null  |\n" +
+                    "| user1 | /users/user1 | users  |\n" +
+                    "| user2 | /users/user2 | users  |",
                     "/users/user1",
-                    "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user2 | /users/user2 | users  |"
+                    "| name  |     path     | parent |\n" +
+                    "| users |    /users    |  null  |\n" +
+                    "| user2 | /users/user2 | users  |"
                 }),
                 Row.New(header, new List<string>(){
-                    "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user1 | /users/user1 | users  |\n| user2 | /users/user2 | users  |",
+                    "| name  |     path     | parent |\n" +
+                    "| users |    /users    |  null  |\n" +
+                    "| user1 | /users/user1 | users  |\n" +
+                    "| user2 | /users/user2 | users  |",
                     "/users/user2",
-                    "| name  |     path     | parent |\n| users |    /users    |  null  |\n| user1 | /users/user1 | users  |"
+                    "| name  |     path     | parent |\n" +
+                    "| users |    /users    |  null  |\n" +
+                    "| user1 | /users/user1 | users  |"
                 })
             };
             Table table = Table.New(header, rows);
