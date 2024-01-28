@@ -36,6 +36,13 @@ namespace ezSpec.keyword.Test {
         }
 
         [TestMethod]
+        public void get_rule_string_with_empty_name() {
+            Rule rule = Rule.New("");
+
+            Assert.AreEqual("", rule.ToString());
+        }
+
+        [TestMethod]
         public void create_scenario_with_name_by_rule() {
             Rule rule = Rule.New("Rule's name");
 
@@ -105,6 +112,21 @@ namespace ezSpec.keyword.Test {
                 "[Pending] Given a given step\n" +
                 "[Pending] When do nothing";
             Assert.AreEqual(expect, rule.ToString());
+        }
+
+        [TestMethod]
+        public void get_rule_without_name_contain_scenario() {
+            Rule rule = Rule.New("");
+            rule.NewScenario("Scenario's name")
+                .Given("a given step", env => { })
+                .When("do nothing", env => { });
+
+            string except = 
+                "Scenario: Scenario's name\n" +
+                "[Pending] Given a given step\n" +
+                "[Pending] When do nothing";
+
+            Assert.AreEqual(except, rule.ToString());
         }
 
     }

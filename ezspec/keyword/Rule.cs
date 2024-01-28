@@ -47,14 +47,18 @@ namespace ezSpec.keyword {
 
         public override string ToString() {
             StringBuilder result = new StringBuilder();
-            result.Append("Rule: ");
-            result.Append(name);
+            if("" != name) {
+                result.Append("Rule: ");
+                result.Append(name);
+            }
             if ("" != description) {
                 result.Append("\n");
                 result.Append(description);
             }
             foreach (RuntimeScenario scenario in scenarios) {
-                result.Append("\n\n");
+                if(0 != result.Length) {
+                    result.Append("\n\n");
+                }
                 result.Append(scenario.ToString());
             }
             return result.ToString();
