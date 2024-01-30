@@ -7,7 +7,7 @@ namespace ezSpec.keyword {
 
         private string name;
         private string description;
-        private IList<RuntimeScenario> scenarios;
+        private IList<Scenario> scenarios;
         private Background background;
 
         public string Name {
@@ -18,7 +18,7 @@ namespace ezSpec.keyword {
             get { return description; }
         }
 
-        public IList<RuntimeScenario> Scenarios {
+        public IList<Scenario> Scenarios {
             get { return scenarios; }
         }
         
@@ -29,7 +29,7 @@ namespace ezSpec.keyword {
         private Rule(string name, string description) {
             this.name = name;
             this.description = description;
-            this.scenarios = new List<RuntimeScenario>();
+            this.scenarios = new List<Scenario>();
             this.background = null;
         }
 
@@ -46,13 +46,13 @@ namespace ezSpec.keyword {
             return background;
         }
 
-        public RuntimeScenario NewScenario(string name) {
-            scenarios.Add(RuntimeScenario.New(name));
+        public Scenario NewScenario(string name) {
+            scenarios.Add(Scenario.New(name));
             return scenarios.Last();
         }
 
-        public RuntimeScenario NewScenario() {
-            scenarios.Add(RuntimeScenario.New(GetNewScenarioCallerFunctionName()));
+        public Scenario NewScenario() {
+            scenarios.Add(Scenario.New(GetNewScenarioCallerFunctionName()));
             return scenarios.Last();
         }
 
@@ -66,7 +66,7 @@ namespace ezSpec.keyword {
                 result.Append("\n");
                 result.Append(description);
             }
-            foreach (RuntimeScenario scenario in scenarios) {
+            foreach (Scenario scenario in scenarios) {
                 if(0 != result.Length) {
                     result.Append("\n\n");
                 }

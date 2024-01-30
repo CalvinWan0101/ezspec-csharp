@@ -99,7 +99,7 @@ namespace ezSpec.keyword.Test {
         [TestMethod]
         public void create_scenario_without_name() { 
             Feature feature = Feature.New("Feature's name", "Feature's description");
-            RuntimeScenario scenario = feature.WithDefaultRule().NewScenario();
+            Scenario scenario = feature.WithDefaultRule().NewScenario();
 
             Assert.AreEqual("create scenario without name", scenario.Name);
         }

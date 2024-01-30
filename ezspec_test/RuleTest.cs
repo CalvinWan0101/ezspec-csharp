@@ -46,7 +46,7 @@ namespace ezSpec.keyword.Test {
         public void create_scenario_with_name_by_rule() {
             Rule rule = Rule.New("Rule's name");
 
-            RuntimeScenario scenario = rule.NewScenario("Scenario's name");
+            Scenario scenario = rule.NewScenario("Scenario's name");
 
             Assert.AreEqual("Scenario's name", scenario.Name);
             Assert.AreEqual(scenario, rule.Scenarios[0]);
@@ -56,7 +56,7 @@ namespace ezSpec.keyword.Test {
         public void create_scenario_without_name_by_rule() {
             Rule rule = Rule.New("Rule's name");
 
-            RuntimeScenario scenario = rule.NewScenario();
+            Scenario scenario = rule.NewScenario();
 
             Assert.AreEqual("create scenario without name by rule", scenario.Name);
             Assert.AreEqual(scenario, rule.Scenarios[0]);
@@ -66,7 +66,7 @@ namespace ezSpec.keyword.Test {
         public void get_rule_with_scenario_without_name_string() {
             Rule rule = Rule.New("Rule's name");
 
-            RuntimeScenario scenario = rule.NewScenario();
+            Scenario scenario = rule.NewScenario();
 
             string expect =
                 "Rule: Rule's name\n" +

@@ -2,7 +2,7 @@
 using System.Text;
 
 namespace ezSpec.keyword {
-    public class Background : RuntimeScenario {
+    public class Background : Scenario {
         protected Background(string name) : base(name) {
         }
 

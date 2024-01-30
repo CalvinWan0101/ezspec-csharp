@@ -5,17 +5,17 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ezSpec.keyword.Test {
 
     [TestClass]
-    public class RuntimeScenarioTest {
+    public class ScenarioTest {
 
         [TestMethod]
         public void create_runtime_scenario_with_name_and_rule() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             Assert.AreEqual("name", runtimeScenario.Name);
         }
 
         [TestMethod]
         public void runtime_scenario_with_given() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario.Given("given description", env => { });
 
             Assert.AreEqual(1, runtimeScenario.Steps.Count);
@@ -26,7 +26,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_with_given_with_continous() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario.Given("given description", Step.ContinuousAfterFailure, env => { });
 
             Assert.AreEqual(1, runtimeScenario.Steps.Count);
@@ -37,7 +37,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_with_when() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario.When("when description", env => { });
 
             Assert.AreEqual(1, runtimeScenario.Steps.Count);
@@ -48,7 +48,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_with_when_with_continous() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario.When("when description", Step.ContinuousAfterFailure, env => { });
 
             Assert.AreEqual(1, runtimeScenario.Steps.Count);
@@ -59,7 +59,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_with_then() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario.Then("then description", env => { });
 
             Assert.AreEqual(1, runtimeScenario.Steps.Count);
@@ -70,7 +70,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_with_then_with_continous() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario.Then("then description", Step.ContinuousAfterFailure, env => { });
 
             Assert.AreEqual(1, runtimeScenario.Steps.Count);
@@ -81,7 +81,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_with_and() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario.And("and description", env => { });
 
             Assert.AreEqual(1, runtimeScenario.Steps.Count);
@@ -92,7 +92,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_with_and_with_continous() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario.And("and description", Step.ContinuousAfterFailure, env => { });
 
             Assert.AreEqual(1, runtimeScenario.Steps.Count);
@@ -103,7 +103,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_with_but() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario.But("but description", env => { });
 
             Assert.AreEqual(1, runtimeScenario.Steps.Count);
@@ -115,7 +115,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_with_but_with_continous() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario.But("but description", Step.ContinuousAfterFailure, env => { });
 
             Assert.AreEqual(1, runtimeScenario.Steps.Count);
@@ -126,7 +126,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_with_then_success() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario.ThenSuccess("then success description", env => { });
 
             Assert.AreEqual(1, runtimeScenario.Steps.Count);
@@ -137,7 +137,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_with_then_success_with_continous() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario.ThenSuccess("then success description", Step.ContinuousAfterFailure, env => { });
 
             Assert.AreEqual(1, runtimeScenario.Steps.Count);
@@ -148,7 +148,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_with_then_success_without_description() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario.ThenSuccess(Step.ContinuousAfterFailure, env => { });
 
             Assert.AreEqual(1, runtimeScenario.Steps.Count);
@@ -159,7 +159,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_with_then_success_without_continous() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario.ThenSuccess(env => { });
 
             Assert.AreEqual(1, runtimeScenario.Steps.Count);
@@ -170,7 +170,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_with_then_failure() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario.ThenFailure("then failure description", env => { });
 
             Assert.AreEqual(1, runtimeScenario.Steps.Count);
@@ -181,7 +181,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_with_then_failure_with_continous() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario.ThenFailure("then failure description", Step.ContinuousAfterFailure, env => { });
 
             Assert.AreEqual(1, runtimeScenario.Steps.Count);
@@ -192,7 +192,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_with_then_failure_without_description() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario.ThenFailure(Step.ContinuousAfterFailure, env => { });
 
             Assert.AreEqual(1, runtimeScenario.Steps.Count);
@@ -203,7 +203,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_with_then_failure_without_continous() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario.ThenFailure(env => { });
 
             Assert.AreEqual(1, runtimeScenario.Steps.Count);
@@ -214,7 +214,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_Scenario_with_steps() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario
                 .Given("given description", Step.ContinuousAfterFailure, env => { })
                 .When("when description", Step.ContinuousAfterFailure, env => { })
@@ -234,7 +234,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void all_steps_use_the_same_scenario_environment() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario
                 .Given("two numbers ${100} and ${80}.", env => {
                     env.Put("number1", env.GetIntArg(0));
@@ -252,7 +252,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void steps_are_all_success() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario
                 .Given("two numbers ${100} and ${80}.", env => {
                     env.Put("number1", env.GetIntArg(0));
@@ -274,7 +274,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void step_terminate_after_failure() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             Assert.ThrowsException<EzSpecError>(() => {
                 runtimeScenario
                     .Given("a given step.", env => {
@@ -294,7 +294,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void step_continue_after_failure() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             Assert.ThrowsException<EzSpecError>(() => {
                 runtimeScenario
                     .Given("a given step.", env => {
@@ -314,7 +314,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void step_pending() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario
                 .Given("a given step.", env => {
                 })
@@ -332,7 +332,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void step_execute_concurrently_all_steps() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario
                 .Given("a given step.", env => {
                 })
@@ -355,7 +355,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void step_execute_concurrently_and_terminate_after_failure() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
 
             Assert.ThrowsException<EzSpecError>(() => {
                 runtimeScenario
@@ -382,7 +382,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void step_execute_concurrently_and_continue_after_failure() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
 
             Assert.ThrowsException<EzSpecError>(() => {
                 runtimeScenario
@@ -409,7 +409,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void step_execute_concurrently_with_pending() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
 
             runtimeScenario
                 .Given("a given step.", env => {
@@ -434,7 +434,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void step_description_contain_table() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario
                 .Given(@"
                     a table 
@@ -455,7 +455,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void more_than_one_step_description_contain_table() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             runtimeScenario
                 .Given(@"s
                     a table 
@@ -484,7 +484,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_without_steps_to_string() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
 
             string except = "Scenario: name";
             Assert.AreEqual(except, runtimeScenario.ToString());
@@ -492,7 +492,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_to_string() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             Assert.ThrowsException<EzSpecError>(() => {
                 runtimeScenario
                     .Given("a given step", env => {
@@ -524,7 +524,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_with_step_contain_more_than_one_line_description() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             Assert.ThrowsException<EzSpecError>(() => {
                 runtimeScenario
                     .Given("a given step line 1\na given step line 2", env => {
@@ -561,7 +561,7 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void runtime_scenario_with_step_contain_long_string_description() {
-            RuntimeScenario runtimeScenario = RuntimeScenario.New("name");
+            Scenario runtimeScenario = Scenario.New("name");
             Assert.ThrowsException<EzSpecError>(() => {
                 runtimeScenario
                     .Given(@"a given step line 1
