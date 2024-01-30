@@ -1,17 +1,15 @@
-﻿using ezSpec.exception;
-using ezSpec.keyword.step;
-using ezSpec.keyword.table;
+﻿using ezSpec.keyword.step;
 using System.Text;
 
 namespace ezSpec.keyword {
     public class Scenario : StepExecutor {
-        protected string name;
+        private string name;
 
         public string Name {
             get { return name; }
         }
 
-        protected Scenario(string name) : base() {
+        private Scenario(string name) : base() {
             this.name = name;
         }
 

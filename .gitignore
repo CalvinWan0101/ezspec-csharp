@@ -32,3 +32,4 @@ msbuild.wrn
 
 # Visual Studio
 .vs/
+/.idea/.idea.ezSpec/.idea

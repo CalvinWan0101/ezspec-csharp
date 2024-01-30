@@ -135,16 +135,16 @@ namespace ezSpec.keyword.Test {
             Assert.IsNull(rule.Background);
         }
 
-        //[TestMethod]
-        //public void rule_with_background() {
-        //    Rule rule = Rule.New("rule name");
-        //    Background background = rule.NewBackground("background name")
-        //        .Given("give step", env => { })
-        //        .And("and step", env => { });
+        [TestMethod]
+        public void rule_with_background() {
+            Rule rule = Rule.New("rule name");
+            Background background = rule.NewBackground("background name")
+                .Given("give step", env => { })
+                .And("and step", env => { });
 
-        //    Assert.AreEqual(background, rule.Background);
-        //    Assert.AreEqual(2, rule.Background.Steps.Count);
-        //}
+            Assert.AreEqual(background, rule.Background);
+            Assert.AreEqual(2, rule.Background.Steps.Count);
+        }
     }
 
 }
