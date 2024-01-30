@@ -8,6 +8,7 @@ namespace ezSpec.keyword {
         private string name;
         private string description;
         private IList<RuntimeScenario> scenarios;
+        private Background background;
 
         public string Name {
             get { return name; }
@@ -20,11 +21,16 @@ namespace ezSpec.keyword {
         public IList<RuntimeScenario> Scenarios {
             get { return scenarios; }
         }
+        
+        public Background Background {
+            get { return background; }
+        }
 
         private Rule(string name, string description) {
             this.name = name;
             this.description = description;
-            scenarios = new List<RuntimeScenario>();
+            this.scenarios = new List<RuntimeScenario>();
+            this.background = null;
         }
 
         public static Rule New(string name) {
@@ -33,6 +39,11 @@ namespace ezSpec.keyword {
 
         public static Rule New(string name, string description) {
             return new Rule(name, description);
+        }
+
+        public Background NewBackground(string name) {
+            background = Background.New(name);
+            return background;
         }
 
         public RuntimeScenario NewScenario(string name) {

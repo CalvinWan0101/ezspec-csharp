@@ -5,8 +5,8 @@ using System.Text;
 
 namespace ezSpec.keyword {
     public class RuntimeScenario {
-        private string name;
-        private IList<Step> steps;
+        protected string name;
+        protected IList<Step> steps;
         private ScenarioEnvironment env;
 
         public string Name {
@@ -17,7 +17,7 @@ namespace ezSpec.keyword {
             get { return steps; }
         }
 
-        private RuntimeScenario(string name) {
+        protected RuntimeScenario(string name) {
             this.name = name;
             steps = new List<Step>();
             env = ScenarioEnvironment.New();

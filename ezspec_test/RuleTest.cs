@@ -121,7 +121,7 @@ namespace ezSpec.keyword.Test {
                 .Given("a given step", env => { })
                 .When("do nothing", env => { });
 
-            string except = 
+            string except =
                 "Scenario: Scenario's name\n" +
                 "[Pending] Given a given step\n" +
                 "[Pending] When do nothing";
@@ -129,6 +129,22 @@ namespace ezSpec.keyword.Test {
             Assert.AreEqual(except, rule.ToString());
         }
 
+        [TestMethod]
+        public void rule_has_no_background_as_default() {
+            Rule rule = Rule.New("rule name");
+            Assert.IsNull(rule.Background);
+        }
+
+        //[TestMethod]
+        //public void rule_with_background() {
+        //    Rule rule = Rule.New("rule name");
+        //    Background background = rule.NewBackground("background name")
+        //        .Given("give step", env => { })
+        //        .And("and step", env => { });
+
+        //    Assert.AreEqual(background, rule.Background);
+        //    Assert.AreEqual(2, rule.Background.Steps.Count);
+        //}
     }
 
 }
