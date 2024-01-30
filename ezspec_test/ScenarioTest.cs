@@ -8,234 +8,234 @@ namespace ezSpec.keyword.Test {
     public class ScenarioTest {
 
         [TestMethod]
-        public void create_runtime_scenario_with_name_and_rule() {
-            Scenario runtimeScenario = Scenario.New("name");
-            Assert.AreEqual("name", runtimeScenario.Name);
+        public void create_scenario_with_name_and_rule() {
+            Scenario scenario = Scenario.New("name");
+            Assert.AreEqual("name", scenario.Name);
         }
 
         [TestMethod]
-        public void runtime_scenario_with_given() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario.Given("given description", env => { });
+        public void scenario_with_given() {
+            Scenario scenario = Scenario.New("name");
+            scenario.Given("given description", env => { });
 
-            Assert.AreEqual(1, runtimeScenario.Steps.Count);
-            Assert.AreEqual("Given", runtimeScenario.Steps[0].Name);
-            Assert.AreEqual("given description", runtimeScenario.Steps[0].Description);
-            Assert.IsFalse(runtimeScenario.Steps[0].IsContinuousAfterFailure);
+            Assert.AreEqual(1, scenario.Steps.Count);
+            Assert.AreEqual("Given", scenario.Steps[0].Name);
+            Assert.AreEqual("given description", scenario.Steps[0].Description);
+            Assert.IsFalse(scenario.Steps[0].IsContinuousAfterFailure);
         }
 
         [TestMethod]
-        public void runtime_scenario_with_given_with_continous() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario.Given("given description", Step.ContinuousAfterFailure, env => { });
+        public void scenario_with_given_with_continous() {
+            Scenario scenario = Scenario.New("name");
+            scenario.Given("given description", Step.ContinuousAfterFailure, env => { });
 
-            Assert.AreEqual(1, runtimeScenario.Steps.Count);
-            Assert.AreEqual("Given", runtimeScenario.Steps[0].Name);
-            Assert.AreEqual("given description", runtimeScenario.Steps[0].Description);
-            Assert.IsTrue(runtimeScenario.Steps[0].IsContinuousAfterFailure);
+            Assert.AreEqual(1, scenario.Steps.Count);
+            Assert.AreEqual("Given", scenario.Steps[0].Name);
+            Assert.AreEqual("given description", scenario.Steps[0].Description);
+            Assert.IsTrue(scenario.Steps[0].IsContinuousAfterFailure);
         }
 
         [TestMethod]
-        public void runtime_scenario_with_when() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario.When("when description", env => { });
+        public void scenario_with_when() {
+            Scenario scenario = Scenario.New("name");
+            scenario.When("when description", env => { });
 
-            Assert.AreEqual(1, runtimeScenario.Steps.Count);
-            Assert.AreEqual("When", runtimeScenario.Steps[0].Name);
-            Assert.AreEqual("when description", runtimeScenario.Steps[0].Description);
-            Assert.IsFalse(runtimeScenario.Steps[0].IsContinuousAfterFailure);
+            Assert.AreEqual(1, scenario.Steps.Count);
+            Assert.AreEqual("When", scenario.Steps[0].Name);
+            Assert.AreEqual("when description", scenario.Steps[0].Description);
+            Assert.IsFalse(scenario.Steps[0].IsContinuousAfterFailure);
         }
 
         [TestMethod]
-        public void runtime_scenario_with_when_with_continous() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario.When("when description", Step.ContinuousAfterFailure, env => { });
+        public void scenario_with_when_with_continous() {
+            Scenario scenario = Scenario.New("name");
+            scenario.When("when description", Step.ContinuousAfterFailure, env => { });
 
-            Assert.AreEqual(1, runtimeScenario.Steps.Count);
-            Assert.AreEqual("When", runtimeScenario.Steps[0].Name);
-            Assert.AreEqual("when description", runtimeScenario.Steps[0].Description);
-            Assert.IsTrue(runtimeScenario.Steps[0].IsContinuousAfterFailure);
+            Assert.AreEqual(1, scenario.Steps.Count);
+            Assert.AreEqual("When", scenario.Steps[0].Name);
+            Assert.AreEqual("when description", scenario.Steps[0].Description);
+            Assert.IsTrue(scenario.Steps[0].IsContinuousAfterFailure);
         }
 
         [TestMethod]
-        public void runtime_scenario_with_then() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario.Then("then description", env => { });
+        public void scenario_with_then() {
+            Scenario scenario = Scenario.New("name");
+            scenario.Then("then description", env => { });
 
-            Assert.AreEqual(1, runtimeScenario.Steps.Count);
-            Assert.AreEqual("Then", runtimeScenario.Steps[0].Name);
-            Assert.AreEqual("then description", runtimeScenario.Steps[0].Description);
-            Assert.IsFalse(runtimeScenario.Steps[0].IsContinuousAfterFailure);
+            Assert.AreEqual(1, scenario.Steps.Count);
+            Assert.AreEqual("Then", scenario.Steps[0].Name);
+            Assert.AreEqual("then description", scenario.Steps[0].Description);
+            Assert.IsFalse(scenario.Steps[0].IsContinuousAfterFailure);
         }
 
         [TestMethod]
-        public void runtime_scenario_with_then_with_continous() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario.Then("then description", Step.ContinuousAfterFailure, env => { });
+        public void scenario_with_then_with_continous() {
+            Scenario scenario = Scenario.New("name");
+            scenario.Then("then description", Step.ContinuousAfterFailure, env => { });
 
-            Assert.AreEqual(1, runtimeScenario.Steps.Count);
-            Assert.AreEqual("Then", runtimeScenario.Steps[0].Name);
-            Assert.AreEqual("then description", runtimeScenario.Steps[0].Description);
-            Assert.IsTrue(runtimeScenario.Steps[0].IsContinuousAfterFailure);
+            Assert.AreEqual(1, scenario.Steps.Count);
+            Assert.AreEqual("Then", scenario.Steps[0].Name);
+            Assert.AreEqual("then description", scenario.Steps[0].Description);
+            Assert.IsTrue(scenario.Steps[0].IsContinuousAfterFailure);
         }
 
         [TestMethod]
-        public void runtime_scenario_with_and() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario.And("and description", env => { });
+        public void scenario_with_and() {
+            Scenario scenario = Scenario.New("name");
+            scenario.And("and description", env => { });
 
-            Assert.AreEqual(1, runtimeScenario.Steps.Count);
-            Assert.AreEqual("And", runtimeScenario.Steps[0].Name);
-            Assert.AreEqual("and description", runtimeScenario.Steps[0].Description);
-            Assert.IsFalse(runtimeScenario.Steps[0].IsContinuousAfterFailure);
+            Assert.AreEqual(1, scenario.Steps.Count);
+            Assert.AreEqual("And", scenario.Steps[0].Name);
+            Assert.AreEqual("and description", scenario.Steps[0].Description);
+            Assert.IsFalse(scenario.Steps[0].IsContinuousAfterFailure);
         }
 
         [TestMethod]
-        public void runtime_scenario_with_and_with_continous() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario.And("and description", Step.ContinuousAfterFailure, env => { });
+        public void scenario_with_and_with_continous() {
+            Scenario scenario = Scenario.New("name");
+            scenario.And("and description", Step.ContinuousAfterFailure, env => { });
 
-            Assert.AreEqual(1, runtimeScenario.Steps.Count);
-            Assert.AreEqual("And", runtimeScenario.Steps[0].Name);
-            Assert.AreEqual("and description", runtimeScenario.Steps[0].Description);
-            Assert.IsTrue(runtimeScenario.Steps[0].IsContinuousAfterFailure);
+            Assert.AreEqual(1, scenario.Steps.Count);
+            Assert.AreEqual("And", scenario.Steps[0].Name);
+            Assert.AreEqual("and description", scenario.Steps[0].Description);
+            Assert.IsTrue(scenario.Steps[0].IsContinuousAfterFailure);
         }
 
         [TestMethod]
-        public void runtime_scenario_with_but() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario.But("but description", env => { });
+        public void scenario_with_but() {
+            Scenario scenario = Scenario.New("name");
+            scenario.But("but description", env => { });
 
-            Assert.AreEqual(1, runtimeScenario.Steps.Count);
-            Assert.AreEqual("But", runtimeScenario.Steps[0].Name);
-            Assert.AreEqual("but description", runtimeScenario.Steps[0].Description);
-            Assert.IsFalse(runtimeScenario.Steps[0].IsContinuousAfterFailure);
+            Assert.AreEqual(1, scenario.Steps.Count);
+            Assert.AreEqual("But", scenario.Steps[0].Name);
+            Assert.AreEqual("but description", scenario.Steps[0].Description);
+            Assert.IsFalse(scenario.Steps[0].IsContinuousAfterFailure);
 
         }
 
         [TestMethod]
-        public void runtime_scenario_with_but_with_continous() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario.But("but description", Step.ContinuousAfterFailure, env => { });
+        public void scenario_with_but_with_continous() {
+            Scenario scenario = Scenario.New("name");
+            scenario.But("but description", Step.ContinuousAfterFailure, env => { });
 
-            Assert.AreEqual(1, runtimeScenario.Steps.Count);
-            Assert.AreEqual("But", runtimeScenario.Steps[0].Name);
-            Assert.AreEqual("but description", runtimeScenario.Steps[0].Description);
-            Assert.IsTrue(runtimeScenario.Steps[0].IsContinuousAfterFailure);
+            Assert.AreEqual(1, scenario.Steps.Count);
+            Assert.AreEqual("But", scenario.Steps[0].Name);
+            Assert.AreEqual("but description", scenario.Steps[0].Description);
+            Assert.IsTrue(scenario.Steps[0].IsContinuousAfterFailure);
         }
 
         [TestMethod]
-        public void runtime_scenario_with_then_success() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario.ThenSuccess("then success description", env => { });
+        public void scenario_with_then_success() {
+            Scenario scenario = Scenario.New("name");
+            scenario.ThenSuccess("then success description", env => { });
 
-            Assert.AreEqual(1, runtimeScenario.Steps.Count);
-            Assert.AreEqual("ThenSuccess", runtimeScenario.Steps[0].Name);
-            Assert.AreEqual("then success description", runtimeScenario.Steps[0].Description);
-            Assert.IsFalse(runtimeScenario.Steps[0].IsContinuousAfterFailure);
+            Assert.AreEqual(1, scenario.Steps.Count);
+            Assert.AreEqual("ThenSuccess", scenario.Steps[0].Name);
+            Assert.AreEqual("then success description", scenario.Steps[0].Description);
+            Assert.IsFalse(scenario.Steps[0].IsContinuousAfterFailure);
         }
 
         [TestMethod]
-        public void runtime_scenario_with_then_success_with_continous() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario.ThenSuccess("then success description", Step.ContinuousAfterFailure, env => { });
+        public void scenario_with_then_success_with_continous() {
+            Scenario scenario = Scenario.New("name");
+            scenario.ThenSuccess("then success description", Step.ContinuousAfterFailure, env => { });
 
-            Assert.AreEqual(1, runtimeScenario.Steps.Count);
-            Assert.AreEqual("ThenSuccess", runtimeScenario.Steps[0].Name);
-            Assert.AreEqual("then success description", runtimeScenario.Steps[0].Description);
-            Assert.IsTrue(runtimeScenario.Steps[0].IsContinuousAfterFailure);
+            Assert.AreEqual(1, scenario.Steps.Count);
+            Assert.AreEqual("ThenSuccess", scenario.Steps[0].Name);
+            Assert.AreEqual("then success description", scenario.Steps[0].Description);
+            Assert.IsTrue(scenario.Steps[0].IsContinuousAfterFailure);
         }
 
         [TestMethod]
-        public void runtime_scenario_with_then_success_without_description() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario.ThenSuccess(Step.ContinuousAfterFailure, env => { });
+        public void scenario_with_then_success_without_description() {
+            Scenario scenario = Scenario.New("name");
+            scenario.ThenSuccess(Step.ContinuousAfterFailure, env => { });
 
-            Assert.AreEqual(1, runtimeScenario.Steps.Count);
-            Assert.AreEqual("ThenSuccess", runtimeScenario.Steps[0].Name);
-            Assert.AreEqual("", runtimeScenario.Steps[0].Description);
-            Assert.IsTrue(runtimeScenario.Steps[0].IsContinuousAfterFailure);
+            Assert.AreEqual(1, scenario.Steps.Count);
+            Assert.AreEqual("ThenSuccess", scenario.Steps[0].Name);
+            Assert.AreEqual("", scenario.Steps[0].Description);
+            Assert.IsTrue(scenario.Steps[0].IsContinuousAfterFailure);
         }
 
         [TestMethod]
-        public void runtime_scenario_with_then_success_without_continous() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario.ThenSuccess(env => { });
+        public void scenario_with_then_success_without_continous() {
+            Scenario scenario = Scenario.New("name");
+            scenario.ThenSuccess(env => { });
 
-            Assert.AreEqual(1, runtimeScenario.Steps.Count);
-            Assert.AreEqual("ThenSuccess", runtimeScenario.Steps[0].Name);
-            Assert.AreEqual("", runtimeScenario.Steps[0].Description);
-            Assert.IsFalse(runtimeScenario.Steps[0].IsContinuousAfterFailure);
+            Assert.AreEqual(1, scenario.Steps.Count);
+            Assert.AreEqual("ThenSuccess", scenario.Steps[0].Name);
+            Assert.AreEqual("", scenario.Steps[0].Description);
+            Assert.IsFalse(scenario.Steps[0].IsContinuousAfterFailure);
         }
 
         [TestMethod]
-        public void runtime_scenario_with_then_failure() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario.ThenFailure("then failure description", env => { });
+        public void scenario_with_then_failure() {
+            Scenario scenario = Scenario.New("name");
+            scenario.ThenFailure("then failure description", env => { });
 
-            Assert.AreEqual(1, runtimeScenario.Steps.Count);
-            Assert.AreEqual("ThenFailure", runtimeScenario.Steps[0].Name);
-            Assert.AreEqual("then failure description", runtimeScenario.Steps[0].Description);
-            Assert.IsFalse(runtimeScenario.Steps[0].IsContinuousAfterFailure);
+            Assert.AreEqual(1, scenario.Steps.Count);
+            Assert.AreEqual("ThenFailure", scenario.Steps[0].Name);
+            Assert.AreEqual("then failure description", scenario.Steps[0].Description);
+            Assert.IsFalse(scenario.Steps[0].IsContinuousAfterFailure);
         }
 
         [TestMethod]
-        public void runtime_scenario_with_then_failure_with_continous() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario.ThenFailure("then failure description", Step.ContinuousAfterFailure, env => { });
+        public void scenario_with_then_failure_with_continous() {
+            Scenario scenario = Scenario.New("name");
+            scenario.ThenFailure("then failure description", Step.ContinuousAfterFailure, env => { });
 
-            Assert.AreEqual(1, runtimeScenario.Steps.Count);
-            Assert.AreEqual("ThenFailure", runtimeScenario.Steps[0].Name);
-            Assert.AreEqual("then failure description", runtimeScenario.Steps[0].Description);
-            Assert.IsTrue(runtimeScenario.Steps[0].IsContinuousAfterFailure);
+            Assert.AreEqual(1, scenario.Steps.Count);
+            Assert.AreEqual("ThenFailure", scenario.Steps[0].Name);
+            Assert.AreEqual("then failure description", scenario.Steps[0].Description);
+            Assert.IsTrue(scenario.Steps[0].IsContinuousAfterFailure);
         }
 
         [TestMethod]
-        public void runtime_scenario_with_then_failure_without_description() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario.ThenFailure(Step.ContinuousAfterFailure, env => { });
+        public void scenario_with_then_failure_without_description() {
+            Scenario scenario = Scenario.New("name");
+            scenario.ThenFailure(Step.ContinuousAfterFailure, env => { });
 
-            Assert.AreEqual(1, runtimeScenario.Steps.Count);
-            Assert.AreEqual("ThenFailure", runtimeScenario.Steps[0].Name);
-            Assert.AreEqual("", runtimeScenario.Steps[0].Description);
-            Assert.IsTrue(runtimeScenario.Steps[0].IsContinuousAfterFailure);
+            Assert.AreEqual(1, scenario.Steps.Count);
+            Assert.AreEqual("ThenFailure", scenario.Steps[0].Name);
+            Assert.AreEqual("", scenario.Steps[0].Description);
+            Assert.IsTrue(scenario.Steps[0].IsContinuousAfterFailure);
         }
 
         [TestMethod]
-        public void runtime_scenario_with_then_failure_without_continous() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario.ThenFailure(env => { });
+        public void scenario_with_then_failure_without_continous() {
+            Scenario scenario = Scenario.New("name");
+            scenario.ThenFailure(env => { });
 
-            Assert.AreEqual(1, runtimeScenario.Steps.Count);
-            Assert.AreEqual("ThenFailure", runtimeScenario.Steps[0].Name);
-            Assert.AreEqual("", runtimeScenario.Steps[0].Description);
-            Assert.IsFalse(runtimeScenario.Steps[0].IsContinuousAfterFailure);
+            Assert.AreEqual(1, scenario.Steps.Count);
+            Assert.AreEqual("ThenFailure", scenario.Steps[0].Name);
+            Assert.AreEqual("", scenario.Steps[0].Description);
+            Assert.IsFalse(scenario.Steps[0].IsContinuousAfterFailure);
         }
 
         [TestMethod]
-        public void runtime_Scenario_with_steps() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario
+        public void Scenario_with_steps() {
+            Scenario scenario = Scenario.New("name");
+            scenario
                 .Given("given description", Step.ContinuousAfterFailure, env => { })
                 .When("when description", Step.ContinuousAfterFailure, env => { })
                 .Then("then description", Step.ContinuousAfterFailure, env => { });
 
-            Assert.AreEqual(3, runtimeScenario.Steps.Count);
-            Assert.AreEqual("Given", runtimeScenario.Steps[0].Name);
-            Assert.AreEqual("When", runtimeScenario.Steps[1].Name);
-            Assert.AreEqual("Then", runtimeScenario.Steps[2].Name);
-            Assert.AreEqual("given description", runtimeScenario.Steps[0].Description);
-            Assert.AreEqual("when description", runtimeScenario.Steps[1].Description);
-            Assert.AreEqual("then description", runtimeScenario.Steps[2].Description);
-            Assert.IsTrue(runtimeScenario.Steps[0].IsContinuousAfterFailure);
-            Assert.IsTrue(runtimeScenario.Steps[1].IsContinuousAfterFailure);
-            Assert.IsTrue(runtimeScenario.Steps[2].IsContinuousAfterFailure);
+            Assert.AreEqual(3, scenario.Steps.Count);
+            Assert.AreEqual("Given", scenario.Steps[0].Name);
+            Assert.AreEqual("When", scenario.Steps[1].Name);
+            Assert.AreEqual("Then", scenario.Steps[2].Name);
+            Assert.AreEqual("given description", scenario.Steps[0].Description);
+            Assert.AreEqual("when description", scenario.Steps[1].Description);
+            Assert.AreEqual("then description", scenario.Steps[2].Description);
+            Assert.IsTrue(scenario.Steps[0].IsContinuousAfterFailure);
+            Assert.IsTrue(scenario.Steps[1].IsContinuousAfterFailure);
+            Assert.IsTrue(scenario.Steps[2].IsContinuousAfterFailure);
         }
 
         [TestMethod]
         public void all_steps_use_the_same_scenario_environment() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario
+            Scenario scenario = Scenario.New("name");
+            scenario
                 .Given("two numbers ${100} and ${80}.", env => {
                     env.Put("number1", env.GetIntArg(0));
                     env.Put("number2", env.GetIntArg(1));
@@ -252,8 +252,8 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void steps_are_all_success() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario
+            Scenario scenario = Scenario.New("name");
+            scenario
                 .Given("two numbers ${100} and ${80}.", env => {
                     env.Put("number1", env.GetIntArg(0));
                     env.Put("number2", env.GetIntArg(1));
@@ -267,16 +267,16 @@ namespace ezSpec.keyword.Test {
                 })
                 .Execute();
 
-            Assert.IsTrue(runtimeScenario.Steps[0].Result.IsSuccess);
-            Assert.IsTrue(runtimeScenario.Steps[1].Result.IsSuccess);
-            Assert.IsTrue(runtimeScenario.Steps[2].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[0].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[1].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[2].Result.IsSuccess);
         }
 
         [TestMethod]
         public void step_terminate_after_failure() {
-            Scenario runtimeScenario = Scenario.New("name");
+            Scenario scenario = Scenario.New("name");
             Assert.ThrowsException<EzSpecError>(() => {
-                runtimeScenario
+                scenario
                     .Given("a given step.", env => {
                     })
                     .When("I run when step and failed", Step.TerminateAfterFailure, env => {
@@ -287,16 +287,16 @@ namespace ezSpec.keyword.Test {
                     .Execute();
             });
 
-            Assert.IsTrue(runtimeScenario.Steps[0].Result.IsSuccess);
-            Assert.IsTrue(runtimeScenario.Steps[1].Result.IsFailure);
-            Assert.IsTrue(runtimeScenario.Steps[2].Result.IsSkipped);
+            Assert.IsTrue(scenario.Steps[0].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[1].Result.IsFailure);
+            Assert.IsTrue(scenario.Steps[2].Result.IsSkipped);
         }
 
         [TestMethod]
         public void step_continue_after_failure() {
-            Scenario runtimeScenario = Scenario.New("name");
+            Scenario scenario = Scenario.New("name");
             Assert.ThrowsException<EzSpecError>(() => {
-                runtimeScenario
+                scenario
                     .Given("a given step.", env => {
                     })
                     .When("I run when step and failed", Step.ContinuousAfterFailure, env => {
@@ -307,15 +307,15 @@ namespace ezSpec.keyword.Test {
                     .Execute();
             });
 
-            Assert.IsTrue(runtimeScenario.Steps[0].Result.IsSuccess);
-            Assert.IsTrue(runtimeScenario.Steps[1].Result.IsFailure);
-            Assert.IsTrue(runtimeScenario.Steps[2].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[0].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[1].Result.IsFailure);
+            Assert.IsTrue(scenario.Steps[2].Result.IsSuccess);
         }
 
         [TestMethod]
         public void step_pending() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario
+            Scenario scenario = Scenario.New("name");
+            scenario
                 .Given("a given step.", env => {
                 })
                 .When("I run when step and failed", env => {
@@ -325,15 +325,15 @@ namespace ezSpec.keyword.Test {
                 })
                 .Execute();
 
-            Assert.IsTrue(runtimeScenario.Steps[0].Result.IsSuccess);
-            Assert.IsTrue(runtimeScenario.Steps[1].Result.IsPending);
-            Assert.IsTrue(runtimeScenario.Steps[2].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[0].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[1].Result.IsPending);
+            Assert.IsTrue(scenario.Steps[2].Result.IsSuccess);
         }
 
         [TestMethod]
         public void step_execute_concurrently_all_steps() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario
+            Scenario scenario = Scenario.New("name");
+            scenario
                 .Given("a given step.", env => {
                 })
                 .When("I run when step", env => {
@@ -346,19 +346,19 @@ namespace ezSpec.keyword.Test {
                 })
                 .ExecuteConcurrently();
 
-            Assert.IsTrue(runtimeScenario.Steps[0].Result.IsSuccess);
-            Assert.IsTrue(runtimeScenario.Steps[1].Result.IsSuccess);
-            Assert.IsTrue(runtimeScenario.Steps[2].Result.IsSuccess);
-            Assert.IsTrue(runtimeScenario.Steps[3].Result.IsSuccess);
-            Assert.IsTrue(runtimeScenario.Steps[4].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[0].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[1].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[2].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[3].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[4].Result.IsSuccess);
         }
 
         [TestMethod]
         public void step_execute_concurrently_and_terminate_after_failure() {
-            Scenario runtimeScenario = Scenario.New("name");
+            Scenario scenario = Scenario.New("name");
 
             Assert.ThrowsException<EzSpecError>(() => {
-                runtimeScenario
+                scenario
                     .Given("a given step.", env => {
                     })
                     .When("I run when step and failed", Step.TerminateAfterFailure, env => {
@@ -373,19 +373,19 @@ namespace ezSpec.keyword.Test {
                     .ExecuteConcurrently();
             });
 
-            Assert.IsTrue(runtimeScenario.Steps[0].Result.IsSuccess);
-            Assert.IsTrue(runtimeScenario.Steps[1].Result.IsFailure);
-            Assert.IsTrue(runtimeScenario.Steps[2].Result.IsSuccess);
-            Assert.IsTrue(runtimeScenario.Steps[3].Result.IsSkipped);
-            Assert.IsTrue(runtimeScenario.Steps[4].Result.IsSkipped);
+            Assert.IsTrue(scenario.Steps[0].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[1].Result.IsFailure);
+            Assert.IsTrue(scenario.Steps[2].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[3].Result.IsSkipped);
+            Assert.IsTrue(scenario.Steps[4].Result.IsSkipped);
         }
 
         [TestMethod]
         public void step_execute_concurrently_and_continue_after_failure() {
-            Scenario runtimeScenario = Scenario.New("name");
+            Scenario scenario = Scenario.New("name");
 
             Assert.ThrowsException<EzSpecError>(() => {
-                runtimeScenario
+                scenario
                     .Given("a given step.", env => {
                     })
                     .When("I run when step and failed", Step.ContinuousAfterFailure, env => {
@@ -400,18 +400,18 @@ namespace ezSpec.keyword.Test {
                     .ExecuteConcurrently();
             });
 
-            Assert.IsTrue(runtimeScenario.Steps[0].Result.IsSuccess);
-            Assert.IsTrue(runtimeScenario.Steps[1].Result.IsFailure);
-            Assert.IsTrue(runtimeScenario.Steps[2].Result.IsSuccess);
-            Assert.IsTrue(runtimeScenario.Steps[3].Result.IsSuccess);
-            Assert.IsTrue(runtimeScenario.Steps[4].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[0].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[1].Result.IsFailure);
+            Assert.IsTrue(scenario.Steps[2].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[3].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[4].Result.IsSuccess);
         }
 
         [TestMethod]
         public void step_execute_concurrently_with_pending() {
-            Scenario runtimeScenario = Scenario.New("name");
+            Scenario scenario = Scenario.New("name");
 
-            runtimeScenario
+            scenario
                 .Given("a given step.", env => {
                 })
                 .When("I run when step and failed", env => {
@@ -425,17 +425,17 @@ namespace ezSpec.keyword.Test {
                 })
                 .ExecuteConcurrently();
 
-            Assert.IsTrue(runtimeScenario.Steps[0].Result.IsSuccess);
-            Assert.IsTrue(runtimeScenario.Steps[1].Result.IsPending);
-            Assert.IsTrue(runtimeScenario.Steps[2].Result.IsSuccess);
-            Assert.IsTrue(runtimeScenario.Steps[3].Result.IsSuccess);
-            Assert.IsTrue(runtimeScenario.Steps[4].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[0].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[1].Result.IsPending);
+            Assert.IsTrue(scenario.Steps[2].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[3].Result.IsSuccess);
+            Assert.IsTrue(scenario.Steps[4].Result.IsSuccess);
         }
 
         [TestMethod]
         public void step_description_contain_table() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario
+            Scenario scenario = Scenario.New("name");
+            scenario
                 .Given(@"
                     a table 
                     | name  |     path     | parent |
@@ -455,8 +455,8 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void more_than_one_step_description_contain_table() {
-            Scenario runtimeScenario = Scenario.New("name");
-            runtimeScenario
+            Scenario scenario = Scenario.New("name");
+            scenario
                 .Given(@"s
                     a table 
                     | name  |     path     | parent |
@@ -483,18 +483,18 @@ namespace ezSpec.keyword.Test {
         }
 
         [TestMethod]
-        public void runtime_scenario_without_steps_to_string() {
-            Scenario runtimeScenario = Scenario.New("name");
+        public void scenario_without_steps_to_string() {
+            Scenario scenario = Scenario.New("name");
 
             string except = "Scenario: name";
-            Assert.AreEqual(except, runtimeScenario.ToString());
+            Assert.AreEqual(except, scenario.ToString());
         }
 
         [TestMethod]
-        public void runtime_scenario_to_string() {
-            Scenario runtimeScenario = Scenario.New("name");
+        public void scenario_to_string() {
+            Scenario scenario = Scenario.New("name");
             Assert.ThrowsException<EzSpecError>(() => {
-                runtimeScenario
+                scenario
                     .Given("a given step", env => {
                     })
                     .When("I run when step", env => {
@@ -519,14 +519,14 @@ namespace ezSpec.keyword.Test {
                 "[Success] And this step success\n" +
                 "[Success] But nothing";
 
-            Assert.AreEqual(except, runtimeScenario.ToString());
+            Assert.AreEqual(except, scenario.ToString());
         }
 
         [TestMethod]
-        public void runtime_scenario_with_step_contain_more_than_one_line_description() {
-            Scenario runtimeScenario = Scenario.New("name");
+        public void scenario_with_step_contain_more_than_one_line_description() {
+            Scenario scenario = Scenario.New("name");
             Assert.ThrowsException<EzSpecError>(() => {
-                runtimeScenario
+                scenario
                     .Given("a given step line 1\na given step line 2", env => {
                     })
                     .When("I run when step line 1\nI run when step line 2", env => {
@@ -556,14 +556,14 @@ namespace ezSpec.keyword.Test {
                 "[Success] But nothing line 1\n" +
                 "          nothing line 2";
 
-            Assert.AreEqual(except, runtimeScenario.ToString());
+            Assert.AreEqual(except, scenario.ToString());
         }
 
         [TestMethod]
-        public void runtime_scenario_with_step_contain_long_string_description() {
-            Scenario runtimeScenario = Scenario.New("name");
+        public void scenario_with_step_contain_long_string_description() {
+            Scenario scenario = Scenario.New("name");
             Assert.ThrowsException<EzSpecError>(() => {
-                runtimeScenario
+                scenario
                     .Given(@"a given step line 1
                              a given step line 2".AutoTrim(), env => {
                     })
@@ -598,7 +598,7 @@ namespace ezSpec.keyword.Test {
                 "[Success] But nothing line 1\n" +
                 "          nothing line 2";
 
-            Assert.AreEqual(except, runtimeScenario.ToString());
+            Assert.AreEqual(except, scenario.ToString());
         }
 
 
