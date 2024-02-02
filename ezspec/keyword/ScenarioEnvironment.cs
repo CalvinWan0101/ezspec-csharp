@@ -44,8 +44,12 @@ namespace ezSpec.keyword {
             foreach (Argument argument in env.historicalArguments) {
                 historicalArguments.Add(Argument.New(argument));
             }
-            input = Example.New(env.input);
-            anonymousTable = Table.New(env.anonymousTable);
+            if (env.input != null) {
+                input = Example.New(env.input);
+            }
+            if (env.anonymousTable != null) {
+                anonymousTable = Table.New(env.anonymousTable);
+            }
             context = new Dictionary<string, object>(env.context);
         }
 
