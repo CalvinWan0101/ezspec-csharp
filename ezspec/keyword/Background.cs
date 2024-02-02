@@ -9,6 +9,10 @@ namespace ezSpec.keyword {
             get { return name; }
         }
 
+        internal ScenarioEnvironment Environment {
+            set { env = value; }
+        }
+
         protected Background(string name) : base() {
             this.name = name;
         }

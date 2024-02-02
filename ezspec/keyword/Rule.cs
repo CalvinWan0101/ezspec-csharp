@@ -8,7 +8,7 @@ namespace ezSpec.keyword {
         private string name;
         private string description;
         private IList<Scenario> scenarios;
-        private Background background;
+        private Background? background;
 
         public string Name {
             get { return name; }
@@ -21,8 +21,8 @@ namespace ezSpec.keyword {
         public IList<Scenario> Scenarios {
             get { return scenarios; }
         }
-        
-        public Background Background {
+
+        public Background? Background {
             get { return background; }
         }
 
@@ -47,18 +47,17 @@ namespace ezSpec.keyword {
         }
 
         public Scenario NewScenario(string name) {
-            scenarios.Add(Scenario.New(name));
+            scenarios.Add(Scenario.New(name, background));
             return scenarios.Last();
         }
 
         public Scenario NewScenario() {
-            scenarios.Add(Scenario.New(GetNewScenarioCallerFunctionName()));
-            return scenarios.Last();
+            return NewScenario(GetNewScenarioCallerFunctionName());
         }
 
         public override string ToString() {
             StringBuilder result = new StringBuilder();
-            if("" != name) {
+            if ("" != name) {
                 result.Append("Rule: ");
                 result.Append(name);
             }
@@ -67,7 +66,7 @@ namespace ezSpec.keyword {
                 result.Append(description);
             }
             foreach (Scenario scenario in scenarios) {
-                if(0 != result.Length) {
+                if (0 != result.Length) {
                     result.Append("\n\n");
                 }
                 result.Append(scenario.ToString());

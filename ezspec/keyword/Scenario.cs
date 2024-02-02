@@ -4,17 +4,23 @@ using System.Text;
 namespace ezSpec.keyword {
     public class Scenario : StepExecutor {
         private string name;
+        private Background? background;
 
         public string Name {
             get { return name; }
         }
 
-        private Scenario(string name) : base() {
+        private Scenario(string name, Background? background) : base() {
             this.name = name;
+            this.background = background;
         }
 
         public static Scenario New(string name) {
-            return new Scenario(name);
+            return New(name, null);
+        }
+
+        public static Scenario New(string name, Background? background) {
+            return new Scenario(name, background);
         }
 
         public Scenario Given(string description, Step.StepCallback callback) {
@@ -101,6 +107,14 @@ namespace ezSpec.keyword {
             steps.Add(new ThenFailure(description, continous, callback));
 
             return this;
+        }
+
+        public override void Execute() {
+            if (background != null) {
+                background.Environment = env;
+                background.Execute();
+            }
+            base.Execute();
         }
 
         public override string ToString() {

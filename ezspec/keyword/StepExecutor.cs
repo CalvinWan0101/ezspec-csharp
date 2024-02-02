@@ -4,9 +4,9 @@ using ezSpec.keyword.table;
 using System.Text;
 
 namespace ezSpec.keyword {
-    public class StepExecutor {
+    public abstract class StepExecutor {
         protected IList<Step> steps;
-        private ScenarioEnvironment env;
+        protected ScenarioEnvironment env;
 
         public IList<Step> Steps {
             get { return steps; }
@@ -17,7 +17,7 @@ namespace ezSpec.keyword {
             env = ScenarioEnvironment.New();
         }
 
-        public void Execute() {
+        public virtual void Execute() {
             ExecuteSteps();
             ThrowExceptionIfFailed();
         }
@@ -36,12 +36,10 @@ namespace ezSpec.keyword {
                 step.Callback?.Invoke(env);
                 step.Result = Result.Success();
                 return false;
-            }
-            catch (PendingException e) {
+            } catch (PendingException e) {
                 step.Result = Result.Pending(e);
                 return false;
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 step.Result = Result.Failure(e);
                 return !step.IsContinuousAfterFailure;
             }
@@ -64,8 +62,7 @@ namespace ezSpec.keyword {
             for (int currentStep = 0; currentStep < Steps.Count;) {
                 if (skip) {
                     steps[currentStep++].Result = Result.Skipped();
-                }
-                else if (Steps[currentStep] is ConcurrentGroup) {
+                } else if (Steps[currentStep] is ConcurrentGroup) {
                     List<Step> concurrentSteps = new List<Step>() {
                         steps[currentStep++]
                     };

@@ -145,6 +145,65 @@ namespace ezSpec.keyword.Test {
             Assert.AreEqual(background, rule.Background);
             Assert.AreEqual(2, rule.Background.Steps.Count);
         }
+
+        [TestMethod]
+        public void rule_with_background_and_scenario() {
+            Rule rule = Rule.New("buy fruit");
+            rule.NewBackground("the price of fruits")
+                .Given("give the price of apple, banana and orange", env => {
+                    env.Put("applePrice", 20);
+                    env.Put("bananaPrice", 10);
+                    env.Put("orangePrice", 5);
+                });
+
+            rule.NewScenario("buy three kinds of fruits")
+                .When("I buy ${5} apples, ${6} bananas and ${7} oranges", env => {
+                    int totalPrice = 0;
+                    totalPrice += env.GetInt("applePrice") * env.GetIntArg(0);
+                    totalPrice += env.GetInt("bananaPrice") * env.GetIntArg(1);
+                    totalPrice += env.GetInt("orangePrice") * env.GetIntArg(2);
+                    env.Put("totalPrice", totalPrice);
+                })
+                .Then("I should pay ${195}", env => {
+                    Assert.AreEqual(env.GetInt("totalPrice"), env.GetIntArg(0));
+                })
+                .Execute();
+        }
+
+        [TestMethod]
+        public void rule_with_background_and_two_scenarios() {
+            Rule rule = Rule.New("buy fruit");
+            rule.NewBackground("the price of fruits")
+                .Given("give the price of apple, banana and orange", env => {
+                    env.Put("applePrice", 20);
+                    env.Put("bananaPrice", 10);
+                    env.Put("orangePrice", 5);
+                });
+
+            rule.NewScenario("buy apple and banana")
+                .When("I buy ${5} apples and ${6} bananas", env => {
+                    int totalPrice = 0;
+                    totalPrice += env.GetInt("applePrice") * env.GetIntArg(0);
+                    totalPrice += env.GetInt("bananaPrice") * env.GetIntArg(1);
+                    env.Put("totalPrice", totalPrice);
+                })
+                .Then("I should pay ${160}", env => {
+                    Assert.AreEqual(env.GetInt("totalPrice"), env.GetIntArg(0));
+                })
+                .Execute();
+
+            rule.NewScenario("buy banana and orange")
+                .When("I buy ${6} bananas and ${7} oranges", env => {
+                    int totalPrice = 0;
+                    totalPrice += env.GetInt("bananaPrice") * env.GetIntArg(0);
+                    totalPrice += env.GetInt("orangePrice") * env.GetIntArg(1);
+                    env.Put("totalPrice", totalPrice);
+                })
+                .Then("I should pay ${95}", env => {
+                    Assert.AreEqual(env.GetInt("totalPrice"), env.GetIntArg(0));
+                })
+                .Execute();
+        }
     }
 
 }
