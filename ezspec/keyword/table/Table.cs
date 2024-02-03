@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.ObjectModel;
+using System.Text;
 
 namespace ezSpec.keyword.table {
     public class Table {
@@ -14,8 +15,8 @@ namespace ezSpec.keyword.table {
             get { return header; }
         }
 
-        public IList<Row> Rows {
-            get { return rows; }
+        public ReadOnlyCollection<Row> Rows {
+            get { return new ReadOnlyCollection<Row>(rows); }
         }
 
         private Table(Header header, IList<Row> rows) {

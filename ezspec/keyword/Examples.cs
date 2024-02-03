@@ -18,7 +18,6 @@ namespace ezSpec.keyword {
 
         public ReadOnlyCollection<Example> ExampleSet {
             get {
-                // TODO: Use convertAll after updating Table
                 List<Example> examples = new List<Example>();
                 foreach (Row row in table.Rows) {
                     examples.Add(Example.New(row));

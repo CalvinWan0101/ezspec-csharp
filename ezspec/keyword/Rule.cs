@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Text;
 
 namespace ezSpec.keyword {
@@ -18,8 +19,8 @@ namespace ezSpec.keyword {
             get { return description; }
         }
 
-        public IList<Scenario> Scenarios {
-            get { return scenarios; }
+        public ReadOnlyCollection<Scenario> Scenarios {
+            get { return new ReadOnlyCollection<Scenario>(scenarios); }
         }
 
         public Background? Background {

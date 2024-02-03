@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Collections.ObjectModel;
+using System.Text;
 
 namespace ezSpec.keyword {
 
@@ -17,8 +18,8 @@ namespace ezSpec.keyword {
             get { return description; }
         }
 
-        public IList<Rule> Rules {
-            get { return rules; }
+        public ReadOnlyCollection<Rule> Rules {
+            get { return new ReadOnlyCollection<Rule>(rules); }
         }
 
         private Feature(string name, string description) {

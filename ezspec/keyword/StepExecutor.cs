@@ -1,6 +1,7 @@
 ﻿using ezSpec.exception;
 using ezSpec.keyword.step;
 using ezSpec.keyword.table;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace ezSpec.keyword {
@@ -8,8 +9,8 @@ namespace ezSpec.keyword {
         protected IList<Step> steps;
         protected ScenarioEnvironment env;
 
-        public IList<Step> Steps {
-            get { return steps; }
+        public ReadOnlyCollection<Step> Steps {
+            get { return new ReadOnlyCollection<Step>(steps); }
         }
 
         protected StepExecutor() {

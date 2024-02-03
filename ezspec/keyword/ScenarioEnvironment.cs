@@ -1,4 +1,5 @@
 ﻿using ezSpec.keyword.table;
+using System.Collections.ObjectModel;
 
 namespace ezSpec.keyword {
     public class ScenarioEnvironment {
@@ -18,12 +19,12 @@ namespace ezSpec.keyword {
             get { return input; }
         }
 
-        public IList<Argument> Arguments {
-            get { return arguments; }
+        public ReadOnlyCollection<Argument> Arguments {
+            get { return new ReadOnlyCollection<Argument>(arguments); }
         }
 
-        public IList<Argument> HistoricalArguments {
-            get { return historicalArguments; }
+        public ReadOnlyCollection<Argument> HistoricalArguments {
+            get { return new ReadOnlyCollection<Argument>(historicalArguments); }
         }
 
         public Table Table {
