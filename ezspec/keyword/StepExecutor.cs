@@ -23,7 +23,7 @@ namespace ezSpec.keyword {
             ThrowExceptionIfFailed();
         }
 
-        public void ExecuteConcurrently() {
+        public virtual void ExecuteConcurrently() {
             ExecuteStepsConcurrently();
             ThrowExceptionIfFailed();
         }
