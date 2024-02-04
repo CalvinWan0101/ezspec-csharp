@@ -15,9 +15,10 @@
                 }
 
                 string projectDirectory = Directory.GetParent(Environment.CurrentDirectory)!
-                        .Parent!.Parent!.Parent!.FullName;
+                        .Parent!.Parent!.Parent!.FullName.Replace("\\","/");
                 return exception.StackTrace
-                    .Replace($"{projectDirectory}\\", "")
+                    .Replace("\\", "/")
+                    .Replace($"{projectDirectory}/", "")
                     .Replace("\r", "");
             }
         }
