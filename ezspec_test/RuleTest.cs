@@ -147,6 +147,38 @@ namespace ezSpec.keyword.Test {
         }
 
         [TestMethod]
+        public void get_rule_string_with_background() {
+            Rule rule = Rule.New("rule name");
+            rule.NewBackground("background name")
+                .Given("give step", env => { })
+                .And("and step", env => { });
+
+            string except =
+                "Rule: rule name\n" +
+                "\n" +
+                "Background: background name\n" +
+                "Given give step\n" +
+                "And and step";
+
+            Assert.AreEqual(except, rule.ToString());
+        }
+
+        [TestMethod]
+        public void get_rule_string_with_empty_name_with_background() {
+            Rule rule = Rule.New("");
+            rule.NewBackground("background name")
+                .Given("give step", env => { })
+                .And("and step", env => { });
+
+            string except =
+                "Background: background name\n" +
+                "Given give step\n" +
+                "And and step";
+
+            Assert.AreEqual(except, rule.ToString());
+        }
+
+        [TestMethod]
         public void rule_with_background_and_scenario() {
             Rule rule = Rule.New("buy fruit");
             rule.NewBackground("the price of fruits")
@@ -201,6 +233,73 @@ namespace ezSpec.keyword.Test {
                 })
                 .Then("I should pay ${95}", env => {
                     Assert.AreEqual(env.GetInt("totalPrice"), env.GetIntArg(0));
+                })
+                .Execute();
+        }
+
+        [TestMethod]
+        public void rule_with_background_with_scenario_outline() {
+            Rule rule = Rule.New("buy fruit");
+            rule.NewBackground("the price of fruits")
+                .Given("give the price of apple, banana and orange", env => {
+                    env.Put("apple", 20);
+                    env.Put("banana", 10);
+                    env.Put("orange", 5);
+                });
+
+            rule.NewScenarioOutline("buy different fruit")
+                .WithExamples(@"
+                    | fruit  | quantity | pay |
+                    | apple  | 10       | 200 |
+                    | orange | 7        | 35  |")
+                .When("I bought <quantity> <fruit>", env => {
+                    env.Put("fruit", env.Example.Get("fruit"));
+                    env.Put("quantity", env.Example.Get("quantity"));
+                })
+                .Then("I should pay $<pay>", env => {
+                    int totalPay = env.GetInt(env.GetString("fruit")) * env.GetInt("quantity");
+                    Assert.AreEqual(int.Parse(env.Example.Get("pay")), totalPay);
+                })
+                .Execute();
+        }
+
+        [TestMethod]
+        public void rule_with_background_with_multiple_scenario_outline() {
+            Rule rule = Rule.New("buy fruit");
+            rule.NewBackground("the price of fruits")
+                .Given("give the price of apple, banana and orange", env => {
+                    env.Put("apple", 20);
+                    env.Put("banana", 10);
+                    env.Put("orange", 5);
+                });
+
+            rule.NewScenarioOutline("buy different fruit")
+                .WithExamples(@"
+                    | fruit  | quantity | pay |
+                    | apple  | 10       | 200 |
+                    | orange | 7        | 35  |")
+                .When("I bought <quantity> <fruit>", env => {
+                    env.Put("fruit", env.Example.Get("fruit"));
+                    env.Put("quantity", env.Example.Get("quantity"));
+                })
+                .Then("I should pay $<pay>", env => {
+                    int totalPay = env.GetInt(env.GetString("fruit")) * env.GetInt("quantity");
+                    Assert.AreEqual(int.Parse(env.Example.Get("pay")), totalPay);
+                })
+                .Execute();
+
+            rule.NewScenarioOutline("buy different fruit")
+                .WithExamples(@"
+                    | fruit  | quantity | pay |
+                    | banana | 4        | 40  |
+                    | orange | 8        | 40  |")
+                .When("I bought <quantity> <fruit>", env => {
+                    env.Put("fruit", env.Example.Get("fruit"));
+                    env.Put("quantity", env.Example.Get("quantity"));
+                })
+                .Then("I should pay $<pay>", env => {
+                    int totalPay = env.GetInt(env.GetString("fruit")) * env.GetInt("quantity");
+                    Assert.AreEqual(int.Parse(env.Example.Get("pay")), totalPay);
                 })
                 .Execute();
         }

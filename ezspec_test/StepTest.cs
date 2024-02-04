@@ -183,6 +183,10 @@ namespace ezSpec.keyword.step.Test {
             public static TestStep New(string description, bool continuous, StepCallback callback) {
                 return new TestStep(description, continuous, callback);
             }
+
+            public override Step Clone() {
+                return new TestStep(description, continousAfterFailure, callback);
+            }
         }
     }
 }

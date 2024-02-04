@@ -5,7 +5,7 @@ namespace ezSpec.keyword {
     public class ScenarioEnvironment {
 
         private int executionCount;
-        private Example input;
+        private Example example;
         private IList<Argument> arguments;
         private IList<Argument> historicalArguments;
         private Table anonymousTable;
@@ -15,8 +15,8 @@ namespace ezSpec.keyword {
             get { return executionCount; }
         }
 
-        public Example Input {
-            get { return input; }
+        public Example Example {
+            get { return example; }
         }
 
         public ReadOnlyCollection<Argument> Arguments {
@@ -45,8 +45,8 @@ namespace ezSpec.keyword {
             foreach (Argument argument in env.historicalArguments) {
                 historicalArguments.Add(Argument.New(argument));
             }
-            if (env.input != null) {
-                input = Example.New(env.input);
+            if (env.example != null) {
+                example = Example.New(env.example);
             }
             if (env.anonymousTable != null) {
                 anonymousTable = Table.New(env.anonymousTable);
@@ -66,8 +66,8 @@ namespace ezSpec.keyword {
             executionCount = count;
         }
 
-        internal void SetInput(Example example) {
-            input = Example.New(example);
+        internal void SetExample(Example example) {
+            this.example = Example.New(example);
         }
 
         internal void SetArguments(IList<Argument> arguments) {
@@ -139,15 +139,27 @@ namespace ezSpec.keyword {
         }
 
         public int GetInt(string key) {
-            return (int)FindInContextByKey(key);
+            object value = FindInContextByKey(key);
+            if (value is string) {
+                return int.Parse((string)value);
+            }
+            return (int)value;
         }
 
         public double GetDouble(string key) {
-            return (double)FindInContextByKey(key);
+            object value = FindInContextByKey(key);
+            if (value is string) {
+                return double.Parse((string)value);
+            }
+            return (double)value;
         }
 
         public bool GetBool(string key) {
-            return (bool)FindInContextByKey(key);
+            object value = FindInContextByKey(key);
+            if (value is string) {
+                return bool.Parse((string)value);
+            }
+            return (bool)value;
         }
 
         public T Get<T>(string key) {

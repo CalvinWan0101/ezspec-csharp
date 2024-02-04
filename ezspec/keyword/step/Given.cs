@@ -7,5 +7,9 @@
 
         public Given(string description, bool continuous, StepCallback callback) : base(description, continuous, callback) {
         }
+
+        public override Step Clone() {
+            return new Given(description, continousAfterFailure, callback);
+        }
     }
 }

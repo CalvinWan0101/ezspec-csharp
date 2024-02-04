@@ -8,7 +8,7 @@ namespace ezSpec.keyword {
 
         private string name;
         private string description;
-        private IList<Scenario> scenarios;
+        private IList<AbstractScenario> scenarios;
         private Background? background;
 
         public string Name {
@@ -19,8 +19,8 @@ namespace ezSpec.keyword {
             get { return description; }
         }
 
-        public ReadOnlyCollection<Scenario> Scenarios {
-            get { return new ReadOnlyCollection<Scenario>(scenarios); }
+        public ReadOnlyCollection<AbstractScenario> Scenarios {
+            get { return new ReadOnlyCollection<AbstractScenario>(scenarios); }
         }
 
         public Background? Background {
@@ -30,7 +30,7 @@ namespace ezSpec.keyword {
         private Rule(string name, string description) {
             this.name = name;
             this.description = description;
-            this.scenarios = new List<Scenario>();
+            this.scenarios = new List<AbstractScenario>();
             this.background = null;
         }
 
@@ -49,11 +49,16 @@ namespace ezSpec.keyword {
 
         public Scenario NewScenario(string name) {
             scenarios.Add(Scenario.New(name, background));
-            return scenarios.Last();
+            return (scenarios.Last() as Scenario)!;
         }
 
         public Scenario NewScenario() {
             return NewScenario(GetNewScenarioCallerFunctionName());
+        }
+
+        public ScenarioOutline NewScenarioOutline(string name) {
+            scenarios.Add(ScenarioOutline.New(name, background));
+            return (scenarios.Last() as ScenarioOutline)!;
         }
 
         public override string ToString() {
@@ -66,7 +71,13 @@ namespace ezSpec.keyword {
                 result.Append("\n");
                 result.Append(description);
             }
-            foreach (Scenario scenario in scenarios) {
+            if (background != null) {
+                if (0 != result.Length) {
+                    result.Append("\n\n");
+                }
+                result.Append(background.ToString());
+            }
+            foreach (AbstractScenario scenario in scenarios) {
                 if (0 != result.Length) {
                     result.Append("\n\n");
                 }

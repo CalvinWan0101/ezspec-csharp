@@ -7,5 +7,9 @@
 
         public But(string description, bool continuous, StepCallback callback) : base(description, continuous, callback) {
         }
+
+        public override Step Clone() {
+            return new But(description, continousAfterFailure, callback);
+        }
     }
 }

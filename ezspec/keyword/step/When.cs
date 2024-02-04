@@ -7,5 +7,9 @@
 
         public When(string description, bool continuous, StepCallback callback) : base(description, continuous, callback) {
         }
+
+        public override Step Clone() {
+            return new When(description, continousAfterFailure, callback);
+        }
     }
 }

@@ -45,7 +45,7 @@ namespace ezSpec.keyword.Test {
             ScenarioEnvironment env = ScenarioEnvironment.New();
 
             Assert.AreEqual(0, env.ExecutionCount);
-            Assert.IsNull(env.Input);
+            Assert.IsNull(env.Example);
             Assert.AreEqual(0, env.Arguments.Count);
             Assert.AreEqual(0, env.HistoricalArguments.Count);
             Assert.IsNull(env.Table);
@@ -65,14 +65,14 @@ namespace ezSpec.keyword.Test {
         public void set_input() {
             ScenarioEnvironment env = ScenarioEnvironment.New();
 
-            var setInputTableMethod = env.GetType().GetMethod("SetInput", BindingFlags.Instance | BindingFlags.NonPublic);
+            var setInputTableMethod = env.GetType().GetMethod("SetExample", BindingFlags.Instance | BindingFlags.NonPublic);
             setInputTableMethod?.Invoke(env, new object[] { inputExample });
 
-            Assert.IsNotNull(env.Input);
-            Assert.AreEqual(3, env.Input.Columns.Count);
-            Assert.AreEqual("10001", env.Input.Get(0));
-            Assert.AreEqual("Joe", env.Input.Get(1));
-            Assert.AreEqual("60", env.Input.Get(2));
+            Assert.IsNotNull(env.Example);
+            Assert.AreEqual(3, env.Example.Columns.Count);
+            Assert.AreEqual("10001", env.Example.Get(0));
+            Assert.AreEqual("Joe", env.Example.Get(1));
+            Assert.AreEqual("60", env.Example.Get(2));
         }
 
         [TestMethod]
@@ -296,7 +296,7 @@ namespace ezSpec.keyword.Test {
             ScenarioEnvironment env = ScenarioEnvironment.New();
             SetEnviormentArgument(env, arguments1);
             SetEnviormentArgument(env, arguments2);
-            SetEnviormentInput(env, inputExample);
+            SetEnviormentExample(env, inputExample);
             SetEnviormentTable(env, anonymousTable);
             env.Put("str_var", "this is a string");
             env.Put("int_var", 3);
@@ -311,7 +311,7 @@ namespace ezSpec.keyword.Test {
             Assert.AreEqual("10001", copyEnv.GetStringHistoricalArg("id"));
             Assert.AreEqual("Joe", copyEnv.GetStringHistoricalArg("name"));
             Assert.AreEqual("60", copyEnv.GetStringHistoricalArg("score"));
-            Assert.AreEqual(3, copyEnv.Input.Columns.Count);
+            Assert.AreEqual(3, copyEnv.Example.Columns.Count);
             Assert.AreEqual(1, copyEnv.Table.Rows.Count);
             Assert.AreEqual("this is a string", copyEnv.GetString("str_var"));
             Assert.AreEqual(3, copyEnv.GetInt("int_var"));
@@ -326,8 +326,8 @@ namespace ezSpec.keyword.Test {
             setArgumentsMethod?.Invoke(env, new object[] { arguments });
         }
 
-        private void SetEnviormentInput(ScenarioEnvironment env, Example input) {
-            var setArgumentsMethod = env.GetType().GetMethod("SetInput", BindingFlags.Instance | BindingFlags.NonPublic);
+        private void SetEnviormentExample(ScenarioEnvironment env, Example input) {
+            var setArgumentsMethod = env.GetType().GetMethod("SetExample", BindingFlags.Instance | BindingFlags.NonPublic);
             setArgumentsMethod?.Invoke(env, new object[] { input });
         }
 

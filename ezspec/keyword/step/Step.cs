@@ -4,21 +4,22 @@ using System.Text.RegularExpressions;
 
 namespace ezSpec.keyword.step {
 
-    public abstract class Step {
+    public abstract partial class Step {
         public delegate void StepCallback(ScenarioEnvironment env);
 
         public static readonly bool ContinuousAfterFailure = true;
         public static readonly bool TerminateAfterFailure = false;
 
-        private string description;
-        private StepCallback callback;
-        private bool continousAfterFailure;
+        protected string description;
+        protected StepCallback callback;
+        protected bool continousAfterFailure;
         private Result stepResult;
 
         public abstract string Name { get; }
 
         public string Description {
             get { return description; }
+            internal set { description = value; }
         }
 
         internal StepCallback Callback {
@@ -64,6 +65,15 @@ namespace ezSpec.keyword.step {
             }
         }
 
+        public abstract Step Clone();
+
+        protected Step(string description, bool continous, StepCallback callback) {
+            this.description = description;
+            continousAfterFailure = continous;
+            this.callback = callback;
+            stepResult = Result.Pending(PendingException.New());
+        }
+
         public override string ToString() {
             StringBuilder result = new StringBuilder();
             result.Append("[");
@@ -73,13 +83,6 @@ namespace ezSpec.keyword.step {
             result.Append(" ");
             result.Append(description.Replace("\n", "\n          "));
             return result.ToString();
-        }
-
-        protected Step(string description, bool continous, StepCallback callback) {
-            this.description = description;
-            continousAfterFailure = continous;
-            this.callback = callback;
-            stepResult = Result.Pending(PendingException.New());
         }
     }
 }

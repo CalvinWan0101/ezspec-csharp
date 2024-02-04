@@ -12,7 +12,19 @@ namespace ezSpec.keyword {
             return new Scenario(name, background);
         }
 
+        internal static Scenario New(Background? background, IList<Step> steps, Example example) {
+            return new Scenario(background, steps, example);
+        }
+
         private Scenario(string name, Background? background) : base(name, background) {
+        }
+
+        private Scenario(Background? background, IList<Step> steps, Example example) : base("", null) {
+            foreach (var step in steps) {
+                this.steps.Add(step);
+            }
+            this.env.SetExample(example);
+            this.background = background;
         }
 
         public new Scenario Given(string description, Step.StepCallback callback) {
