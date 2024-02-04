@@ -8,8 +8,8 @@
         public And(string description, bool continuous, StepCallback callback) : base(description, continuous, callback) {
         }
 
-        public override Step Clone() {
-            return new And(description, continousAfterFailure, callback);
+        internal override Step CloneWithDifferentDescription(string description) {
+            return new And(description, this.continousAfterFailure, this.callback);
         }
     }
 }

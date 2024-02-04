@@ -65,7 +65,7 @@ namespace ezSpec.keyword.step {
             }
         }
 
-        public abstract Step Clone();
+        internal abstract Step CloneWithDifferentDescription(string description);
 
         protected Step(string description, bool continous, StepCallback callback) {
             this.description = description;

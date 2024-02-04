@@ -8,27 +8,27 @@ namespace ezSpec.keyword.step.Test {
 
         [TestMethod]
         public void create_step() {
-            Step step = TestStep.New("description", env => { });
-            Assert.AreEqual("description", step.Description);
-            Assert.IsFalse(step.IsContinuousAfterFailure);
+            Given given = new Given("description", false, env => { });
+            Assert.AreEqual("description", given.Description);
+            Assert.IsFalse(given.IsContinuousAfterFailure);
         }
 
         [TestMethod]
         public void create_step_with_continous() {
-            Step step = TestStep.New("description", Step.ContinuousAfterFailure, env => { });
-            Assert.AreEqual("description", step.Description);
-            Assert.IsTrue(step.IsContinuousAfterFailure);
+            Given given = new Given("description", Step.ContinuousAfterFailure, env => { });
+            Assert.AreEqual("description", given.Description);
+            Assert.IsTrue(given.IsContinuousAfterFailure);
         }
 
         [TestMethod]
         public void invoke_step_callback() {
             int notifyCount = 0;
-            Step step = TestStep.New("description", env => {
+            Given given = new Given("description", false, env => {
                 notifyCount++;
             });
 
-            var callback = step.GetType().GetProperty("Callback", BindingFlags.Instance | BindingFlags.NonPublic)?
-                .GetValue(step, null) as Step.StepCallback;
+            var callback = given.GetType().GetProperty("Callback", BindingFlags.Instance | BindingFlags.NonPublic)?
+                .GetValue(given, null) as Step.StepCallback;
             callback?.Invoke(null);
 
             Assert.AreEqual(1, notifyCount);
@@ -36,9 +36,9 @@ namespace ezSpec.keyword.step.Test {
 
         [TestMethod]
         public void description_with_dollar_sign_argument() {
-            Step step = TestStep.New("With argument ${123}", env => { });
+            Given given = new Given("With argument ${123}", false, env => { });
 
-            List<Argument> arguments = step.Arguments;
+            List<Argument> arguments = given.Arguments;
 
             Assert.AreEqual(1, arguments.Count);
             Assert.AreEqual("", arguments[0].Key);
@@ -47,9 +47,9 @@ namespace ezSpec.keyword.step.Test {
 
         [TestMethod]
         public void description_with_equal_sign_argument_in_curly_brackets() {
-            Step step = TestStep.New("With argument ${arg=123}", env => { });
+            Given given = new Given("With argument ${arg=123}", false, env => { });
 
-            List<Argument> arguments = step.Arguments;
+            List<Argument> arguments = given.Arguments;
 
             Assert.AreEqual(1, arguments.Count);
             Assert.AreEqual("arg", arguments[0].Key);
@@ -58,9 +58,9 @@ namespace ezSpec.keyword.step.Test {
 
         [TestMethod]
         public void description_with_colon_argument_in_curly_brackets() {
-            Step step = TestStep.New("With argument ${arg:123}", env => { });
+            Given given = new Given("With argument ${arg:123}", false, env => { });
 
-            List<Argument> arguments = step.Arguments;
+            List<Argument> arguments = given.Arguments;
 
             Assert.AreEqual(1, arguments.Count);
             Assert.AreEqual("arg", arguments[0].Key);
@@ -69,9 +69,9 @@ namespace ezSpec.keyword.step.Test {
 
         [TestMethod]
         public void description_with_many_arguments() {
-            Step step = TestStep.New("With arrguments ${arg1:abc}, ${$210}, and ${arg2=123}", env => { });
+            Given given = new Given("With arrguments ${arg1:abc}, ${$210}, and ${arg2=123}", false, env => { });
 
-            List<Argument> arguments = step.Arguments;
+            List<Argument> arguments = given.Arguments;
 
             Assert.AreEqual(3, arguments.Count);
             Assert.AreEqual("arg1", arguments[0].Key);
@@ -84,31 +84,31 @@ namespace ezSpec.keyword.step.Test {
 
         [TestMethod]
         public void set_and_get_result() {
-            Step step = TestStep.New("description", env => { });
+            Given given = new Given("description", false, env => { });
 
             Result successExpect = Result.Success();
 
-            step.Result = successExpect;
-            Assert.AreEqual(successExpect, step.Result);
+            given.Result = successExpect;
+            Assert.AreEqual(successExpect, given.Result);
 
             Exception e = new Exception();
             Result pendingExpect = Result.Pending(e);
-            step.Result = pendingExpect;
-            Assert.AreEqual(pendingExpect, step.Result);
+            given.Result = pendingExpect;
+            Assert.AreEqual(pendingExpect, given.Result);
         }
 
         [TestMethod]
         public void erase_reversed_words() {
-            Step step = TestStep.New("With arrguments ${arg1:abc}, ${$210}, and ${arg2=123}", env => { });
+            Given given = new Given("With arrguments ${arg1:abc}, ${$210}, and ${arg2=123}", false, env => { });
 
-            Assert.AreEqual("With arrguments abc, $210, and 123", step.EraseReversedWords);
+            Assert.AreEqual("With arrguments abc, $210, and 123", given.EraseReversedWords);
         }
 
         [TestMethod]
         public void get_name() {
-            Step step = TestStep.New("description", env => { });
+            Given given = new Given("description", false, env => { });
 
-            Assert.AreEqual("TestStep", step.Name);
+            Assert.AreEqual("Given", given.Name);
         }
 
         [TestMethod]
@@ -166,27 +166,6 @@ namespace ezSpec.keyword.step.Test {
             Assert.AreEqual("[Pending] But but description line 1\n          but description line 2", but.ToString());
             Assert.AreEqual("[Pending] ThenSuccess then success description line 1\n          then success description line 1", thenSuccess.ToString());
             Assert.AreEqual("[Pending] ThenFailure then failure description line 1\n          then failure description line 2", thenFailure.ToString());
-        }
-
-        private class TestStep : Step {
-            public override string Name {
-                get { return "TestStep"; }
-            }
-
-            public TestStep(string description, bool continuous, StepCallback callback) : base(description, continuous, callback) {
-            }
-
-            public static TestStep New(string description, StepCallback callback) {
-                return new TestStep(description, TerminateAfterFailure, callback);
-            }
-
-            public static TestStep New(string description, bool continuous, StepCallback callback) {
-                return new TestStep(description, continuous, callback);
-            }
-
-            public override Step Clone() {
-                return new TestStep(description, continousAfterFailure, callback);
-            }
         }
     }
 }

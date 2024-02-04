@@ -8,8 +8,8 @@
         public When(string description, bool continuous, StepCallback callback) : base(description, continuous, callback) {
         }
 
-        public override Step Clone() {
-            return new When(description, continousAfterFailure, callback);
+        internal override Step CloneWithDifferentDescription(string description) {
+            return new When(description, this.continousAfterFailure, this.callback);
         }
     }
 }

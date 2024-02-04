@@ -180,8 +180,7 @@ namespace ezSpec.keyword {
         private IList<Step> GetReplacedSteps(IList<Step> steps, Example example) {
             IList<Step> replacedSteps = new List<Step>();
             foreach (Step step in steps) {
-                Step clone = step.Clone();
-                clone.Description = ReplaceStepDescription(step.Description, example);
+                Step clone = step.CloneWithDifferentDescription(ReplaceStepDescription(step.Description, example));
                 replacedSteps.Add(clone);
             }
             return replacedSteps;

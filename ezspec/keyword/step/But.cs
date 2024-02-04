@@ -8,8 +8,8 @@
         public But(string description, bool continuous, StepCallback callback) : base(description, continuous, callback) {
         }
 
-        public override Step Clone() {
-            return new But(description, continousAfterFailure, callback);
+        internal override Step CloneWithDifferentDescription(string description) {
+            return new But(description, this.continousAfterFailure, this.callback);
         }
     }
 }

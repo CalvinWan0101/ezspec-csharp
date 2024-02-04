@@ -8,8 +8,8 @@
         public ThenSuccess(string description, bool continuous, StepCallback callback) : base(description, continuous, callback) {
         }
 
-        public override Step Clone() {
-            return new ThenSuccess(description, continousAfterFailure, callback);
+        internal override Step CloneWithDifferentDescription(string description) {
+            return new ThenSuccess(description, this.continousAfterFailure, this.callback);
         }
     }
 }
