@@ -513,11 +513,11 @@ namespace ezSpec.keyword.Test {
 
             string except =
                 "Scenario: name\n" +
-                "[Success] Given a given step\n" +
-                "[Success] When I run when step\n" +
-                "[Failure] Then this step failure\n" +
-                "[Success] And this step success\n" +
-                "[Success] But nothing";
+                "\t[Success] Given a given step\n" +
+                "\t[Success] When I run when step\n" +
+                "\t[Failure] Then this step failure\n" +
+                "\t[Success] And this step success\n" +
+                "\t[Success] But nothing";
 
             Assert.AreEqual(except, scenario.ToString());
         }
@@ -545,16 +545,16 @@ namespace ezSpec.keyword.Test {
 
             string except =
                 "Scenario: name\n" +
-                "[Success] Given a given step line 1\n" +
-                "          a given step line 2\n" +
-                "[Success] When I run when step line 1\n" +
-                "          I run when step line 2\n" +
-                "[Failure] Then this step failure line 1\n" +
-                "          this step failure line 2\n" +
-                "[Success] And this step success line 1\n" +
-                "          this step success line 2\n" +
-                "[Success] But nothing line 1\n" +
-                "          nothing line 2";
+                "\t[Success] Given a given step line 1\n" +
+                "\t          a given step line 2\n" +
+                "\t[Success] When I run when step line 1\n" +
+                "\t          I run when step line 2\n" +
+                "\t[Failure] Then this step failure line 1\n" +
+                "\t          this step failure line 2\n" +
+                "\t[Success] And this step success line 1\n" +
+                "\t          this step success line 2\n" +
+                "\t[Success] But nothing line 1\n" +
+                "\t          nothing line 2";
 
             Assert.AreEqual(except, scenario.ToString());
         }
@@ -587,16 +587,16 @@ namespace ezSpec.keyword.Test {
 
             string except =
                 "Scenario: name\n" +
-                "[Success] Given a given step line 1\n" +
-                "          a given step line 2\n" +
-                "[Success] When I run when step line 1\n" +
-                "          I run when step line 2\n" +
-                "[Failure] Then this step failure line 1\n" +
-                "          this step failure line 2\n" +
-                "[Success] And this step success line 1\n" +
-                "          this step success line 2\n" +
-                "[Success] But nothing line 1\n" +
-                "          nothing line 2";
+                "\t[Success] Given a given step line 1\n" +
+                "\t          a given step line 2\n" +
+                "\t[Success] When I run when step line 1\n" +
+                "\t          I run when step line 2\n" +
+                "\t[Failure] Then this step failure line 1\n" +
+                "\t          this step failure line 2\n" +
+                "\t[Success] And this step success line 1\n" +
+                "\t          this step success line 2\n" +
+                "\t[Success] But nothing line 1\n" +
+                "\t          nothing line 2";
 
             Assert.AreEqual(except, scenario.ToString());
         }

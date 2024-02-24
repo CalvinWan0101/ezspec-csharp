@@ -146,11 +146,11 @@ namespace ezSpec_test {
 
             string expect =
                 "Examples: examplesName\n" +
-                "examplesDescription\n" +
-                "|\tid\t|\tname\t|\tscore\t|\n" +
-                "|\t10001\t|\tJoe\t|\t60\t|\n" +
-                "|\t10002\t|\tCalvin\t|\t80\t|\n" +
-                "|\t10003\t|\tHoward\t|\t100\t|";
+                "\texamplesDescription\n" +
+                "\t|\tid\t|\tname\t|\tscore\t|\n" +
+                "\t|\t10001\t|\tJoe\t|\t60\t|\n" +
+                "\t|\t10002\t|\tCalvin\t|\t80\t|\n" +
+                "\t|\t10003\t|\tHoward\t|\t100\t|";
 
             Assert.AreEqual(expect, examples.ToString());
         }
@@ -167,10 +167,10 @@ namespace ezSpec_test {
 
             string expect =
                 "Examples: examplesName\n" +
-                "|\tid\t|\tname\t|\tscore\t|\n" +
-                "|\t10001\t|\tJoe\t|\t60\t|\n" +
-                "|\t10002\t|\tCalvin\t|\t80\t|\n" +
-                "|\t10003\t|\tHoward\t|\t100\t|";
+                "\t|\tid\t|\tname\t|\tscore\t|\n" +
+                "\t|\t10001\t|\tJoe\t|\t60\t|\n" +
+                "\t|\t10002\t|\tCalvin\t|\t80\t|\n" +
+                "\t|\t10003\t|\tHoward\t|\t100\t|";
 
             Assert.AreEqual(expect, examples.ToString());
         }
@@ -187,10 +187,10 @@ namespace ezSpec_test {
 
             string expect =
                 "Examples: \n" +
-                "|\tid\t|\tname\t|\tscore\t|\n" +
-                "|\t10001\t|\tJoe\t|\t60\t|\n" +
-                "|\t10002\t|\tCalvin\t|\t80\t|\n" +
-                "|\t10003\t|\tHoward\t|\t100\t|";
+                "\t|\tid\t|\tname\t|\tscore\t|\n" +
+                "\t|\t10001\t|\tJoe\t|\t60\t|\n" +
+                "\t|\t10002\t|\tCalvin\t|\t80\t|\n" +
+                "\t|\t10003\t|\tHoward\t|\t100\t|";
 
             Assert.AreEqual(expect, examples.ToString());
         }
@@ -208,11 +208,11 @@ namespace ezSpec_test {
 
             string expect =
                 "Examples: examplesName\n" +
-                "examplesDescription\n" +
-                "| id    | name   | score |\n" +
-                "| 10001 | Joe    | 60    |\n" +
-                "| 10002 | Calvin | 80    |\n" +
-                "| 10003 | Howard | 100   |";
+                "\texamplesDescription\n" +
+                "\t| id    | name   | score |\n" +
+                "\t| 10001 | Joe    | 60    |\n" +
+                "\t| 10002 | Calvin | 80    |\n" +
+                "\t| 10003 | Howard | 100   |";
 
             Assert.AreEqual(expect, examples.ToStringBeautify());
         }

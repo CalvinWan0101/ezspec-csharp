@@ -118,10 +118,10 @@ namespace ezSpec.keyword.Test {
                 "\n" +
                 "Feature's description\n" +
                 "\n" +
-                "Scenario: Scenario's name\n" +
-                "[Pending] Given given description\n" +
-                "[Pending] When when description\n" +
-                "[Pending] Then then description";
+                "\tScenario: Scenario's name\n" +
+                "\t\t[Pending] Given given description\n" +
+                "\t\t[Pending] When when description\n" +
+                "\t\t[Pending] Then then description";
 
             Assert.AreEqual(except, feature.ToString());
         }
@@ -145,10 +145,10 @@ namespace ezSpec.keyword.Test {
                 "Rule: Rule's name\n" +
                 "Rule's description\n" +
                 "\n" +
-                "Scenario: Scenario's name\n" +
-                "[Pending] Given given description\n" +
-                "[Pending] When when description\n" +
-                "[Pending] Then then description";
+                "\tScenario: Scenario's name\n" +
+                "\t\t[Pending] Given given description\n" +
+                "\t\t[Pending] When when description\n" +
+                "\t\t[Pending] Then then description";
 
             Assert.AreEqual(except, feature.ToString());
         }
@@ -192,10 +192,10 @@ namespace ezSpec.keyword.Test {
                 "Rule: Rule2's name\n" +
                 "Rule2's description\n" +
                 "\n" +
-                "Scenario: Scenario's name\n" +
-                "[Pending] Given given description\n" +
-                "[Pending] When when description\n" +
-                "[Pending] Then then description";
+                "\tScenario: Scenario's name\n" +
+                "\t\t[Pending] Given given description\n" +
+                "\t\t[Pending] When when description\n" +
+                "\t\t[Pending] Then then description";
 
             Assert.AreEqual(except, feature.ToString());
         }
@@ -222,18 +222,18 @@ namespace ezSpec.keyword.Test {
                 "\n" +
                 "Feature's description\n" +
                 "\n" +
-                "Scenario: Scenario's name\n" +
-                "[Pending] Given given description\n" +
-                "[Pending] When when description\n" +
-                "[Pending] Then then description\n" +
+                "\tScenario: Scenario's name\n" +
+                "\t\t[Pending] Given given description\n" +
+                "\t\t[Pending] When when description\n" +
+                "\t\t[Pending] Then then description\n" +
                 "\n" +
                 "Rule: Rule's name\n" +
                 "Rule's description\n" +
                 "\n" +
-                "Scenario: Scenario's name\n" +
-                "[Pending] Given given description\n" +
-                "[Pending] When when description\n" +
-                "[Pending] Then then description";
+                "\tScenario: Scenario's name\n" +
+                "\t\t[Pending] Given given description\n" +
+                "\t\t[Pending] When when description\n" +
+                "\t\t[Pending] Then then description";
 
             Assert.AreEqual(except, feature.ToString());
         }

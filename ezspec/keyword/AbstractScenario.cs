@@ -92,5 +92,7 @@ namespace ezSpec.keyword {
             steps.Add(new ThenFailure(description, continous, callback));
             return this;
         }
+
+        public override abstract string ToString();
     }
 }

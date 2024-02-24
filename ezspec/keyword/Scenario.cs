@@ -138,8 +138,8 @@ namespace ezSpec.keyword {
             result.Append("Scenario: ");
             result.Append(name);
             for (int i = 0; i < steps.Count; i++) {
-                result.Append("\n");
-                result.Append(steps[i].ToString());
+                result.Append("\n\t");
+                result.Append(steps[i].ToStringWithResult().Replace("\n", "\n\t"));
             }
             return result.ToString();
         }

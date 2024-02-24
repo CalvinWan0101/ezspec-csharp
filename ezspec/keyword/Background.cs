@@ -56,10 +56,8 @@ namespace ezSpec.keyword {
             result.Append("Background: ");
             result.Append(name);
             foreach (Step step in steps) {
-                result.Append("\n");
-                result.Append(step.Name);
-                result.Append(" ");
-                result.Append(step.Description);
+                result.Append("\n\t");
+                result.Append(step.ToString());
             }
             return result.ToString();
         }

@@ -232,16 +232,17 @@ namespace ezSpec.keyword.Test {
 
             string except =
                 "Scenario Outline: buy fruit\n" +
-                "Raw Steps:\n" +
-                "Given <fruit> which cost $<cost>\n" +
-                "When I bought <quantity> <fruit>\n" +
-                "Then I should pay $<pay>\n" +
                 "\n" +
-                "Examples: \n" +
-                "| fruit  | cost | quantity | pay |\n" +
-                "| apple  | 10   | 3        | 30  |\n" +
-                "| banana | 20   | 4        | 80  |\n" +
-                "| orange | 30   | 2        | 60  |";
+                "\tRaw Steps:\n" +
+                "\t\tGiven <fruit> which cost $<cost>\n" +
+                "\t\tWhen I bought <quantity> <fruit>\n" +
+                "\t\tThen I should pay $<pay>\n" +
+                "\n" +
+                "\tExamples: \n" +
+                "\t\t| fruit  | cost | quantity | pay |\n" +
+                "\t\t| apple  | 10   | 3        | 30  |\n" +
+                "\t\t| banana | 20   | 4        | 80  |\n" +
+                "\t\t| orange | 30   | 2        | 60  |";
             Assert.AreEqual(except, scenarioOutline.ToString());
         }
 
@@ -273,21 +274,22 @@ namespace ezSpec.keyword.Test {
 
             string except =
                 "Scenario Outline: buy fruit\n" +
-                "Raw Steps:\n" +
-                "Given <fruit> which cost $<cost>\n" +
-                "When I bought <quantity> <fruit>\n" +
-                "Then I should pay $<pay>\n" +
                 "\n" +
-                "Examples: \n" +
-                "| fruit  | cost | quantity | pay |\n" +
-                "| apple  | 10   | 3        | 30  |\n" +
-                "| banana | 20   | 4        | 80  |\n" +
-                "| orange | 30   | 2        | 60  |\n" +
+                "\tRaw Steps:\n" +
+                "\t\tGiven <fruit> which cost $<cost>\n" +
+                "\t\tWhen I bought <quantity> <fruit>\n" +
+                "\t\tThen I should pay $<pay>\n" +
                 "\n" +
-                "Examples: \n" +
-                "| fruit | cost | quantity | pay |\n" +
-                "| peach | 15   | 6        | 90  |\n" +
-                "| grape | 25   | 5        | 125 |";
+                "\tExamples: \n" +
+                "\t\t| fruit  | cost | quantity | pay |\n" +
+                "\t\t| apple  | 10   | 3        | 30  |\n" +
+                "\t\t| banana | 20   | 4        | 80  |\n" +
+                "\t\t| orange | 30   | 2        | 60  |\n" +
+                "\n" +
+                "\tExamples: \n" +
+                "\t\t| fruit | cost | quantity | pay |\n" +
+                "\t\t| peach | 15   | 6        | 90  |\n" +
+                "\t\t| grape | 25   | 5        | 125 |";
             Assert.AreEqual(except, scenarioOutline.ToString());
         }
 
@@ -315,31 +317,32 @@ namespace ezSpec.keyword.Test {
 
             string except =
                 "Scenario Outline: buy fruit\n" +
-                "Raw Steps:\n" +
-                "Given <fruit> which cost $<cost>\n" +
-                "When I bought <quantity> <fruit>\n" +
-                "Then I should pay $<pay>\n" +
                 "\n" +
-                "Examples: \n" +
-                "| fruit  | cost | quantity | pay |\n" +
-                "| apple  | 10   | 3        | 30  |\n" +
-                "| banana | 20   | 4        | 80  |\n" +
-                "| orange | 30   | 2        | 60  |\n" +
+                "\tRaw Steps:\n" +
+                "\t\tGiven <fruit> which cost $<cost>\n" +
+                "\t\tWhen I bought <quantity> <fruit>\n" +
+                "\t\tThen I should pay $<pay>\n" +
                 "\n" +
-                "[1]\n" +
-                "[Success] Given apple which cost $10\n" +
-                "[Success] When I bought 3 apple\n" +
-                "[Success] Then I should pay $30\n" +
+                "\tExamples: \n" +
+                "\t\t| fruit  | cost | quantity | pay |\n" +
+                "\t\t| apple  | 10   | 3        | 30  |\n" +
+                "\t\t| banana | 20   | 4        | 80  |\n" +
+                "\t\t| orange | 30   | 2        | 60  |\n" +
                 "\n" +
-                "[2]\n" +
-                "[Success] Given banana which cost $20\n" +
-                "[Success] When I bought 4 banana\n" +
-                "[Success] Then I should pay $80\n" +
+                "\t[1]\n" +
+                "\t\t[Success] Given apple which cost $10\n" +
+                "\t\t[Success] When I bought 3 apple\n" +
+                "\t\t[Success] Then I should pay $30\n" +
                 "\n" +
-                "[3]\n" +
-                "[Success] Given orange which cost $30\n" +
-                "[Success] When I bought 2 orange\n" +
-                "[Success] Then I should pay $60";
+                "\t[2]\n" +
+                "\t\t[Success] Given banana which cost $20\n" +
+                "\t\t[Success] When I bought 4 banana\n" +
+                "\t\t[Success] Then I should pay $80\n" +
+                "\n" +
+                "\t[3]\n" +
+                "\t\t[Success] Given orange which cost $30\n" +
+                "\t\t[Success] When I bought 2 orange\n" +
+                "\t\t[Success] Then I should pay $60";
             Assert.AreEqual(except, scenarioOutline.ToString());
         }
 
@@ -372,46 +375,47 @@ namespace ezSpec.keyword.Test {
 
             string except =
                 "Scenario Outline: buy fruit\n" +
-                "Raw Steps:\n" +
-                "Given <fruit> which cost $<cost>\n" +
-                "When I bought <quantity> <fruit>\n" +
-                "Then I should pay $<pay>\n" +
                 "\n" +
-                "Examples: \n" +
-                "| fruit  | cost | quantity | pay |\n" +
-                "| apple  | 10   | 3        | 30  |\n" +
-                "| banana | 20   | 4        | 80  |\n" +
-                "| orange | 30   | 2        | 60  |\n" +
+                "\tRaw Steps:\n" +
+                "\t\tGiven <fruit> which cost $<cost>\n" +
+                "\t\tWhen I bought <quantity> <fruit>\n" +
+                "\t\tThen I should pay $<pay>\n" +
                 "\n" +
-                "Examples: \n" +
-                "| fruit | cost | quantity | pay |\n" +
-                "| peach | 15   | 6        | 90  |\n" +
-                "| grape | 25   | 5        | 125 |\n" +
+                "\tExamples: \n" +
+                "\t\t| fruit  | cost | quantity | pay |\n" +
+                "\t\t| apple  | 10   | 3        | 30  |\n" +
+                "\t\t| banana | 20   | 4        | 80  |\n" +
+                "\t\t| orange | 30   | 2        | 60  |\n" +
                 "\n" +
-                "[1]\n" +
-                "[Success] Given apple which cost $10\n" +
-                "[Success] When I bought 3 apple\n" +
-                "[Success] Then I should pay $30\n" +
+                "\tExamples: \n" +
+                "\t\t| fruit | cost | quantity | pay |\n" +
+                "\t\t| peach | 15   | 6        | 90  |\n" +
+                "\t\t| grape | 25   | 5        | 125 |\n" +
                 "\n" +
-                "[2]\n" +
-                "[Success] Given banana which cost $20\n" +
-                "[Success] When I bought 4 banana\n" +
-                "[Success] Then I should pay $80\n" +
+                "\t[1]\n" +
+                "\t\t[Success] Given apple which cost $10\n" +
+                "\t\t[Success] When I bought 3 apple\n" +
+                "\t\t[Success] Then I should pay $30\n" +
                 "\n" +
-                "[3]\n" +
-                "[Success] Given orange which cost $30\n" +
-                "[Success] When I bought 2 orange\n" +
-                "[Success] Then I should pay $60\n" +
+                "\t[2]\n" +
+                "\t\t[Success] Given banana which cost $20\n" +
+                "\t\t[Success] When I bought 4 banana\n" +
+                "\t\t[Success] Then I should pay $80\n" +
                 "\n" +
-                "[4]\n" +
-                "[Success] Given peach which cost $15\n" +
-                "[Success] When I bought 6 peach\n" +
-                "[Success] Then I should pay $90\n" +
+                "\t[3]\n" +
+                "\t\t[Success] Given orange which cost $30\n" +
+                "\t\t[Success] When I bought 2 orange\n" +
+                "\t\t[Success] Then I should pay $60\n" +
                 "\n" +
-                "[5]\n" +
-                "[Success] Given grape which cost $25\n" +
-                "[Success] When I bought 5 grape\n" +
-                "[Success] Then I should pay $125";
+                "\t[4]\n" +
+                "\t\t[Success] Given peach which cost $15\n" +
+                "\t\t[Success] When I bought 6 peach\n" +
+                "\t\t[Success] Then I should pay $90\n" +
+                "\n" +
+                "\t[5]\n" +
+                "\t\t[Success] Given grape which cost $25\n" +
+                "\t\t[Success] When I bought 5 grape\n" +
+                "\t\t[Success] Then I should pay $125";
             Assert.AreEqual(except, scenarioOutline.ToString());
         }
     }

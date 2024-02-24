@@ -76,12 +76,20 @@ namespace ezSpec.keyword.step {
 
         public override string ToString() {
             StringBuilder result = new StringBuilder();
+            result.Append(Name);
+            result.Append(" ");
+            result.Append(EraseReversedWords);
+            return result.ToString();
+        }
+
+        public string ToStringWithResult() {
+            StringBuilder result = new StringBuilder();
             result.Append("[");
             result.Append(stepResult.ToString());
             result.Append("] ");
             result.Append(Name);
             result.Append(" ");
-            result.Append(description.Replace("\n", "\n          "));
+            result.Append(EraseReversedWords.Replace("\n", "\n          "));
             return result.ToString();
         }
     }

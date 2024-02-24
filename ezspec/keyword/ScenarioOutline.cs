@@ -153,25 +153,25 @@ namespace ezSpec.keyword {
             StringBuilder result = new StringBuilder();
             result.Append("Scenario Outline: ");
             result.Append(name);
-            result.Append("\n");
+            result.Append("\n\n\t");
             result.Append("Raw Steps:");
             foreach (Step step in steps) {
-                result.Append("\n");
+                result.Append("\n\t\t");
                 result.Append(step.Name);
                 result.Append(" ");
                 result.Append(step.Description);
             }
             foreach (Examples examples in multiExamples) {
-                result.Append("\n\n");
-                result.Append(examples.ToStringBeautify());
+                result.Append("\n\n\t");
+                result.Append(examples.ToStringBeautify().Replace("\n", "\n\t"));
             }
             for (int i = 0; i < scenarios.Count; i++) {
-                result.Append("\n\n[");
+                result.Append("\n\n\t[");
                 result.Append(i + 1);
                 result.Append("]");
                 foreach (Step step in scenarios[i].Steps) {
-                    result.Append("\n");
-                    result.Append(step);
+                    result.Append("\n\t\t");
+                    result.Append(step.ToStringWithResult());
                 }
             }
             return result.ToString();

@@ -64,12 +64,12 @@ namespace ezSpec.keyword {
             StringBuilder result = new StringBuilder();
             result.Append("Examples: ");
             result.Append(name);
-            result.Append("\n");
+            result.Append("\n\t");
             if ("" != description) {
                 result.Append(description);
-                result.Append("\n");
+                result.Append("\n\t");
             }
-            result.Append(table.ToString());
+            result.Append(table.ToString().Replace("\n", "\n\t"));
 
             return result.ToString();
         }
@@ -78,12 +78,12 @@ namespace ezSpec.keyword {
             StringBuilder result = new StringBuilder();
             result.Append("Examples: ");
             result.Append(name);
-            result.Append("\n");
+            result.Append("\n\t");
             if ("" != description) {
                 result.Append(description);
-                result.Append("\n");
+                result.Append("\n\t");
             }
-            result.Append(table.ToStringBeautify());
+            result.Append(table.ToStringBeautify().Replace("\n", "\n\t"));
 
             return result.ToString();
         }

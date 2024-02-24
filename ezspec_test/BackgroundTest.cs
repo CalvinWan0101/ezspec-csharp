@@ -79,8 +79,8 @@ namespace ezSpec.keyword.Test {
 
             string expect =
                 "Background: background name\n" +
-                "Given given step\n" +
-                "And and step";
+                "\tGiven given step\n" +
+                "\tAnd and step";
             Assert.AreEqual(expect, background.ToString());
         }
 

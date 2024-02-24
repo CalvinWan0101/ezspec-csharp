@@ -140,17 +140,17 @@ namespace ezSpec.keyword.step.Test {
             Step thenSuccess = new ThenSuccess("then success description", false, env => { });
             Step thenFailure = new ThenFailure("then failure description", false, env => { });
 
-            Assert.AreEqual("[Pending] Given give description", given.ToString());
-            Assert.AreEqual("[Pending] When when description", when.ToString());
-            Assert.AreEqual("[Pending] Then then description", then.ToString());
-            Assert.AreEqual("[Pending] And and description", and.ToString());
-            Assert.AreEqual("[Pending] But but description", but.ToString());
-            Assert.AreEqual("[Pending] ThenSuccess then success description", thenSuccess.ToString());
-            Assert.AreEqual("[Pending] ThenFailure then failure description", thenFailure.ToString());
+            Assert.AreEqual("Given give description", given.ToString());
+            Assert.AreEqual("When when description", when.ToString());
+            Assert.AreEqual("Then then description", then.ToString());
+            Assert.AreEqual("And and description", and.ToString());
+            Assert.AreEqual("But but description", but.ToString());
+            Assert.AreEqual("ThenSuccess then success description", thenSuccess.ToString());
+            Assert.AreEqual("ThenFailure then failure description", thenFailure.ToString());
         }
 
         [TestMethod]
-        public void step_contains_more_than_one_line_description() {
+        public void step_contains_more_than_one_line_description_to_string_with() {
             Step given = new Given("give description line 1\ngive description line 2", false, env => { });
             Step when = new When("when description line 1\nwhen description line 2", false, env => { });
             Step then = new Then("then description line 1\nthen description line 2", false, env => { });
@@ -159,13 +159,51 @@ namespace ezSpec.keyword.step.Test {
             Step thenSuccess = new ThenSuccess("then success description line 1\nthen success description line 1", false, env => { });
             Step thenFailure = new ThenFailure("then failure description line 1\nthen failure description line 2", false, env => { });
 
-            Assert.AreEqual("[Pending] Given give description line 1\n          give description line 2", given.ToString());
-            Assert.AreEqual("[Pending] When when description line 1\n          when description line 2", when.ToString());
-            Assert.AreEqual("[Pending] Then then description line 1\n          then description line 2", then.ToString());
-            Assert.AreEqual("[Pending] And and description line 1\n          and description line 2", and.ToString());
-            Assert.AreEqual("[Pending] But but description line 1\n          but description line 2", but.ToString());
-            Assert.AreEqual("[Pending] ThenSuccess then success description line 1\n          then success description line 1", thenSuccess.ToString());
-            Assert.AreEqual("[Pending] ThenFailure then failure description line 1\n          then failure description line 2", thenFailure.ToString());
+            Assert.AreEqual("Given give description line 1\ngive description line 2", given.ToString());
+            Assert.AreEqual("When when description line 1\nwhen description line 2", when.ToString());
+            Assert.AreEqual("Then then description line 1\nthen description line 2", then.ToString());
+            Assert.AreEqual("And and description line 1\nand description line 2", and.ToString());
+            Assert.AreEqual("But but description line 1\nbut description line 2", but.ToString());
+            Assert.AreEqual("ThenSuccess then success description line 1\nthen success description line 1", thenSuccess.ToString());
+            Assert.AreEqual("ThenFailure then failure description line 1\nthen failure description line 2", thenFailure.ToString());
+        }
+
+        [TestMethod]
+        public void step_to_string_with_result() {
+            Step given = new Given("give description", false, env => { });
+            Step when = new When("when description", false, env => { });
+            Step then = new Then("then description", false, env => { });
+            Step and = new And("and description", false, env => { });
+            Step but = new But("but description", false, env => { });
+            Step thenSuccess = new ThenSuccess("then success description", false, env => { });
+            Step thenFailure = new ThenFailure("then failure description", false, env => { });
+
+            Assert.AreEqual("[Pending] Given give description", given.ToStringWithResult());
+            Assert.AreEqual("[Pending] When when description", when.ToStringWithResult());
+            Assert.AreEqual("[Pending] Then then description", then.ToStringWithResult());
+            Assert.AreEqual("[Pending] And and description", and.ToStringWithResult());
+            Assert.AreEqual("[Pending] But but description", but.ToStringWithResult());
+            Assert.AreEqual("[Pending] ThenSuccess then success description", thenSuccess.ToStringWithResult());
+            Assert.AreEqual("[Pending] ThenFailure then failure description", thenFailure.ToStringWithResult());
+        }
+
+        [TestMethod]
+        public void step_contains_more_than_one_line_description_to_string_with_result() {
+            Step given = new Given("give description line 1\ngive description line 2", false, env => { });
+            Step when = new When("when description line 1\nwhen description line 2", false, env => { });
+            Step then = new Then("then description line 1\nthen description line 2", false, env => { });
+            Step and = new And("and description line 1\nand description line 2", false, env => { });
+            Step but = new But("but description line 1\nbut description line 2", false, env => { });
+            Step thenSuccess = new ThenSuccess("then success description line 1\nthen success description line 1", false, env => { });
+            Step thenFailure = new ThenFailure("then failure description line 1\nthen failure description line 2", false, env => { });
+
+            Assert.AreEqual("[Pending] Given give description line 1\n          give description line 2", given.ToStringWithResult());
+            Assert.AreEqual("[Pending] When when description line 1\n          when description line 2", when.ToStringWithResult());
+            Assert.AreEqual("[Pending] Then then description line 1\n          then description line 2", then.ToStringWithResult());
+            Assert.AreEqual("[Pending] And and description line 1\n          and description line 2", and.ToStringWithResult());
+            Assert.AreEqual("[Pending] But but description line 1\n          but description line 2", but.ToStringWithResult());
+            Assert.AreEqual("[Pending] ThenSuccess then success description line 1\n          then success description line 1", thenSuccess.ToStringWithResult());
+            Assert.AreEqual("[Pending] ThenFailure then failure description line 1\n          then failure description line 2", thenFailure.ToStringWithResult());
         }
     }
 }

@@ -75,13 +75,15 @@ namespace ezSpec.keyword {
                 if (0 != result.Length) {
                     result.Append("\n\n");
                 }
-                result.Append(background.ToString());
+                result.Append("\t");
+                result.Append(background.ToString().Replace("\n", "\n\t"));
             }
             foreach (AbstractScenario scenario in scenarios) {
                 if (0 != result.Length) {
                     result.Append("\n\n");
                 }
-                result.Append(scenario.ToString());
+                result.Append("\t");
+                result.Append(scenario.ToString().Replace("\n", "\n\t"));
             }
             return result.ToString();
         }

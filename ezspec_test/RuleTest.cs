@@ -71,7 +71,7 @@ namespace ezSpec.keyword.Test {
             string expect =
                 "Rule: Rule's name\n" +
                 "\n" +
-                "Scenario: get rule with scenario without name string";
+                "\tScenario: get rule with scenario without name string";
             Assert.AreEqual(expect, rule.ToString());
         }
 
@@ -86,8 +86,8 @@ namespace ezSpec.keyword.Test {
                 "Rule: name\n" +
                 "description\n" +
                 "\n" +
-                "Scenario: scenario 1\n" +
-                "[Pending] Given a given step";
+                "\tScenario: scenario 1\n" +
+                "\t\t[Pending] Given a given step";
             Assert.AreEqual(expect, rule.ToString());
         }
 
@@ -105,12 +105,12 @@ namespace ezSpec.keyword.Test {
                 "Rule: name\n" +
                 "description\n" +
                 "\n" +
-                "Scenario: scenario 1\n" +
-                "[Pending] Given a given step\n" +
+                "\tScenario: scenario 1\n" +
+                "\t\t[Pending] Given a given step\n" +
                 "\n" +
-                "Scenario: scenario 2\n" +
-                "[Pending] Given a given step\n" +
-                "[Pending] When do nothing";
+                "\tScenario: scenario 2\n" +
+                "\t\t[Pending] Given a given step\n" +
+                "\t\t[Pending] When do nothing";
             Assert.AreEqual(expect, rule.ToString());
         }
 
@@ -122,9 +122,9 @@ namespace ezSpec.keyword.Test {
                 .When("do nothing", env => { });
 
             string except =
-                "Scenario: Scenario's name\n" +
-                "[Pending] Given a given step\n" +
-                "[Pending] When do nothing";
+                "\tScenario: Scenario's name\n" +
+                "\t\t[Pending] Given a given step\n" +
+                "\t\t[Pending] When do nothing";
 
             Assert.AreEqual(except, rule.ToString());
         }
@@ -156,9 +156,9 @@ namespace ezSpec.keyword.Test {
             string except =
                 "Rule: rule name\n" +
                 "\n" +
-                "Background: background name\n" +
-                "Given give step\n" +
-                "And and step";
+                "\tBackground: background name\n" +
+                "\t\tGiven give step\n" +
+                "\t\tAnd and step";
 
             Assert.AreEqual(except, rule.ToString());
         }
@@ -171,9 +171,9 @@ namespace ezSpec.keyword.Test {
                 .And("and step", env => { });
 
             string except =
-                "Background: background name\n" +
-                "Given give step\n" +
-                "And and step";
+                "\tBackground: background name\n" +
+                "\t\tGiven give step\n" +
+                "\t\tAnd and step";
 
             Assert.AreEqual(except, rule.ToString());
         }
