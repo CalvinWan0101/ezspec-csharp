@@ -264,6 +264,32 @@ namespace ezSpec.keyword.Test {
         }
 
         [TestMethod]
+        public void rule_with_background_with_scenario_outline_without_name() {
+            Rule rule = Rule.New("buy fruit");
+            rule.NewBackground("the price of fruits")
+                .Given("give the price of apple, banana and orange", env => {
+                    env.Put("apple", 20);
+                    env.Put("banana", 10);
+                    env.Put("orange", 5);
+                });
+
+            rule.NewScenarioOutline()
+                .WithExamples(@"
+                    | fruit  | quantity | pay |
+                    | apple  | 10       | 200 |
+                    | orange | 7        | 35  |")
+                .When("I bought <quantity> <fruit>", env => {
+                    env.Put("fruit", env.Example.Get("fruit"));
+                    env.Put("quantity", env.Example.Get("quantity"));
+                })
+                .Then("I should pay $<pay>", env => {
+                    int totalPay = env.GetInt(env.GetString("fruit")) * env.GetInt("quantity");
+                    Assert.AreEqual(int.Parse(env.Example.Get("pay")), totalPay);
+                })
+                .Execute();
+        }
+
+        [TestMethod]
         public void rule_with_background_with_multiple_scenario_outline() {
             Rule rule = Rule.New("buy fruit");
             rule.NewBackground("the price of fruits")

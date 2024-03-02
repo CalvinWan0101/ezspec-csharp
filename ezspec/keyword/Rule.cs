@@ -61,6 +61,10 @@ namespace ezSpec.keyword {
             return (scenarios.Last() as ScenarioOutline)!;
         }
 
+        public ScenarioOutline NewScenarioOutline() {
+            return NewScenarioOutline(GetNewScenarioCallerFunctionName());
+        }
+
         public override string ToString() {
             StringBuilder result = new StringBuilder();
             if ("" != name) {
