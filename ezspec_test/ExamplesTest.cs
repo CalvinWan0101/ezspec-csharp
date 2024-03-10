@@ -2,7 +2,7 @@
 using ezSpec.keyword.table;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ezSpec_test {
+namespace ezSpec.keyword.Test {
 
     [TestClass]
     public class ExamplesTest {
@@ -147,10 +147,10 @@ namespace ezSpec_test {
             string expect =
                 "Examples: examplesName\n" +
                 "\texamplesDescription\n" +
-                "\t|\tid\t|\tname\t|\tscore\t|\n" +
-                "\t|\t10001\t|\tJoe\t|\t60\t|\n" +
-                "\t|\t10002\t|\tCalvin\t|\t80\t|\n" +
-                "\t|\t10003\t|\tHoward\t|\t100\t|";
+                "\t| id    | name   | score |\n" +
+                "\t| 10001 | Joe    | 60    |\n" +
+                "\t| 10002 | Calvin | 80    |\n" +
+                "\t| 10003 | Howard | 100   |";
 
             Assert.AreEqual(expect, examples.ToString());
         }
@@ -167,10 +167,10 @@ namespace ezSpec_test {
 
             string expect =
                 "Examples: examplesName\n" +
-                "\t|\tid\t|\tname\t|\tscore\t|\n" +
-                "\t|\t10001\t|\tJoe\t|\t60\t|\n" +
-                "\t|\t10002\t|\tCalvin\t|\t80\t|\n" +
-                "\t|\t10003\t|\tHoward\t|\t100\t|";
+                "\t| id    | name   | score |\n" +
+                "\t| 10001 | Joe    | 60    |\n" +
+                "\t| 10002 | Calvin | 80    |\n" +
+                "\t| 10003 | Howard | 100   |";
 
             Assert.AreEqual(expect, examples.ToString());
         }
@@ -187,34 +187,12 @@ namespace ezSpec_test {
 
             string expect =
                 "Examples: \n" +
-                "\t|\tid\t|\tname\t|\tscore\t|\n" +
-                "\t|\t10001\t|\tJoe\t|\t60\t|\n" +
-                "\t|\t10002\t|\tCalvin\t|\t80\t|\n" +
-                "\t|\t10003\t|\tHoward\t|\t100\t|";
-
-            Assert.AreEqual(expect, examples.ToString());
-        }
-
-        [TestMethod]
-        public void examples_to_string_beautify() {
-            string rawData = @"
-                |  id   |  name  | score |
-                | 10001 |  Joe   |  60   |
-                | 10002 | Calvin |  80   |
-                | 10003 | Howard |  100  |";
-
-            Examples examples = Examples.New("examplesName", "examplesDescription", rawData);
-
-
-            string expect =
-                "Examples: examplesName\n" +
-                "\texamplesDescription\n" +
                 "\t| id    | name   | score |\n" +
                 "\t| 10001 | Joe    | 60    |\n" +
                 "\t| 10002 | Calvin | 80    |\n" +
                 "\t| 10003 | Howard | 100   |";
 
-            Assert.AreEqual(expect, examples.ToStringBeautify());
+            Assert.AreEqual(expect, examples.ToString());
         }
     }
 }

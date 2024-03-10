@@ -3,7 +3,7 @@ using System.Text;
 
 namespace ezSpec.keyword {
     public class Background : StepExecutor {
-        private string name;
+        private readonly string name;
 
         public string Name {
             get { return name; }

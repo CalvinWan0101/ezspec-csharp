@@ -2,7 +2,7 @@
 
 namespace ezSpec.keyword {
     public abstract class AbstractScenario : StepExecutor {
-        protected string name;
+        protected readonly string name;
         protected Background? background;
 
         public string Name {

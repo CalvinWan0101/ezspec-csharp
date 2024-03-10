@@ -5,8 +5,8 @@ using System.Text.RegularExpressions;
 namespace ezSpec.keyword {
     public class ScenarioOutline : AbstractScenario {
 
-        private IList<Examples> multiExamples;
-        private IList<Scenario> scenarios;
+        private readonly IList<Examples> multiExamples;
+        private readonly IList<Scenario> scenarios;
 
         public static ScenarioOutline New(string name, Background? background) {
             return new ScenarioOutline(name, background);
@@ -163,7 +163,7 @@ namespace ezSpec.keyword {
             }
             foreach (Examples examples in multiExamples) {
                 result.Append("\n\n\t");
-                result.Append(examples.ToStringBeautify().Replace("\n", "\n\t"));
+                result.Append(examples.ToString().Replace("\n", "\n\t"));
             }
             for (int i = 0; i < scenarios.Count; i++) {
                 result.Append("\n\n\t[");

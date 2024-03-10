@@ -4,9 +4,9 @@ using System.Text;
 
 namespace ezSpec.keyword {
     public class Examples {
-        private string name;
-        private string description;
-        private Table table;
+        private readonly string name;
+        private readonly string description;
+        private readonly Table table;
 
         public string Name {
             get { return name; }
@@ -61,20 +61,6 @@ namespace ezSpec.keyword {
         }
 
         public override string ToString() {
-            StringBuilder result = new StringBuilder();
-            result.Append("Examples: ");
-            result.Append(name);
-            result.Append("\n\t");
-            if ("" != description) {
-                result.Append(description);
-                result.Append("\n\t");
-            }
-            result.Append(table.ToString().Replace("\n", "\n\t"));
-
-            return result.ToString();
-        }
-
-        public string ToStringBeautify() {
             StringBuilder result = new StringBuilder();
             result.Append("Examples: ");
             result.Append(name);

@@ -59,7 +59,6 @@ namespace ezSpec.keyword {
 
             key = "";
             value = groups[1].Value.Trim();
-            //value = value.Substring(2, value.Length - 3).Trim();
         }
 
     }

@@ -6,9 +6,9 @@ namespace ezSpec.keyword {
 
     public class Rule {
 
-        private string name;
-        private string description;
-        private IList<AbstractScenario> scenarios;
+        private readonly string name;
+        private readonly string description;
+        private readonly IList<AbstractScenario> scenarios;
         private Background? background;
 
         public string Name {

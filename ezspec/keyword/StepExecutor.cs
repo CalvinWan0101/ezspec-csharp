@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ezSpec.keyword {
     public abstract class StepExecutor {
-        protected IList<Step> steps;
+        protected readonly IList<Step> steps;
         protected ScenarioEnvironment env;
 
         public ReadOnlyCollection<Step> Steps {

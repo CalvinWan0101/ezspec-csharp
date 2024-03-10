@@ -5,9 +5,9 @@ namespace ezSpec.keyword {
 
     public class Feature {
 
-        private string name;
-        private string description;
-        private IList<Rule> rules;
+        private readonly string name;
+        private readonly string description;
+        private readonly IList<Rule> rules;
         private Rule defaultRule;
 
         public string Name {
