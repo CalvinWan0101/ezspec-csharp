@@ -3,9 +3,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 namespace ezSpec.keyword {
-    public class ScenarioOutline : AbstractScenario {
+    public class ScenarioOutline : Scenario {
 
         private readonly IList<Examples> multiExamples;
+        //TODO: Keeping list of scenario in scenario outline may be a bad idea
         private readonly IList<Scenario> scenarios;
 
         public static ScenarioOutline New(string name, Background? background) {
@@ -20,7 +21,7 @@ namespace ezSpec.keyword {
             return new ScenarioOutline("", null);
         }
 
-        private ScenarioOutline(string name, Background? background) : base(name, null) {
+        private ScenarioOutline(string name, Background? background) : base(name, background) {
             this.multiExamples = new List<Examples>();
             this.scenarios = new List<Scenario>();
             this.background = background;

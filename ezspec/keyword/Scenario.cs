@@ -1,9 +1,22 @@
-﻿using ezSpec.keyword.step;
+﻿using System.Collections.ObjectModel;
+using ezSpec.keyword.step;
 using System.Text;
 
 namespace ezSpec.keyword {
-    public class Scenario : AbstractScenario {
+    public class Scenario {
+        protected readonly string name;
+        protected Background? background;
+        protected readonly IList<Step> steps;
+        protected readonly ScenarioEnvironment env;
 
+        public string Name {
+            get { return name; }
+        }
+        
+        public ReadOnlyCollection<Step> Steps {
+            get { return new ReadOnlyCollection<Step>(steps); }
+        }
+        
         public static Scenario New(string name) {
             return New(name, null);
         }
@@ -16,10 +29,18 @@ namespace ezSpec.keyword {
             return new Scenario(background, steps, example);
         }
 
-        private Scenario(string name, Background? background) : base(name, background) {
+        protected Scenario(string name, Background? background) {
+            this.name = name;
+            this.background = background;
+            this.steps = new List<Step>();
+            this.env = ScenarioEnvironment.New();
         }
 
-        private Scenario(Background? background, IList<Step> steps, Example example) : base("", null) {
+        protected Scenario(Background? background, IList<Step> steps, Example example) {
+            this.name = "";
+            this.background = background;
+            this.steps = new List<Step>();
+            this.env = ScenarioEnvironment.New();
             foreach (var step in steps) {
                 this.steps.Add(step);
             }
@@ -27,93 +48,93 @@ namespace ezSpec.keyword {
             this.background = background;
         }
 
-        public new Scenario Given(string description, Step.StepCallback callback) {
-            base.Given(description, callback);
+        public Scenario Given(string description, Step.StepCallback callback) {
+            Given(description, Step.TerminateAfterFailure, callback);
             return this;
         }
 
-        public new Scenario Given(string description, bool continous, Step.StepCallback callback) {
-            base.Given(description, continous, callback);
+        public Scenario Given(string description, bool continous, Step.StepCallback callback) {
+            steps.Add(new Given(description, continous, callback));
             return this;
         }
 
-        public new Scenario When(string description, Step.StepCallback callback) {
-            base.When(description, callback);
+        public Scenario When(string description, Step.StepCallback callback) {
+            When(description, Step.TerminateAfterFailure, callback);
             return this;
         }
 
-        public new Scenario When(string description, bool continous, Step.StepCallback callback) {
-            base.When(description, continous, callback);
+        public Scenario When(string description, bool continous, Step.StepCallback callback) {
+            steps.Add(new When(description, continous, callback));
             return this;
         }
 
-        public new Scenario Then(string description, Step.StepCallback callback) {
-            base.Then(description, callback);
+        public Scenario Then(string description, Step.StepCallback callback) {
+            Then(description, Step.TerminateAfterFailure, callback);
             return this;
         }
 
-        public new Scenario Then(string description, bool continous, Step.StepCallback callback) {
-            base.Then(description, continous, callback);
+        public Scenario Then(string description, bool continous, Step.StepCallback callback) {
+            steps.Add(new Then(description, continous, callback));
             return this;
         }
 
-        public new Scenario And(string description, Step.StepCallback callback) {
-            base.And(description, callback);
+        public Scenario And(string description, Step.StepCallback callback) {
+            And(description, Step.TerminateAfterFailure, callback);
             return this;
         }
 
-        public new Scenario And(string description, bool continous, Step.StepCallback callback) {
-            base.And(description, continous, callback);
+        public Scenario And(string description, bool continous, Step.StepCallback callback) {
+            steps.Add(new And(description, continous, callback));
             return this;
         }
 
-        public new Scenario But(string description, Step.StepCallback callback) {
-            base.But(description, callback);
+        public Scenario But(string description, Step.StepCallback callback) {
+            But(description, Step.TerminateAfterFailure, callback);
             return this;
         }
 
-        public new Scenario But(string description, bool continous, Step.StepCallback callback) {
-            base.But(description, continous, callback);
+        public Scenario But(string description, bool continous, Step.StepCallback callback) {
+            steps.Add(new But(description, continous, callback));
             return this;
         }
 
-        public new Scenario ThenSuccess(string description, Step.StepCallback callback) {
-            base.ThenSuccess(description, callback);
+        public Scenario ThenSuccess(string description, Step.StepCallback callback) {
+            ThenSuccess(description, Step.TerminateAfterFailure, callback);
             return this;
         }
 
-        public new Scenario ThenSuccess(bool continous, Step.StepCallback callback) {
-            base.ThenSuccess(continous, callback);
+        public Scenario ThenSuccess(bool continous, Step.StepCallback callback) {
+            ThenSuccess("", continous, callback);
             return this;
         }
 
-        public new Scenario ThenSuccess(Step.StepCallback callback) {
-            base.ThenSuccess(callback);
+        public Scenario ThenSuccess(Step.StepCallback callback) {
+            ThenSuccess("", Step.TerminateAfterFailure, callback);
             return this;
         }
 
-        public new Scenario ThenSuccess(string description, bool continous, Step.StepCallback callback) {
-            base.ThenSuccess(description, continous, callback);
+        public Scenario ThenSuccess(string description, bool continous, Step.StepCallback callback) {
+            steps.Add(new ThenSuccess(description, continous, callback));
             return this;
         }
 
-        public new Scenario ThenFailure(string description, Step.StepCallback callback) {
-            base.ThenFailure(description, callback);
+        public Scenario ThenFailure(string description, Step.StepCallback callback) {
+            ThenFailure(description, Step.TerminateAfterFailure, callback);
             return this;
         }
 
-        public new Scenario ThenFailure(bool continous, Step.StepCallback callback) {
-            base.ThenFailure(continous, callback);
+        public Scenario ThenFailure(bool continous, Step.StepCallback callback) {
+            ThenFailure("", continous, callback);
             return this;
         }
 
-        public new Scenario ThenFailure(Step.StepCallback callback) {
-            base.ThenFailure(callback);
+        public Scenario ThenFailure(Step.StepCallback callback) {
+            ThenFailure("", Step.TerminateAfterFailure, callback);
             return this;
         }
 
         public new Scenario ThenFailure(string description, bool continous, Step.StepCallback callback) {
-            base.ThenFailure(description, continous, callback);
+            steps.Add(new ThenFailure(description, continous, callback));
             return this;
         }
 

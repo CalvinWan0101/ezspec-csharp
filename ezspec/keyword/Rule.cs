@@ -8,7 +8,7 @@ namespace ezSpec.keyword {
 
         private readonly string name;
         private readonly string description;
-        private readonly IList<AbstractScenario> scenarios;
+        private readonly IList<Scenario> scenarios;
         private Background? background;
 
         public string Name {
@@ -19,8 +19,8 @@ namespace ezSpec.keyword {
             get { return description; }
         }
 
-        public ReadOnlyCollection<AbstractScenario> Scenarios {
-            get { return new ReadOnlyCollection<AbstractScenario>(scenarios); }
+        public ReadOnlyCollection<Scenario> Scenarios {
+            get { return new ReadOnlyCollection<Scenario>(scenarios); }
         }
 
         public Background? Background {
@@ -30,7 +30,7 @@ namespace ezSpec.keyword {
         private Rule(string name, string description) {
             this.name = name;
             this.description = description;
-            this.scenarios = new List<AbstractScenario>();
+            this.scenarios = new List<Scenario>();
             this.background = null;
         }
 
@@ -82,7 +82,7 @@ namespace ezSpec.keyword {
                 result.Append("\t");
                 result.Append(background.ToString().Replace("\n", "\n\t"));
             }
-            foreach (AbstractScenario scenario in scenarios) {
+            foreach (Scenario scenario in scenarios) {
                 if (0 != result.Length) {
                     result.Append("\n\n");
                 }
