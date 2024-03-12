@@ -1,5 +1,5 @@
 ﻿namespace ezSpec.keyword.step {
-    public class Given : Step, ConcurrentGroup {
+    public class Given : Step, BeginConcurrentStep {
 
         public override string Name {
             get { return "Given"; }

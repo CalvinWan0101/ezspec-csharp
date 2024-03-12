@@ -1,5 +1,5 @@
 ﻿namespace ezSpec.keyword.step {
-    public class ThenSuccess : Step, ConcurrentGroup {
+    public class ThenSuccess : Step, BeginConcurrentStep {
 
         public override string Name {
             get { return "ThenSuccess"; }

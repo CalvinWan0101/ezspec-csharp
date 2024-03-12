@@ -48,19 +48,14 @@ namespace ezSpec.keyword {
 
         private static void ExecuteStepsConcurrently(IList<Step> steps, ScenarioEnvironment env) {
             bool skip = false;
-            for (int currentStep = 0; currentStep < steps.Count;) {
+            List<ConcurrentGroup> concurrentGroups = ConcurrentGroup.SliceConcurrentGroups(steps);
+            foreach (ConcurrentGroup concurrentGroup in concurrentGroups) {
                 if (skip) {
-                    steps[currentStep++].Result = Result.Skipped();
-                } else if (steps[currentStep] is ConcurrentGroup) {
-                    List<Step> concurrentSteps = new List<Step>() {
-                        steps[currentStep++]
-                    };
-
-                    for (; currentStep < steps.Count && steps[currentStep] is not ConcurrentGroup; currentStep++) {
-                        concurrentSteps.Add(steps[currentStep]);
+                    foreach (Step step in concurrentGroup.Steps) {
+                        step.Result = Result.Skipped();
                     }
-
-                    foreach (Step step in concurrentSteps) {
+                } else {
+                    foreach (Step step in concurrentGroup.Steps) {
                         skip |= ExecuteStep(step, env);
                     }
                 }
