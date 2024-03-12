@@ -1,17 +1,26 @@
-﻿using ezSpec.keyword.step;
+﻿using System.Collections.ObjectModel;
+using ezSpec.keyword.step;
 
 namespace ezSpec.keyword {
-    public abstract class AbstractScenario : StepExecutor {
+    public abstract class AbstractScenario {
         protected readonly string name;
         protected Background? background;
+        protected readonly IList<Step> steps;
+        protected readonly ScenarioEnvironment env;
 
         public string Name {
             get { return name; }
         }
+        
+        public ReadOnlyCollection<Step> Steps {
+            get { return new ReadOnlyCollection<Step>(steps); }
+        }
 
-        protected AbstractScenario(string name, Background? background) : base() {
+        protected AbstractScenario(string name, Background? background) {
             this.name = name;
             this.background = background;
+            this.steps = new List<Step>();
+            this.env = ScenarioEnvironment.New();
         }
 
         public AbstractScenario Given(string description, Step.StepCallback callback) {

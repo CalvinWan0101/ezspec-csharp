@@ -117,20 +117,20 @@ namespace ezSpec.keyword {
             return this;
         }
 
-        public override void Execute() {
+        public void Execute() {
             if (background != null) {
                 background.Environment = env;
                 background.Execute();
             }
-            base.Execute();
+            StepExecutor.Execute(steps, env);
         }
 
-        public override void ExecuteConcurrently() {
+        public void ExecuteConcurrently() {
             if (background != null) {
                 background.Environment = env;
                 background.ExecuteConcurrently();
             }
-            base.ExecuteConcurrently();
+            StepExecutor.ExecuteConcurrently(steps, env);
         }
 
         public override string ToString() {

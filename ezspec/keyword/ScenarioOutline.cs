@@ -129,7 +129,7 @@ namespace ezSpec.keyword {
             return this;
         }
 
-        public override void Execute() {
+        public void Execute() {
             foreach (Examples examples in multiExamples) {
                 foreach (Example example in examples.ExampleSet) {
                     Scenario scenario = Scenario.New(background, GetReplacedSteps(steps, example), example);
@@ -139,7 +139,7 @@ namespace ezSpec.keyword {
             }
         }
 
-        public override void ExecuteConcurrently() {
+        public void ExecuteConcurrently() {
             foreach (Examples examples in multiExamples) {
                 foreach (Example example in examples.ExampleSet) {
                     Scenario scenario = Scenario.New(background, GetReplacedSteps(steps, example), example);

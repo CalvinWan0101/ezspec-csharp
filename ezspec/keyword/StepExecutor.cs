@@ -5,30 +5,18 @@ using System.Collections.ObjectModel;
 using System.Text;
 
 namespace ezSpec.keyword {
-    public abstract class StepExecutor {
-        protected readonly IList<Step> steps;
-        protected ScenarioEnvironment env;
-
-        public ReadOnlyCollection<Step> Steps {
-            get { return new ReadOnlyCollection<Step>(steps); }
+    public class StepExecutor {
+        public static void Execute(IList<Step> steps, ScenarioEnvironment env) {
+            ExecuteSteps(steps, env);
+            ThrowExceptionIfFailed(steps);
         }
 
-        protected StepExecutor() {
-            steps = new List<Step>();
-            env = ScenarioEnvironment.New();
+        public static void ExecuteConcurrently(IList<Step> steps, ScenarioEnvironment env) {
+            ExecuteStepsConcurrently(steps, env);
+            ThrowExceptionIfFailed(steps);
         }
 
-        public virtual void Execute() {
-            ExecuteSteps();
-            ThrowExceptionIfFailed();
-        }
-
-        public virtual void ExecuteConcurrently() {
-            ExecuteStepsConcurrently();
-            ThrowExceptionIfFailed();
-        }
-
-        private bool ExecuteStep(Step step) {
+        private static bool ExecuteStep(Step step, ScenarioEnvironment env) {
             try {
                 env.SetArguments(step.Arguments);
                 if (Table.ContainsTable(step.Description)) {
@@ -46,7 +34,7 @@ namespace ezSpec.keyword {
             }
         }
 
-        private void ExecuteSteps() {
+        private static void ExecuteSteps(IList<Step> steps, ScenarioEnvironment env) {
             bool skip = false;
             foreach (Step step in steps) {
                 if (skip) {
@@ -54,32 +42,32 @@ namespace ezSpec.keyword {
                     continue;
                 }
 
-                skip = ExecuteStep(step);
+                skip = ExecuteStep(step, env);
             }
         }
 
-        private void ExecuteStepsConcurrently() {
+        private static void ExecuteStepsConcurrently(IList<Step> steps, ScenarioEnvironment env) {
             bool skip = false;
-            for (int currentStep = 0; currentStep < Steps.Count;) {
+            for (int currentStep = 0; currentStep < steps.Count;) {
                 if (skip) {
                     steps[currentStep++].Result = Result.Skipped();
-                } else if (Steps[currentStep] is ConcurrentGroup) {
+                } else if (steps[currentStep] is ConcurrentGroup) {
                     List<Step> concurrentSteps = new List<Step>() {
                         steps[currentStep++]
                     };
 
-                    for (; currentStep < Steps.Count && Steps[currentStep] is not ConcurrentGroup; currentStep++) {
+                    for (; currentStep < steps.Count && steps[currentStep] is not ConcurrentGroup; currentStep++) {
                         concurrentSteps.Add(steps[currentStep]);
                     }
 
                     foreach (Step step in concurrentSteps) {
-                        skip |= ExecuteStep(step);
+                        skip |= ExecuteStep(step, env);
                     }
                 }
             }
         }
 
-        private void ThrowExceptionIfFailed() {
+        private static void ThrowExceptionIfFailed(IList<Step> steps) {
             StringBuilder errorMessage = new StringBuilder();
             foreach (Step step in steps) {
                 if (step.Result.IsFailure) {
@@ -96,6 +84,5 @@ namespace ezSpec.keyword {
                 throw new EzSpecError(errorMessage.ToString());
             }
         }
-
     }
 }

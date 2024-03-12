@@ -1,20 +1,28 @@
-﻿using ezSpec.keyword.step;
+﻿using System.Collections.ObjectModel;
+using ezSpec.keyword.step;
 using System.Text;
 
 namespace ezSpec.keyword {
-    public class Background : StepExecutor {
+    public class Background {
         private readonly string name;
+        private readonly IList<Step> steps;
+        private ScenarioEnvironment env;
 
         public string Name {
             get { return name; }
+        }
+        
+        public ReadOnlyCollection<Step> Steps {
+            get { return new ReadOnlyCollection<Step>(steps); }
         }
 
         internal ScenarioEnvironment Environment {
             set { env = value; }
         }
 
-        protected Background(string name) : base() {
+        protected Background(string name) {
             this.name = name;
+            this.steps = new List<Step>();
         }
 
         public static new Background New(string name) {
@@ -49,6 +57,14 @@ namespace ezSpec.keyword {
             steps.Add(new But(description, continous, callback));
 
             return this;
+        }
+        
+        public void Execute() {
+            StepExecutor.Execute(steps, env);
+        }
+        
+        public void ExecuteConcurrently() {
+            StepExecutor.ExecuteConcurrently(steps, env);
         }
 
         public override string ToString() {
