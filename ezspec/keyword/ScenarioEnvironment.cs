@@ -83,7 +83,12 @@ namespace ezSpec.keyword {
         }
 
         public string GetStringArg(int index) {
-            return arguments[index].Value;
+            try {
+                return arguments[index].Value;
+            }
+            catch (ArgumentOutOfRangeException) {
+                throw new ArgumentOutOfRangeException("Index of argument is out of range at " + index);
+            }
         }
 
         public string GetStringArg(string key) {
@@ -91,7 +96,12 @@ namespace ezSpec.keyword {
         }
 
         public int GetIntArg(int index) {
-            return int.Parse(arguments[index].Value);
+            try {
+                return int.Parse(arguments[index].Value);
+            }
+            catch (ArgumentOutOfRangeException) {
+                throw new ArgumentOutOfRangeException("Index of argument is out of range at " + index);
+            }
         }
 
         public int GetIntArg(string key) {
@@ -99,7 +109,12 @@ namespace ezSpec.keyword {
         }
 
         public double GetDoubleArg(int index) {
-            return double.Parse(arguments[index].Value);
+            try {
+                return double.Parse(arguments[index].Value);
+            }
+            catch (ArgumentOutOfRangeException) {
+                throw new ArgumentOutOfRangeException("Index of argument is out of range at " + index);
+            }
         }
 
         public double GetDoubleArg(string key) {
@@ -107,7 +122,12 @@ namespace ezSpec.keyword {
         }
 
         public string GetStringHistoricalArg(int index) {
-            return historicalArguments[index].Value;
+            try {
+                return historicalArguments[index].Value;
+            }
+            catch (ArgumentOutOfRangeException) {
+                throw new ArgumentOutOfRangeException("Index of historical argument is out of range at " + index);
+            }
         }
 
         public string GetStringHistoricalArg(string key) {
@@ -115,7 +135,12 @@ namespace ezSpec.keyword {
         }
 
         public int GetIntHistoricalArg(int index) {
-            return int.Parse(historicalArguments[index].Value);
+            try {
+                return int.Parse(historicalArguments[index].Value);
+            }
+            catch (ArgumentOutOfRangeException) {
+                throw new ArgumentOutOfRangeException("Index of historical argument is out of range at " + index);
+            }
         }
 
         public int GetIntHistoricalArg(string key) {
@@ -123,7 +148,12 @@ namespace ezSpec.keyword {
         }
 
         public double GetDoubleHistoricalArg(int index) {
-            return double.Parse(historicalArguments[index].Value);
+            try {
+                return double.Parse(historicalArguments[index].Value);
+            }
+            catch (ArgumentOutOfRangeException) {
+                throw new ArgumentOutOfRangeException("Index of historical argument is out of range at " + index);
+            }
         }
 
         public double GetDoubleHistoricalArg(string key) {
@@ -167,15 +197,30 @@ namespace ezSpec.keyword {
         }
 
         private string FindInArgumentsByKey(string key) {
-            return arguments.First((argument) => argument.Key == key).Value;
+            try {
+                return arguments.First((argument) => argument.Key == key).Value;
+            }
+            catch (InvalidOperationException) { 
+                throw new ArgumentNullException("Cannot find any value in arguments with key: " + key);
+            }
         }
 
         private string FindInHistoricalArgumentsByKey(string key) {
-            return historicalArguments.First((argument) => argument.Key == key).Value;
+            try {
+                return historicalArguments.First((argument) => argument.Key == key).Value;
+            }
+            catch (InvalidOperationException) {
+                throw new ArgumentNullException("Cannot find any value in historical arguments with key: " + key);
+            }
         }
 
         private object FindInContextByKey(string key) {
-            return context.First((pair) => pair.Key == key).Value;
+            try {
+                return context.First((pair) => pair.Key == key).Value;
+            }
+            catch (InvalidOperationException) { 
+                throw new ArgumentNullException("Cannot find any value in context with key: " + key);
+            }
         }
     }
 }

@@ -183,6 +183,54 @@ namespace ezSpec.keyword.Test {
         }
 
         [TestMethod]
+        public void get_argument_as_string_by_index_not_exist() {
+            ScenarioEnvironment env = ScenarioEnvironment.New();
+            SetEnviormentArgument(env, arguments1);
+
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => { env.GetStringArg(-1); });
+        }
+
+        [TestMethod]
+        public void get_argument_as_string_by_key_not_exist() {
+            ScenarioEnvironment env = ScenarioEnvironment.New();
+            SetEnviormentArgument(env, arguments1);
+
+            Assert.ThrowsException<ArgumentNullException>(() => { env.GetStringArg("not exist"); });
+        }
+
+        [TestMethod]
+        public void get_argument_as_int_by_index_not_exist() {
+            ScenarioEnvironment env = ScenarioEnvironment.New();
+            SetEnviormentArgument(env, arguments1);
+
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => { env.GetIntArg(-1); });
+        }
+
+        [TestMethod]
+        public void get_argument_as_int_by_key_not_exist() {
+            ScenarioEnvironment env = ScenarioEnvironment.New();
+            SetEnviormentArgument(env, arguments1);
+
+            Assert.ThrowsException<ArgumentNullException>(() => { env.GetIntArg("not exist"); });
+        }
+
+        [TestMethod]
+        public void get_argument_as_dobule_by_index_not_exist() {
+            ScenarioEnvironment env = ScenarioEnvironment.New();
+            SetEnviormentArgument(env, arguments1);
+
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => { env.GetDoubleArg(-1); });
+        }
+
+        [TestMethod]
+        public void get_argument_as_dobule_by_key_not_exist() {
+            ScenarioEnvironment env = ScenarioEnvironment.New();
+            SetEnviormentArgument(env, arguments1);
+
+            Assert.ThrowsException<ArgumentNullException>(() => { env.GetDoubleArg("not exist"); });
+        }
+
+        [TestMethod]
         public void get_historical_arguments_as_string_by_index() {
             ScenarioEnvironment env = ScenarioEnvironment.New();
             SetEnviormentArgument(env, arguments1);
@@ -245,6 +293,54 @@ namespace ezSpec.keyword.Test {
         }
 
         [TestMethod]
+        public void get_historical_argument_as_string_by_index_not_exist() {
+            ScenarioEnvironment env = ScenarioEnvironment.New();
+            SetEnviormentArgument(env, arguments1);
+
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => { env.GetStringHistoricalArg(-1); });
+        }
+
+        [TestMethod]
+        public void get_historical_argument_as_string_by_key_not_exist() {
+            ScenarioEnvironment env = ScenarioEnvironment.New();
+            SetEnviormentArgument(env, arguments1);
+
+            Assert.ThrowsException<ArgumentNullException>(() => { env.GetStringHistoricalArg("not exist"); });
+        }
+
+        [TestMethod]
+        public void get_historical_argument_as_int_by_index_not_exist() {
+            ScenarioEnvironment env = ScenarioEnvironment.New();
+            SetEnviormentArgument(env, arguments1);
+
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => { env.GetIntHistoricalArg(-1); });
+        }
+
+        [TestMethod]
+        public void get_historical_argument_as_int_by_key_not_exist() {
+            ScenarioEnvironment env = ScenarioEnvironment.New();
+            SetEnviormentArgument(env, arguments1);
+
+            Assert.ThrowsException<ArgumentNullException>(() => { env.GetIntHistoricalArg("not exist"); });
+        }
+
+        [TestMethod]
+        public void get_historical_argument_as_double_by_index_not_exist() {
+            ScenarioEnvironment env = ScenarioEnvironment.New();
+            SetEnviormentArgument(env, arguments1);
+
+            Assert.ThrowsException<ArgumentOutOfRangeException>(() => { env.GetDoubleHistoricalArg(-1); });
+        }
+
+        [TestMethod]
+        public void get_historical_argument_as_double_by_key_not_exist() {
+            ScenarioEnvironment env = ScenarioEnvironment.New();
+            SetEnviormentArgument(env, arguments1);
+
+            Assert.ThrowsException<ArgumentNullException>(() => { env.GetDoubleHistoricalArg("not exist"); });
+        }
+
+        [TestMethod]
         public void set_and_get_string_variable() {
             ScenarioEnvironment env = ScenarioEnvironment.New();
 
@@ -289,6 +385,41 @@ namespace ezSpec.keyword.Test {
             var result = env.Get<Tuple<int, int>>("object_var");
             Assert.AreEqual(3, result.Item1);
             Assert.AreEqual(5, result.Item2);
+        }
+
+        [TestMethod]
+        public void get_a_string_variable_not_exist() {
+            ScenarioEnvironment env = ScenarioEnvironment.New();
+
+            Assert.ThrowsException<ArgumentNullException>(() => { env.GetString("not exist"); });
+        }
+
+        [TestMethod]
+        public void get_a_int_variable_not_exist() {
+            ScenarioEnvironment env = ScenarioEnvironment.New();
+
+            Assert.ThrowsException<ArgumentNullException>(() => { env.GetInt("not exist"); });
+        }
+
+        [TestMethod]
+        public void get_a_double_variable_not_exist() {
+            ScenarioEnvironment env = ScenarioEnvironment.New();
+
+            Assert.ThrowsException<ArgumentNullException>(() => { env.GetDouble("not exist"); });
+        }
+
+        [TestMethod]
+        public void get_a_bolean_variable_not_exist() {
+            ScenarioEnvironment env = ScenarioEnvironment.New();
+
+            Assert.ThrowsException<ArgumentNullException>(() => { env.GetBool("not exist"); });
+        }
+
+        [TestMethod]
+        public void get_a_object_variable_not_exist() {
+            ScenarioEnvironment env = ScenarioEnvironment.New();
+
+            Assert.ThrowsException<ArgumentNullException>(() => { env.Get<Tuple<int, int>>("not exist"); });
         }
 
         [TestMethod]
