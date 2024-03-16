@@ -59,9 +59,9 @@ namespace ezSpec.keyword {
                         step.Result = Result.Skipped();
                     }
                 } else {
-                    foreach (Step step in concurrentGroup.Steps) {
+                    Parallel.ForEach(concurrentGroup.Steps, (step) => {
                         skip |= ExecuteStep(step, env);
-                    }
+                    });
                 }
             }
         }
