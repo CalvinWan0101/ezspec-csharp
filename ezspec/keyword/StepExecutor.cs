@@ -18,10 +18,7 @@ namespace ezSpec.keyword {
 
         private static bool ExecuteStep(Step step, ScenarioEnvironment env) {
             try {
-                env.SetArguments(step.Arguments);
-                if (Table.ContainsTable(step.Description)) {
-                    env.SetAnonymousTable(Table.New(step.Description));
-                }
+                SetEnvironmentByStep(step, env);
                 step.Callback?.Invoke(env);
                 step.Result = Result.Success();
                 return false;
@@ -31,6 +28,13 @@ namespace ezSpec.keyword {
             } catch (Exception e) {
                 step.Result = Result.Failure(e);
                 return !step.IsContinuousAfterFailure;
+            }
+        }
+
+        private static void SetEnvironmentByStep(Step step, ScenarioEnvironment env) {
+            env.SetArguments(step.Arguments);
+            if (Table.ContainsTable(step.Description)) {
+                env.SetAnonymousTable(Table.New(step.Description));
             }
         }
 
