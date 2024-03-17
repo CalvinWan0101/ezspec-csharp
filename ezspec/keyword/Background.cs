@@ -20,6 +20,15 @@ namespace ezSpec.keyword {
             set { env = value; }
         }
 
+        public bool IsExecuteSuccess {
+            get {
+                foreach (Step step in steps) {
+                    if (!step.Result.IsSuccess) return false;
+                }
+                return true;
+            }
+        }
+
         protected Background(string name) {
             this.name = name;
             this.steps = new List<Step>();

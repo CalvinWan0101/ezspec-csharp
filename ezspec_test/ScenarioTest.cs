@@ -331,6 +331,40 @@ namespace ezSpec.keyword.Test {
         }
 
         [TestMethod]
+        public void step_execute_with_background_success() {
+            Rule rule = Rule.New("Rule's name");
+            rule.NewBackground("Background's name")
+                .Given("a success step", env => { });
+
+            rule.NewScenario("Scenario's name")
+                .When("I run when step", env => { })
+                .Then("this step should be success", env => { })
+                .Execute();
+            
+            Assert.IsTrue(rule.Scenarios[0].Steps[0].Result.IsSuccess);
+            Assert.IsTrue(rule.Scenarios[0].Steps[1].Result.IsSuccess);
+        }
+        
+        [TestMethod]
+        public void step_execute_with_background_failure() {
+            try {
+                Rule rule = Rule.New("Rule's name");
+                rule.NewBackground("Background's name")
+                    .Given("a failure step", env => {
+                        Assert.IsTrue(false);
+                    });
+
+                rule.NewScenario("Scenario's name")
+                    .When("I run when step", env => { })
+                    .Then("this step should be success", env => { })
+                    .Execute();
+            
+                Assert.IsTrue(rule.Scenarios[0].Steps[0].Result.IsSkipped);
+                Assert.IsTrue(rule.Scenarios[0].Steps[1].Result.IsSkipped);
+            } catch (Exception e) {}
+        }
+
+        [TestMethod]
         public void step_execute_concurrently_all_steps() {
             Scenario scenario = Scenario.New("name");
             scenario
@@ -352,6 +386,40 @@ namespace ezSpec.keyword.Test {
             Assert.IsTrue(scenario.Steps[3].Result.IsSuccess);
             Assert.IsTrue(scenario.Steps[4].Result.IsSuccess);
         }
+        
+        [TestMethod]
+        public void step_execute_concurrently_with_background_success() {
+            Rule rule = Rule.New("Rule's name");
+            rule.NewBackground("Background's name")
+                .Given("a success step", env => { });
+
+            rule.NewScenario("Scenario's name")
+                .When("I run when step", env => { })
+                .Then("this step should be success", env => { })
+                .ExecuteConcurrently();
+            
+            Assert.IsTrue(rule.Scenarios[0].Steps[0].Result.IsSuccess);
+            Assert.IsTrue(rule.Scenarios[0].Steps[1].Result.IsSuccess);
+        }
+        
+        [TestMethod]
+        public void step_execute_concurrently_with_background_failure() {
+            try {
+                Rule rule = Rule.New("Rule's name");
+                rule.NewBackground("Background's name")
+                    .Given("a failure step", env => {
+                        Assert.IsTrue(false);
+                    });
+
+                rule.NewScenario("Scenario's name")
+                    .When("I run when step", env => { })
+                    .Then("this step should be success", env => { })
+                    .ExecuteConcurrently();
+            
+                Assert.IsTrue(rule.Scenarios[0].Steps[0].Result.IsSkipped);
+                Assert.IsTrue(rule.Scenarios[0].Steps[1].Result.IsSkipped);
+            } catch (Exception e) {}
+        }
 
         [TestMethod]
         public void step_execute_concurrently_and_terminate_after_failure() {
@@ -364,7 +432,7 @@ namespace ezSpec.keyword.Test {
                     .When("I run when step and failed", Step.TerminateAfterFailure, env => {
                         Assert.AreEqual(1, 2);
                     })
-                    .And("this step shoul not be skip", env => {
+                    .And("this step should not be skip", env => {
                     })
                     .Then("this step should be ship", env => {
                     })

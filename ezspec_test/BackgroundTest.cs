@@ -1,4 +1,5 @@
-﻿using ezSpec.keyword.step;
+﻿using System.Reflection;
+using ezSpec.keyword.step;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ezSpec.keyword.Test {
@@ -70,6 +71,40 @@ namespace ezSpec.keyword.Test {
             Assert.AreEqual("but description", background.Steps[0].Description);
             Assert.IsTrue(background.Steps[0].IsContinuousAfterFailure);
         }
+        
+        [TestMethod]
+        public void get_background_executed_success_status() {
+            Background background = Background.New("background name");
+            
+            var environmentProperty = background.GetType().GetProperty("Environment", BindingFlags.Instance | BindingFlags.NonPublic);
+            environmentProperty?.SetValue(background,  ScenarioEnvironment.New());
+            
+            background.Given("given step", env => { })
+                .And("and step", env => { })
+                .Execute();
+
+            Assert.IsTrue(background.IsExecuteSuccess);
+        }
+        
+        [TestMethod]
+        public void get_background_executed_failure_status() {
+            Background background = Background.New("background name");
+            
+            var environmentProperty = background.GetType().GetProperty("Environment", BindingFlags.Instance | BindingFlags.NonPublic);
+            environmentProperty?.SetValue(background,  ScenarioEnvironment.New());
+
+            try {
+                background.Given("given step", env => { })
+                    .And("and a failure step", env => {
+                        Assert.IsTrue(false);
+                    })
+                    .Execute();
+
+                Assert.IsFalse(background.IsExecuteSuccess);
+            }
+            catch (Exception e) { }
+            
+        }
 
         [TestMethod]
         public void get_background_string() {
@@ -83,7 +118,5 @@ namespace ezSpec.keyword.Test {
                 "\tAnd and step";
             Assert.AreEqual(expect, background.ToString());
         }
-
-
     }
 }

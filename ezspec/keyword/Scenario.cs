@@ -142,6 +142,10 @@ namespace ezSpec.keyword {
             if (background != null) {
                 background.Environment = env;
                 background.Execute();
+                if (!background.IsExecuteSuccess) {
+                    SkipAllSteps();
+                    return;
+                }
             }
             StepExecutor.Execute(steps, env);
         }
@@ -150,6 +154,10 @@ namespace ezSpec.keyword {
             if (background != null) {
                 background.Environment = env;
                 background.ExecuteConcurrently();
+                if (!background.IsExecuteSuccess) {
+                    SkipAllSteps();
+                    return;
+                }
             }
             StepExecutor.ExecuteConcurrently(steps, env);
         }
@@ -163,6 +171,12 @@ namespace ezSpec.keyword {
                 result.Append(steps[i].ToStringWithResult().Replace("\n", "\n\t"));
             }
             return result.ToString();
+        }
+        
+        private void SkipAllSteps() {
+            foreach (Step step in steps) {
+                step.Result = Result.Skipped();
+            }
         }
     }
 }
