@@ -82,7 +82,7 @@ namespace ezSpec.keyword {
             result.Append(name);
             foreach (Step step in steps) {
                 result.Append("\n\t");
-                result.Append(step.ToString());
+                result.Append(step.ToStringWithResult().Replace("\n", "\n\t"));
             }
             return result.ToString();
         }

@@ -157,8 +157,8 @@ namespace ezSpec.keyword.Test {
                 "Rule: rule name\n" +
                 "\n" +
                 "\tBackground: background name\n" +
-                "\t\tGiven give step\n" +
-                "\t\tAnd and step";
+                "\t\t[Pending] Given give step\n" +
+                "\t\t[Pending] And and step";
 
             Assert.AreEqual(except, rule.ToString());
         }
@@ -172,8 +172,8 @@ namespace ezSpec.keyword.Test {
 
             string except =
                 "\tBackground: background name\n" +
-                "\t\tGiven give step\n" +
-                "\t\tAnd and step";
+                "\t\t[Pending] Given give step\n" +
+                "\t\t[Pending] And and step";
 
             Assert.AreEqual(except, rule.ToString());
         }

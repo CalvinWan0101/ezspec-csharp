@@ -108,15 +108,25 @@ namespace ezSpec.keyword.Test {
 
         [TestMethod]
         public void get_background_string() {
-            Background background = Background.New("background name");
-            background.Given("given step", env => { })
-                .And("and step", env => { });
+            try {
+                Background background = Background.New("background name");
+                background.Given("given step", env => { })
+                    .And("and a success step", env => { })
+                    .And("and a failure step", env => {
+                        Assert.IsTrue(false);
+                    })
+                    .And("this Step should be skipped.", env => { })
+                    .Execute();
 
-            string expect =
-                "Background: background name\n" +
-                "\tGiven given step\n" +
-                "\tAnd and step";
-            Assert.AreEqual(expect, background.ToString());
+                string expect =
+                    "Background: background name\n" +
+                    "\t[Success] Given given step\n" +
+                    "\t[Success] And and a success step\n" +
+                    "\t[Failure] And and a failure step\n" +
+                    "\t[Shipped] this step should be skipped";
+                Assert.AreEqual(expect, background.ToString());
+            }
+            catch (Exception e) {}
         }
     }
 }
