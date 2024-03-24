@@ -170,7 +170,7 @@ namespace ezSpec.keyword {
             result.Append(name);
             for (int i = 0; i < steps.Count; i++) {
                 result.Append("\n\t");
-                result.Append(steps[i].ToStringWithResult().Replace("\n", "\n\t"));
+                result.Append(steps[i].ToStringWithResult().AddIndent("\t"));
             }
             return result.ToString();
         }

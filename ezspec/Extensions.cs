@@ -1,4 +1,8 @@
 ﻿public static class Extensions {
+    public static string AddIndent(this string str, string indent) {
+        return str.Replace("\n", "\n" + indent);
+    }
+
     public static string AutoTrim(this string code) {
         List<string> lines = SplitByNewLine(code);
         int trimLen = lines.Skip(1).Min(s => s.Length - s.TrimStart().Length);

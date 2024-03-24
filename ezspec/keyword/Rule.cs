@@ -80,14 +80,14 @@ namespace ezSpec.keyword {
                     result.Append("\n\n");
                 }
                 result.Append("\t");
-                result.Append(background.ToString().Replace("\n", "\n\t"));
+                result.Append(background.ToString().AddIndent("\t"));
             }
             foreach (Scenario scenario in scenarios) {
                 if (0 != result.Length) {
                     result.Append("\n\n");
                 }
                 result.Append("\t");
-                result.Append(scenario.ToString().Replace("\n", "\n\t"));
+                result.Append(scenario.ToString().AddIndent("\t"));
             }
             return result.ToString();
         }

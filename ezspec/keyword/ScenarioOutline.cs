@@ -164,7 +164,7 @@ namespace ezSpec.keyword {
             }
             foreach (Examples examples in multiExamples) {
                 result.Append("\n\n\t");
-                result.Append(examples.ToString().Replace("\n", "\n\t"));
+                result.Append(examples.ToString().AddIndent("\t"));
             }
             for (int i = 0; i < scenarios.Count; i++) {
                 result.Append("\n\n\t[");
@@ -172,7 +172,7 @@ namespace ezSpec.keyword {
                 result.Append("]");
                 foreach (Step step in scenarios[i].Steps) {
                     result.Append("\n\t\t");
-                    result.Append(step.ToStringWithResult());
+                    result.Append(step.ToStringWithResult().AddIndent("\t\t"));
                 }
             }
             return result.ToString();

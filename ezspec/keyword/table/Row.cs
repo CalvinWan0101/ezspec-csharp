@@ -68,8 +68,7 @@ namespace ezSpec.keyword.table {
             foreach (string column in columns) {
                 if (Table.ContainsTable(column)) {
                     sb.Append("\t|");
-                }
-                else {
+                } else {
                     sb.Append($"\t{column}\t|");
                 }
             }
@@ -79,7 +78,7 @@ namespace ezSpec.keyword.table {
                     sb.Append("\n");
                     sb.Append($"\t<{header.Get(i)}>\n");
                     sb.Append("\t");
-                    sb.Append(Table.New(columns[i]).ToString().Replace("\n", "\n\t"));
+                    sb.Append(Table.New(columns[i]).ToString().AddIndent("\t"));
                 }
             }
             if (0 == columns.Count) {
@@ -98,8 +97,7 @@ namespace ezSpec.keyword.table {
                 if (Table.ContainsTable(columns[i])) {
                     sb.Append(new string(' ', columnsLength[i]));
                     sb.Append("|");
-                }
-                else {
+                } else {
                     sb.Append(" ");
                     sb.Append(columns[i]);
                     sb.Append(new string(' ', columnsLength[i] - columns[i].Length - 1));
@@ -112,7 +110,7 @@ namespace ezSpec.keyword.table {
                     sb.Append("\n");
                     sb.Append($"\t<{header.Get(i)}>\n");
                     sb.Append("\t");
-                    sb.Append(Table.New(columns[i]).ToStringBeautify().Replace("\n", "\n\t"));
+                    sb.Append(Table.New(columns[i]).ToStringBeautify().AddIndent("\t"));
                 }
             }
             if (0 == columns.Count) {
