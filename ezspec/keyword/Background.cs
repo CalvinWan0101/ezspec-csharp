@@ -68,11 +68,11 @@ namespace ezSpec.keyword {
             return this;
         }
         
-        public void Execute() {
+        internal void Execute() {
             StepExecutor.Execute(steps, env);
         }
         
-        public void ExecuteConcurrently() {
+        internal void ExecuteConcurrently() {
             StepExecutor.ExecuteConcurrently(steps, env);
         }
 

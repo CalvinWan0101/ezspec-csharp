@@ -80,9 +80,11 @@ namespace ezSpec.keyword.Test {
             var environmentProperty = background.GetType().GetProperty("Environment", BindingFlags.Instance | BindingFlags.NonPublic);
             environmentProperty?.SetValue(background,  ScenarioEnvironment.New());
             
+            var execute = background.GetType().GetMethod("Execute", BindingFlags.Instance | BindingFlags.NonPublic);
+
             background.Given("given step", env => { })
-                .And("and step", env => { })
-                .Execute();
+                .And("and step", env => { });
+            execute?.Invoke(background, new object[] { });
 
             Assert.IsTrue(background.IsExecuteSuccess);
         }
@@ -93,16 +95,58 @@ namespace ezSpec.keyword.Test {
             
             var environmentProperty = background.GetType().GetProperty("Environment", BindingFlags.Instance | BindingFlags.NonPublic);
             environmentProperty?.SetValue(background,  ScenarioEnvironment.New());
+            
+            var execute = background.GetType().GetMethod("Execute", BindingFlags.Instance | BindingFlags.NonPublic);
 
-            Assert.ThrowsException<EzSpecError>(() => {
+            try {
                 background.Given("given step", env => { })
                     .And("and a failure step", env => {
                         Assert.IsTrue(false);
-                    })
-                    .Execute();
-            });
+                    });
+                execute?.Invoke(background, new object[] { });
+                Assert.Fail();
+            } catch (TargetInvocationException e) {
+                Assert.IsTrue(e.InnerException is EzSpecError);
+            }
             Assert.IsFalse(background.IsExecuteSuccess);
+        }
+        
+        [TestMethod]
+        public void get_background_executed_success_status_with_execute_concurrently() {
+            Background background = Background.New("background name");
             
+            var environmentProperty = background.GetType().GetProperty("Environment", BindingFlags.Instance | BindingFlags.NonPublic);
+            environmentProperty?.SetValue(background,  ScenarioEnvironment.New());
+            
+            var executeConcurrently = background.GetType().GetMethod("ExecuteConcurrently", BindingFlags.Instance | BindingFlags.NonPublic);
+
+            background.Given("given step", env => { })
+                .And("and step", env => { });
+            executeConcurrently?.Invoke(background, new object[] { });
+
+            Assert.IsTrue(background.IsExecuteSuccess);
+        }
+        
+        [TestMethod]
+        public void get_background_executed_failure_status_with_execute_concurrently() {
+            Background background = Background.New("background name");
+            
+            var environmentProperty = background.GetType().GetProperty("Environment", BindingFlags.Instance | BindingFlags.NonPublic);
+            environmentProperty?.SetValue(background,  ScenarioEnvironment.New());
+            
+            var executeConcurrently = background.GetType().GetMethod("ExecuteConcurrently", BindingFlags.Instance | BindingFlags.NonPublic);
+
+            try {
+                background.Given("given step", env => { })
+                    .And("and a failure step", env => {
+                        Assert.IsTrue(false);
+                    });
+                executeConcurrently?.Invoke(background, new object[] { });
+                Assert.Fail();
+            } catch (TargetInvocationException e) {
+                Assert.IsTrue(e.InnerException is EzSpecError);
+            }
+            Assert.IsFalse(background.IsExecuteSuccess);
         }
 
         [TestMethod]
@@ -112,15 +156,19 @@ namespace ezSpec.keyword.Test {
             var environmentProperty = background.GetType().GetProperty("Environment", BindingFlags.Instance | BindingFlags.NonPublic);
             environmentProperty?.SetValue(background,  ScenarioEnvironment.New());
             
-            Assert.ThrowsException<EzSpecError>(() => {
+            var execute = background.GetType().GetMethod("Execute", BindingFlags.Instance | BindingFlags.NonPublic);
+            try {
                 background.Given("given step", env => { })
                     .And("and a success step", env => { })
                     .And("and a failure step", env => {
                         Assert.IsTrue(false);
                     })
-                    .And("this step should be skipped", env => { })
-                    .Execute();
-            });
+                    .And("this step should be skipped", env => { });
+                execute?.Invoke(background, new object[] { });
+                Assert.Fail();
+            } catch (TargetInvocationException e) {
+                Assert.IsTrue(e.InnerException is EzSpecError);
+            }
             
             string expect =
                 "Background: background name\n" +
