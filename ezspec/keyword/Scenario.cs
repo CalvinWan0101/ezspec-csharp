@@ -141,10 +141,11 @@ namespace ezSpec.keyword {
         public void Execute() {
             if (background != null) {
                 background.Environment = env;
-                background.Execute();
-                if (!background.IsExecuteSuccess) {
+                try {
+                    background.Execute();
+                } catch (Exception e) {
                     SkipAllSteps();
-                    return;
+                    throw e;
                 }
             }
             StepExecutor.Execute(steps, env);
@@ -153,10 +154,11 @@ namespace ezSpec.keyword {
         public void ExecuteConcurrently() {
             if (background != null) {
                 background.Environment = env;
-                background.ExecuteConcurrently();
-                if (!background.IsExecuteSuccess) {
+                try {
+                    background.ExecuteConcurrently();
+                } catch (Exception e) {
                     SkipAllSteps();
-                    return;
+                    throw e;
                 }
             }
             StepExecutor.ExecuteConcurrently(steps, env);

@@ -347,8 +347,8 @@ namespace ezSpec.keyword.Test {
         
         [TestMethod]
         public void step_execute_with_background_failure() {
-            try {
-                Rule rule = Rule.New("Rule's name");
+            Rule rule = Rule.New("Rule's name");
+            Assert.ThrowsException<EzSpecError>(() => {
                 rule.NewBackground("Background's name")
                     .Given("a failure step", env => {
                         Assert.IsTrue(false);
@@ -358,10 +358,9 @@ namespace ezSpec.keyword.Test {
                     .When("I run when step", env => { })
                     .Then("this step should be success", env => { })
                     .Execute();
-            
-                Assert.IsTrue(rule.Scenarios[0].Steps[0].Result.IsSkipped);
-                Assert.IsTrue(rule.Scenarios[0].Steps[1].Result.IsSkipped);
-            } catch (Exception e) {}
+            });
+            Assert.IsTrue(rule.Scenarios[0].Steps[0].Result.IsSkipped);
+            Assert.IsTrue(rule.Scenarios[0].Steps[1].Result.IsSkipped);
         }
 
         [TestMethod]
@@ -404,8 +403,8 @@ namespace ezSpec.keyword.Test {
         
         [TestMethod]
         public void step_execute_concurrently_with_background_failure() {
-            try {
-                Rule rule = Rule.New("Rule's name");
+            Rule rule = Rule.New("Rule's name");
+            Assert.ThrowsException<EzSpecError>(() => {
                 rule.NewBackground("Background's name")
                     .Given("a failure step", env => {
                         Assert.IsTrue(false);
@@ -415,10 +414,10 @@ namespace ezSpec.keyword.Test {
                     .When("I run when step", env => { })
                     .Then("this step should be success", env => { })
                     .ExecuteConcurrently();
+            });
             
-                Assert.IsTrue(rule.Scenarios[0].Steps[0].Result.IsSkipped);
-                Assert.IsTrue(rule.Scenarios[0].Steps[1].Result.IsSkipped);
-            } catch (Exception e) {}
+            Assert.IsTrue(rule.Scenarios[0].Steps[0].Result.IsSkipped);
+            Assert.IsTrue(rule.Scenarios[0].Steps[1].Result.IsSkipped);
         }
 
         [TestMethod]
@@ -434,7 +433,7 @@ namespace ezSpec.keyword.Test {
                     })
                     .And("this step should not be skip", env => {
                     })
-                    .Then("this step should be ship", env => {
+                    .Then("this step should be skip", env => {
                     })
                     .And("this step also should be skip", env => {
                     })

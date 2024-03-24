@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using ezSpec.exception;
 using ezSpec.keyword.step;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -93,40 +94,41 @@ namespace ezSpec.keyword.Test {
             var environmentProperty = background.GetType().GetProperty("Environment", BindingFlags.Instance | BindingFlags.NonPublic);
             environmentProperty?.SetValue(background,  ScenarioEnvironment.New());
 
-            try {
+            Assert.ThrowsException<EzSpecError>(() => {
                 background.Given("given step", env => { })
                     .And("and a failure step", env => {
                         Assert.IsTrue(false);
                     })
                     .Execute();
-
-                Assert.IsFalse(background.IsExecuteSuccess);
-            }
-            catch (Exception e) { }
+            });
+            Assert.IsFalse(background.IsExecuteSuccess);
             
         }
 
         [TestMethod]
         public void get_background_string() {
-            try {
-                Background background = Background.New("background name");
+            Background background = Background.New("background name");
+            
+            var environmentProperty = background.GetType().GetProperty("Environment", BindingFlags.Instance | BindingFlags.NonPublic);
+            environmentProperty?.SetValue(background,  ScenarioEnvironment.New());
+            
+            Assert.ThrowsException<EzSpecError>(() => {
                 background.Given("given step", env => { })
                     .And("and a success step", env => { })
                     .And("and a failure step", env => {
                         Assert.IsTrue(false);
                     })
-                    .And("this Step should be skipped.", env => { })
+                    .And("this step should be skipped", env => { })
                     .Execute();
-
-                string expect =
-                    "Background: background name\n" +
-                    "\t[Success] Given given step\n" +
-                    "\t[Success] And and a success step\n" +
-                    "\t[Failure] And and a failure step\n" +
-                    "\t[Shipped] this step should be skipped";
-                Assert.AreEqual(expect, background.ToString());
-            }
-            catch (Exception e) {}
+            });
+            
+            string expect =
+                "Background: background name\n" +
+                "\t[Success] Given given step\n" +
+                "\t[Success] And and a success step\n" +
+                "\t[Failure] And and a failure step\n" +
+                "\t[Skipped] And this step should be skipped";
+            Assert.AreEqual(expect, background.ToString());
         }
     }
 }

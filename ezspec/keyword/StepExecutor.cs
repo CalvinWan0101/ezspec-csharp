@@ -1,7 +1,6 @@
 ﻿using ezSpec.exception;
 using ezSpec.keyword.step;
 using ezSpec.keyword.table;
-using System.Collections.ObjectModel;
 using System.Text;
 
 namespace ezSpec.keyword {
@@ -50,17 +49,18 @@ namespace ezSpec.keyword {
             }
         }
 
-        private static void ExecuteStepsConcurrently(IList<Step> steps, ScenarioEnvironment env) {
-            bool skip = false;
+        private static void ExecuteStepsConcurrently(IList<Step> steps, ScenarioEnvironment env){
+            ConcurrentlyResults concurrentlyResults = new ConcurrentlyResults();
             List<ConcurrentGroup> concurrentGroups = ConcurrentGroup.SliceConcurrentGroups(steps);
             foreach (ConcurrentGroup concurrentGroup in concurrentGroups) {
-                if (skip) {
+                if (concurrentlyResults.IsSkip()) {
                     foreach (Step step in concurrentGroup.Steps) {
                         step.Result = Result.Skipped();
                     }
                 } else {
-                    Parallel.ForEach(concurrentGroup.Steps, (step) => {
-                        skip |= ExecuteStep(step, env);
+                    concurrentlyResults.Clear();
+                    Parallel.ForEach(concurrentGroup.Steps, step => {
+                        concurrentlyResults.AddResultSkipStatus(ExecuteStep(step, env));
                     });
                 }
             }
@@ -81,6 +81,26 @@ namespace ezSpec.keyword {
 
             if (errorMessage.Length > 0) {
                 throw new EzSpecError(errorMessage.ToString());
+            }
+        }
+
+        class ConcurrentlyResults {
+            
+            private List<bool> results = new List<bool>();
+
+            public bool IsSkip() {
+                foreach (bool result in results) {
+                    if (result) return true;
+                }
+                return false;
+            }
+
+            public void AddResultSkipStatus(bool result) {
+                results.Add(result);
+            }
+            
+            public void Clear() {
+                results.Clear();
             }
         }
     }
