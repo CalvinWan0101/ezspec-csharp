@@ -50,19 +50,23 @@ namespace ezSpec.keyword {
         }
 
         private static void ExecuteStepsConcurrently(IList<Step> steps, ScenarioEnvironment env){
-            ConcurrentlyResults concurrentlyResults = new ConcurrentlyResults();
+            ConcurrentResults concurrentResults = new ConcurrentResults();
             List<ConcurrentGroup> concurrentGroups = ConcurrentGroup.SliceConcurrentGroups(steps);
             foreach (ConcurrentGroup concurrentGroup in concurrentGroups) {
-                if (concurrentlyResults.IsSkip()) {
-                    foreach (Step step in concurrentGroup.Steps) {
-                        step.Result = Result.Skipped();
-                    }
-                } else {
-                    concurrentlyResults.Clear();
-                    Parallel.ForEach(concurrentGroup.Steps, step => {
-                        concurrentlyResults.AddResultSkipStatus(ExecuteStep(step, env));
-                    });
+                ExecuteConcurrentGroup(concurrentGroup, env, concurrentResults);
+            }
+        }
+
+        private static void ExecuteConcurrentGroup(ConcurrentGroup concurrentGroup, ScenarioEnvironment env, ConcurrentResults concurrentResults) {
+            if (concurrentResults.IsSkip()) {
+                foreach (Step step in concurrentGroup.Steps) {
+                    step.Result = Result.Skipped();
                 }
+            } else {
+                concurrentResults.Clear();
+                Parallel.ForEach(concurrentGroup.Steps, step => {
+                    concurrentResults.AddResultSkipStatus(ExecuteStep(step, env));
+                });
             }
         }
 
@@ -84,23 +88,19 @@ namespace ezSpec.keyword {
             }
         }
 
-        class ConcurrentlyResults {
+        private class ConcurrentResults {
+            private bool isSkip;
             
-            private List<bool> results = new List<bool>();
-
             public bool IsSkip() {
-                foreach (bool result in results) {
-                    if (result) return true;
-                }
-                return false;
+                return isSkip;
             }
 
             public void AddResultSkipStatus(bool result) {
-                results.Add(result);
+                isSkip |= result;
             }
             
             public void Clear() {
-                results.Clear();
+                isSkip = false;
             }
         }
     }
