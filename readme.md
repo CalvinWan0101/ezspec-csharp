@@ -1,4 +1,6 @@
-# ezSpec
+![](./cover.png)
+
+# ezSpec C#
 
 **ezSpec** is referenced from [**ezSpec (Java)**](https://gitlab.com/TeddyChen/ezspec), which is a developer-facing Behavior-Driven Development (BDD) tool implemented in C#. It adopts Gherkin syntax to specify requirements in a Specification by Example (SBE) manner. The goal of ezSpec is to provide a BDD/SBE tool that is more developer-friendly than current tools.
 
