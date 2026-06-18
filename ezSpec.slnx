@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ezspec/ezSpec.csproj" />
+  <Project Path="ezspec_test/ezSpec_test.csproj" />
+</Solution>
