@@ -1,15 +1,14 @@
-﻿namespace ezSpec.keyword.step {
-    public class And : Step {
+﻿namespace ezSpec.keyword.step;
 
-        public override string Name {
-            get { return "And"; }
-        }
+public class And : Step {
+    public override string Name {
+        get { return "And"; }
+    }
 
-        public And(string description, bool continuous, StepCallback callback) : base(description, continuous, callback) {
-        }
+    public And(string description, bool continuous, StepCallback callback) : base(description, continuous, callback) {
+    }
 
-        internal override Step CloneWithDifferentDescription(string description) {
-            return new And(description, this.continousAfterFailure, this.callback);
-        }
+    internal override Step CloneWithDifferentDescription(string description) {
+        return new And(description, this.continousAfterFailure, this.callback);
     }
 }

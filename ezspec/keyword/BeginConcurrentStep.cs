@@ -1,5 +1,4 @@
-﻿namespace ezSpec.keyword {
-    public interface BeginConcurrentStep {
-        
-    }
+﻿namespace ezSpec.keyword;
+
+public interface BeginConcurrentStep {
 }

@@ -5,11 +5,11 @@ namespace ezSpec.keyword;
 
 public class ConcurrentGroup {
     private readonly IList<Step> steps;
-    
+
     public ReadOnlyCollection<Step> Steps {
         get { return new ReadOnlyCollection<Step>(steps); }
     }
-    
+
     private ConcurrentGroup(IList<Step> steps) {
         this.steps = steps;
     }
@@ -24,11 +24,14 @@ public class ConcurrentGroup {
                     concurrentSteps = new List<Step>();
                 }
             }
+
             concurrentSteps.Add(steps[currentStep]);
         }
+
         if (concurrentSteps.Count > 0) {
             concurrentGroups.Add(new ConcurrentGroup(concurrentSteps));
         }
+
         return concurrentGroups;
     }
 }

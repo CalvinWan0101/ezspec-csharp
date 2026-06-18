@@ -1,75 +1,70 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ezSpec.keyword.Test {
+namespace ezSpec.keyword.Test;
 
-    [TestClass]
-    public class ArgumentTest {
-
-        [TestMethod]
-        public void value_argument_start_with_dollar_sign() {
-            Assert.AreEqual("1", Argument.New("${1}").Value);
-            Assert.AreEqual("", Argument.New("${1}").Key);
-            Assert.AreEqual("80", Argument.New("${80}").Value);
-            Assert.AreEqual("\\$5", Argument.New("${\\$5}").Value);
-            Assert.AreEqual("$5", Argument.New("${$5}").Value);
-            Assert.AreEqual("$$5", Argument.New("${$$5}").Value);
-            Assert.AreEqual("$$20$20", Argument.New("${$$20$20}").Value);
-        }
-
-        [TestMethod]
-        public void key_value_argument_place_in_curly_brackets_with_equal_sign() {
-            Assert.AreEqual("price", Argument.New("${price=21,000}").Key);
-            Assert.AreEqual("21,000", Argument.New("${price=21,000}").Value);
-            Assert.AreEqual("price", Argument.New("${price=  21,000     }").Key);
-            Assert.AreEqual("21,000", Argument.New("${price=  21,000     }").Value);
-            Assert.AreEqual("price", Argument.New("${    price =21,000}").Key);
-            Assert.AreEqual("21,000", Argument.New("${    price =21,000}").Value);
-            Assert.AreEqual("price", Argument.New("${ price   =   21,000 }").Key);
-            Assert.AreEqual("21,000", Argument.New("${ price   =   21,000 }").Value);
-            Assert.AreEqual("price", Argument.New("${price=$21,000}").Key);
-            Assert.AreEqual("$21,000", Argument.New("${price=$21,000}").Value);
-            Assert.AreEqual("", Argument.New("${=vat=100}").Key);
-            Assert.AreEqual("vat=100", Argument.New("${=vat=100}").Value);
-        }
-
-        [TestMethod]
-        public void key_value_argument_place_in_curly_brackets_with_colon() {
-            Assert.AreEqual("price", Argument.New("${price:21,000}").Key);
-            Assert.AreEqual("21,000", Argument.New("${price:21,000}").Value);
-            Assert.AreEqual("price", Argument.New("${price:  21,000     }").Key);
-            Assert.AreEqual("21,000", Argument.New("${price:  21,000     }").Value);
-            Assert.AreEqual("price", Argument.New("${    price :21,000}").Key);
-            Assert.AreEqual("21,000", Argument.New("${    price :21,000}").Value);
-            Assert.AreEqual("price", Argument.New("${ price   :   21,000 }").Key);
-            Assert.AreEqual("21,000", Argument.New("${ price   :   21,000 }").Value);
-            Assert.AreEqual("price", Argument.New("${price:$21,000}").Key);
-            Assert.AreEqual("$21,000", Argument.New("${price:$21,000}").Value);
-            Assert.AreEqual("", Argument.New("${:vat:100}").Key);
-            Assert.AreEqual("vat:100", Argument.New("${:vat:100}").Value);
-        }
-
-        [TestMethod]
-        public void copy_value_argument_start_with_dollar_sign() {
-            Argument argument = Argument.New("${1}");
-            Assert.AreEqual("1", Argument.New(argument).Value);
-            Assert.AreEqual("", Argument.New(argument).Key);
-        }
-
-        [TestMethod]
-        public void copy_key_value_argument_place_in_curly_brackets_with_equal_sign() {
-            Argument argument = Argument.New("${price=21,000}");
-            Assert.AreEqual("price", Argument.New(argument).Key);
-            Assert.AreEqual("21,000", Argument.New(argument).Value);
-
-        }
-
-        [TestMethod]
-        public void copy_key_value_argument_place_in_curly_brackets_with_colon() {
-            Argument argument = Argument.New("${price:21,000}");
-            Assert.AreEqual("price", Argument.New(argument).Key);
-            Assert.AreEqual("21,000", Argument.New(argument).Value);
-        }
-
+[TestClass]
+public class ArgumentTest {
+    [TestMethod]
+    public void value_argument_start_with_dollar_sign() {
+        Assert.AreEqual("1", Argument.New("${1}").Value);
+        Assert.AreEqual("", Argument.New("${1}").Key);
+        Assert.AreEqual("80", Argument.New("${80}").Value);
+        Assert.AreEqual("\\$5", Argument.New("${\\$5}").Value);
+        Assert.AreEqual("$5", Argument.New("${$5}").Value);
+        Assert.AreEqual("$$5", Argument.New("${$$5}").Value);
+        Assert.AreEqual("$$20$20", Argument.New("${$$20$20}").Value);
     }
 
+    [TestMethod]
+    public void key_value_argument_place_in_curly_brackets_with_equal_sign() {
+        Assert.AreEqual("price", Argument.New("${price=21,000}").Key);
+        Assert.AreEqual("21,000", Argument.New("${price=21,000}").Value);
+        Assert.AreEqual("price", Argument.New("${price=  21,000     }").Key);
+        Assert.AreEqual("21,000", Argument.New("${price=  21,000     }").Value);
+        Assert.AreEqual("price", Argument.New("${    price =21,000}").Key);
+        Assert.AreEqual("21,000", Argument.New("${    price =21,000}").Value);
+        Assert.AreEqual("price", Argument.New("${ price   =   21,000 }").Key);
+        Assert.AreEqual("21,000", Argument.New("${ price   =   21,000 }").Value);
+        Assert.AreEqual("price", Argument.New("${price=$21,000}").Key);
+        Assert.AreEqual("$21,000", Argument.New("${price=$21,000}").Value);
+        Assert.AreEqual("", Argument.New("${=vat=100}").Key);
+        Assert.AreEqual("vat=100", Argument.New("${=vat=100}").Value);
+    }
+
+    [TestMethod]
+    public void key_value_argument_place_in_curly_brackets_with_colon() {
+        Assert.AreEqual("price", Argument.New("${price:21,000}").Key);
+        Assert.AreEqual("21,000", Argument.New("${price:21,000}").Value);
+        Assert.AreEqual("price", Argument.New("${price:  21,000     }").Key);
+        Assert.AreEqual("21,000", Argument.New("${price:  21,000     }").Value);
+        Assert.AreEqual("price", Argument.New("${    price :21,000}").Key);
+        Assert.AreEqual("21,000", Argument.New("${    price :21,000}").Value);
+        Assert.AreEqual("price", Argument.New("${ price   :   21,000 }").Key);
+        Assert.AreEqual("21,000", Argument.New("${ price   :   21,000 }").Value);
+        Assert.AreEqual("price", Argument.New("${price:$21,000}").Key);
+        Assert.AreEqual("$21,000", Argument.New("${price:$21,000}").Value);
+        Assert.AreEqual("", Argument.New("${:vat:100}").Key);
+        Assert.AreEqual("vat:100", Argument.New("${:vat:100}").Value);
+    }
+
+    [TestMethod]
+    public void copy_value_argument_start_with_dollar_sign() {
+        Argument argument = Argument.New("${1}");
+        Assert.AreEqual("1", Argument.New(argument).Value);
+        Assert.AreEqual("", Argument.New(argument).Key);
+    }
+
+    [TestMethod]
+    public void copy_key_value_argument_place_in_curly_brackets_with_equal_sign() {
+        Argument argument = Argument.New("${price=21,000}");
+        Assert.AreEqual("price", Argument.New(argument).Key);
+        Assert.AreEqual("21,000", Argument.New(argument).Value);
+    }
+
+    [TestMethod]
+    public void copy_key_value_argument_place_in_curly_brackets_with_colon() {
+        Argument argument = Argument.New("${price:21,000}");
+        Assert.AreEqual("price", Argument.New(argument).Key);
+        Assert.AreEqual("21,000", Argument.New(argument).Value);
+    }
 }
