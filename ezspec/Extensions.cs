@@ -1,4 +1,6 @@
-﻿public static class Extensions {
+﻿namespace ezSpec;
+
+public static class Extensions {
     public static string AddIndent(this string str, string indent) {
         return str.Replace("\n", "\n" + indent);
     }
@@ -10,24 +12,25 @@
         if (lines.Count == 0) {
             return "";
         }
-        else if (lines.Count == 1) {
+
+        if (lines.Count == 1) {
             return lines[0];
         }
+
         return lines[0] + "\n" + string.Join("\n",
-            lines
-            .GetRange(1, lines.Count - 1)
-            .ConvertAll(line => line.Substring(Math.Min(line.Length, trimLen))));
+            lines.GetRange(1, lines.Count - 1)
+                .ConvertAll(line => line.Substring(Math.Min(line.Length, trimLen))));
     }
 
     private static List<string> SplitByNewLine(string code) {
         if (code.Contains("\r\n")) {
             return code.Split("\r\n").ToList();
         }
-        else if (code.Contains("\r")) {
+
+        if (code.Contains("\r")) {
             return code.Split("\r").ToList();
         }
-        else {
-            return code.Split("\n").ToList();
-        }
+
+        return code.Split("\n").ToList();
     }
 }
