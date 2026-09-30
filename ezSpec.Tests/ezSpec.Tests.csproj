@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ezSpec\ezSpec.csproj" />
+    <ProjectReference Include="..\ezspec\ezSpec.csproj" />
   </ItemGroup>
 
 </Project>
