@@ -10,7 +10,7 @@ Unlike common BDD/SBE tools, ezSpec is an internal DSL. Both feature files and s
 
 ### Requirement
 
-- .NET core 6.0 or later
+- .NET 8.0, 9.0, or 10.0
 
 ### NuGet
 
