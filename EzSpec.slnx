@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/EzSpec/EzSpec.csproj" />
+  </Folder>
+  <Folder Name="/test/">
+    <Project Path="test/EzSpec.Tests/EzSpec.Tests.csproj" />
+  </Folder>
+</Solution>

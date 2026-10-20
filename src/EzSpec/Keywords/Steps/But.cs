@@ -1,0 +1,15 @@
+namespace EzSpec.Keywords.Steps;
+
+public class But : Step {
+
+    public override string Name {
+        get { return "But"; }
+    }
+
+    public But(string description, bool continuous, StepCallback callback) : base(description, continuous, callback) {
+    }
+
+    internal override Step CloneWithDifferentDescription(string description) {
+        return new But(description, this.continousAfterFailure, this.callback);
+    }
+}
