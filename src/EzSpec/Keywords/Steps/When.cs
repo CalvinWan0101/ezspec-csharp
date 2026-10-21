@@ -1,12 +1,9 @@
 namespace EzSpec.Keywords.Steps;
 
-public class When : Step, BeginConcurrentStep {
+public class When(string description, bool continuous, Step.StepCallback callback) : Step(description, continuous, callback), BeginConcurrentStep {
 
     public override string Name {
         get { return "When"; }
-    }
-
-    public When(string description, bool continuous, StepCallback callback) : base(description, continuous, callback) {
     }
 
     internal override Step CloneWithDifferentDescription(string description) {

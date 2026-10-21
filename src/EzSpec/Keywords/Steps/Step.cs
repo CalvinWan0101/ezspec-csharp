@@ -4,16 +4,16 @@ using System.Text.RegularExpressions;
 
 namespace EzSpec.Keywords.Steps;
 
-public abstract partial class Step {
+public abstract partial class Step(string description, bool continous, Step.StepCallback callback) {
     public delegate void StepCallback(ScenarioEnvironment env);
 
     public static readonly bool ContinuousAfterFailure = true;
     public static readonly bool TerminateAfterFailure = false;
 
-    protected string description;
-    protected StepCallback callback;
-    protected bool continousAfterFailure;
-    private Result stepResult;
+    protected string description = description;
+    protected StepCallback callback = callback;
+    protected bool continousAfterFailure = continous;
+    private Result stepResult = Result.Pending(PendingException.New());
 
     public abstract string Name { get; }
 
@@ -66,13 +66,6 @@ public abstract partial class Step {
     }
 
     internal abstract Step CloneWithDifferentDescription(string description);
-
-    protected Step(string description, bool continous, StepCallback callback) {
-        this.description = description;
-        continousAfterFailure = continous;
-        this.callback = callback;
-        stepResult = Result.Pending(PendingException.New());
-    }
 
     public override string ToString() {
         StringBuilder result = new StringBuilder();

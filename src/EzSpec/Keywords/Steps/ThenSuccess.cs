@@ -1,12 +1,9 @@
 namespace EzSpec.Keywords.Steps;
 
-public class ThenSuccess : Step, BeginConcurrentStep {
+public class ThenSuccess(string description, bool continuous, Step.StepCallback callback) : Step(description, continuous, callback), BeginConcurrentStep {
 
     public override string Name {
         get { return "ThenSuccess"; }
-    }
-
-    public ThenSuccess(string description, bool continuous, StepCallback callback) : base(description, continuous, callback) {
     }
 
     internal override Step CloneWithDifferentDescription(string description) {
