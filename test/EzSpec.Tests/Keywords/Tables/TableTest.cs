@@ -2,7 +2,7 @@ using EzSpec.Keywords.Tables;
 using EzSpec.Keywords;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace EzSpec.Tests.Tables;
+namespace EzSpec.Tests.Keywords.Tables;
 
 [TestClass]
 public class TableTest {

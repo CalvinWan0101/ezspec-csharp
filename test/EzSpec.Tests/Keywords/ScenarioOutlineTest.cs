@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Diagnostics;
 using System.Reflection;
 
-namespace EzSpec.Tests;
+namespace EzSpec.Tests.Keywords;
 
 [TestClass]
 public class ScenarioOutlineTest {

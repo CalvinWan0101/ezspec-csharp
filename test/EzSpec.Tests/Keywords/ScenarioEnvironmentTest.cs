@@ -3,7 +3,7 @@ using EzSpec.Keywords.Tables;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
 
-namespace EzSpec.Tests;
+namespace EzSpec.Tests.Keywords;
 
 [TestClass]
 public class ScenarioEnvironmentTest {

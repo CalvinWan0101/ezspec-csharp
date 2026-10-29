@@ -2,7 +2,7 @@ using EzSpec.Keywords;
 using EzSpec.Exceptions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace EzSpec.Tests;
+namespace EzSpec.Tests.Keywords;
 
 [TestClass]
 public class ResultTest {
@@ -63,7 +63,7 @@ public class ResultTest {
 
         string except =
             "   at System.Collections.Generic.List`1.get_Item(Int32 index)\n" +
-            "   at EzSpec.Tests.ResultTest.get_failure_exception_message() in EzSpec.Tests/ResultTest.cs:line 57";
+            "   at EzSpec.Tests.Keywords.ResultTest.get_failure_exception_message() in EzSpec.Tests/Keywords/ResultTest.cs:line 57";
         Assert.AreEqual(except, result.ExceptionMessage);
     }
 }

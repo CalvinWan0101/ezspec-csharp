@@ -2,7 +2,7 @@ using EzSpec.Keywords.Steps;
 using EzSpec.Keywords;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace EzSpec.Tests;
+namespace EzSpec.Tests.Keywords;
 
 [TestClass]
 public class FeatureTest {

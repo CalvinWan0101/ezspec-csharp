@@ -3,7 +3,7 @@ using EzSpec.Keywords;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
 
-namespace EzSpec.Tests;
+namespace EzSpec.Tests.Keywords.Steps;
 
 [TestClass]
 public class StepTest {

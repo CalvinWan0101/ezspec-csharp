@@ -2,7 +2,7 @@ using EzSpec.Keywords;
 using EzSpec.Keywords.Steps;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace EzSpec.Tests;
+namespace EzSpec.Tests.Keywords;
 
 [TestClass]
 public class ConcurrentGroupTest {

@@ -3,7 +3,7 @@ using EzSpec.Exceptions;
 using EzSpec.Keywords.Steps;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace EzSpec.Tests;
+namespace EzSpec.Tests.Keywords;
 
 [TestClass]
 public class ScenarioTest {
