@@ -73,7 +73,7 @@ public class RowTest {
         };
         Row row = Row.New(header, rowData);
 
-        Assert.ThrowsException<SystemException>(() => {
+        Assert.ThrowsExactly<SystemException>(() => {
             row.Get("columnNotExist");
         });
     }
@@ -268,6 +268,6 @@ public class RowTest {
             10
         };
 
-        Assert.ThrowsException<SystemException>(() => row.ToString(columnsLength));
+        Assert.ThrowsExactly<SystemException>(() => row.ToString(columnsLength));
     }
 }

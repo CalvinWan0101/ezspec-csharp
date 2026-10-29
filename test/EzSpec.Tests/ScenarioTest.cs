@@ -276,7 +276,7 @@ public class ScenarioTest {
     [TestMethod]
     public void step_terminate_after_failure() {
         Scenario scenario = Scenario.New("name");
-        Assert.ThrowsException<EzSpecError>(() => {
+        Assert.ThrowsExactly<EzSpecError>(() => {
             scenario
                 .Given("a given step.", env => {
                 })
@@ -296,7 +296,7 @@ public class ScenarioTest {
     [TestMethod]
     public void step_continue_after_failure() {
         Scenario scenario = Scenario.New("name");
-        Assert.ThrowsException<EzSpecError>(() => {
+        Assert.ThrowsExactly<EzSpecError>(() => {
             scenario
                 .Given("a given step.", env => {
                 })
@@ -349,7 +349,7 @@ public class ScenarioTest {
     [TestMethod]
     public void step_execute_with_background_failure() {
         Rule rule = Rule.New("Rule's name");
-        Assert.ThrowsException<EzSpecError>(() => {
+        Assert.ThrowsExactly<EzSpecError>(() => {
             rule.NewBackground("Background's name")
                 .Given("a failure step", env => {
                     Assert.IsTrue(false);
@@ -405,7 +405,7 @@ public class ScenarioTest {
     [TestMethod]
     public void step_execute_concurrently_with_background_failure() {
         Rule rule = Rule.New("Rule's name");
-        Assert.ThrowsException<EzSpecError>(() => {
+        Assert.ThrowsExactly<EzSpecError>(() => {
             rule.NewBackground("Background's name")
                 .Given("a failure step", env => {
                     Assert.IsTrue(false);
@@ -425,7 +425,7 @@ public class ScenarioTest {
     public void step_execute_concurrently_and_terminate_after_failure() {
         Scenario scenario = Scenario.New("name");
 
-        Assert.ThrowsException<EzSpecError>(() => {
+        Assert.ThrowsExactly<EzSpecError>(() => {
             scenario
                 .Given("a given step.", env => {
                 })
@@ -452,7 +452,7 @@ public class ScenarioTest {
     public void step_execute_concurrently_and_continue_after_failure() {
         Scenario scenario = Scenario.New("name");
 
-        Assert.ThrowsException<EzSpecError>(() => {
+        Assert.ThrowsExactly<EzSpecError>(() => {
             scenario
                 .Given("a given step.", env => {
                 })
@@ -561,7 +561,7 @@ public class ScenarioTest {
     [TestMethod]
     public void scenario_to_string() {
         Scenario scenario = Scenario.New("name");
-        Assert.ThrowsException<EzSpecError>(() => {
+        Assert.ThrowsExactly<EzSpecError>(() => {
             scenario
                 .Given("a given step", env => {
                 })
@@ -593,7 +593,7 @@ public class ScenarioTest {
     [TestMethod]
     public void scenario_with_step_contain_more_than_one_line_description() {
         Scenario scenario = Scenario.New("name");
-        Assert.ThrowsException<EzSpecError>(() => {
+        Assert.ThrowsExactly<EzSpecError>(() => {
             scenario
                 .Given("a given step line 1\na given step line 2", env => {
                 })
@@ -630,7 +630,7 @@ public class ScenarioTest {
     [TestMethod]
     public void scenario_with_step_contain_long_string_description() {
         Scenario scenario = Scenario.New("name");
-        Assert.ThrowsException<EzSpecError>(() => {
+        Assert.ThrowsExactly<EzSpecError>(() => {
             scenario
                 .Given(@"a given step line 1
                              a given step line 2".AutoTrim(), env => {

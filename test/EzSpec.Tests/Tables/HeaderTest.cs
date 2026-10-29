@@ -139,6 +139,6 @@ public class HeaderTest {
         List<int> columnsLength = new List<int>() {
             10
         };
-        Assert.ThrowsException<SystemException>(() => header.ToString(columnsLength));
+        Assert.ThrowsExactly<SystemException>(() => header.ToString(columnsLength));
     }
 }

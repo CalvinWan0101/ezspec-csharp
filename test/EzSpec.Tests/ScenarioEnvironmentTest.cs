@@ -188,7 +188,7 @@ public class ScenarioEnvironmentTest {
         ScenarioEnvironment env = ScenarioEnvironment.New();
         SetEnviormentArgument(env, arguments1);
 
-        Assert.ThrowsException<ArgumentOutOfRangeException>(() => { env.GetStringArg(-1); });
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => { env.GetStringArg(-1); });
     }
 
     [TestMethod]
@@ -196,7 +196,7 @@ public class ScenarioEnvironmentTest {
         ScenarioEnvironment env = ScenarioEnvironment.New();
         SetEnviormentArgument(env, arguments1);
 
-        Assert.ThrowsException<ArgumentNullException>(() => { env.GetStringArg("not exist"); });
+        Assert.ThrowsExactly<ArgumentNullException>(() => { env.GetStringArg("not exist"); });
     }
 
     [TestMethod]
@@ -204,7 +204,7 @@ public class ScenarioEnvironmentTest {
         ScenarioEnvironment env = ScenarioEnvironment.New();
         SetEnviormentArgument(env, arguments1);
 
-        Assert.ThrowsException<ArgumentOutOfRangeException>(() => { env.GetIntArg(-1); });
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => { env.GetIntArg(-1); });
     }
 
     [TestMethod]
@@ -212,7 +212,7 @@ public class ScenarioEnvironmentTest {
         ScenarioEnvironment env = ScenarioEnvironment.New();
         SetEnviormentArgument(env, arguments1);
 
-        Assert.ThrowsException<ArgumentNullException>(() => { env.GetIntArg("not exist"); });
+        Assert.ThrowsExactly<ArgumentNullException>(() => { env.GetIntArg("not exist"); });
     }
 
     [TestMethod]
@@ -220,7 +220,7 @@ public class ScenarioEnvironmentTest {
         ScenarioEnvironment env = ScenarioEnvironment.New();
         SetEnviormentArgument(env, arguments1);
 
-        Assert.ThrowsException<ArgumentOutOfRangeException>(() => { env.GetDoubleArg(-1); });
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => { env.GetDoubleArg(-1); });
     }
 
     [TestMethod]
@@ -228,7 +228,7 @@ public class ScenarioEnvironmentTest {
         ScenarioEnvironment env = ScenarioEnvironment.New();
         SetEnviormentArgument(env, arguments1);
 
-        Assert.ThrowsException<ArgumentNullException>(() => { env.GetDoubleArg("not exist"); });
+        Assert.ThrowsExactly<ArgumentNullException>(() => { env.GetDoubleArg("not exist"); });
     }
 
     [TestMethod]
@@ -298,7 +298,7 @@ public class ScenarioEnvironmentTest {
         ScenarioEnvironment env = ScenarioEnvironment.New();
         SetEnviormentArgument(env, arguments1);
 
-        Assert.ThrowsException<ArgumentOutOfRangeException>(() => { env.GetStringHistoricalArg(-1); });
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => { env.GetStringHistoricalArg(-1); });
     }
 
     [TestMethod]
@@ -306,7 +306,7 @@ public class ScenarioEnvironmentTest {
         ScenarioEnvironment env = ScenarioEnvironment.New();
         SetEnviormentArgument(env, arguments1);
 
-        Assert.ThrowsException<ArgumentNullException>(() => { env.GetStringHistoricalArg("not exist"); });
+        Assert.ThrowsExactly<ArgumentNullException>(() => { env.GetStringHistoricalArg("not exist"); });
     }
 
     [TestMethod]
@@ -314,7 +314,7 @@ public class ScenarioEnvironmentTest {
         ScenarioEnvironment env = ScenarioEnvironment.New();
         SetEnviormentArgument(env, arguments1);
 
-        Assert.ThrowsException<ArgumentOutOfRangeException>(() => { env.GetIntHistoricalArg(-1); });
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => { env.GetIntHistoricalArg(-1); });
     }
 
     [TestMethod]
@@ -322,7 +322,7 @@ public class ScenarioEnvironmentTest {
         ScenarioEnvironment env = ScenarioEnvironment.New();
         SetEnviormentArgument(env, arguments1);
 
-        Assert.ThrowsException<ArgumentNullException>(() => { env.GetIntHistoricalArg("not exist"); });
+        Assert.ThrowsExactly<ArgumentNullException>(() => { env.GetIntHistoricalArg("not exist"); });
     }
 
     [TestMethod]
@@ -330,7 +330,7 @@ public class ScenarioEnvironmentTest {
         ScenarioEnvironment env = ScenarioEnvironment.New();
         SetEnviormentArgument(env, arguments1);
 
-        Assert.ThrowsException<ArgumentOutOfRangeException>(() => { env.GetDoubleHistoricalArg(-1); });
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => { env.GetDoubleHistoricalArg(-1); });
     }
 
     [TestMethod]
@@ -338,7 +338,7 @@ public class ScenarioEnvironmentTest {
         ScenarioEnvironment env = ScenarioEnvironment.New();
         SetEnviormentArgument(env, arguments1);
 
-        Assert.ThrowsException<ArgumentNullException>(() => { env.GetDoubleHistoricalArg("not exist"); });
+        Assert.ThrowsExactly<ArgumentNullException>(() => { env.GetDoubleHistoricalArg("not exist"); });
     }
 
     [TestMethod]
@@ -392,35 +392,35 @@ public class ScenarioEnvironmentTest {
     public void get_a_string_variable_not_exist() {
         ScenarioEnvironment env = ScenarioEnvironment.New();
 
-        Assert.ThrowsException<ArgumentNullException>(() => { env.GetString("not exist"); });
+        Assert.ThrowsExactly<ArgumentNullException>(() => { env.GetString("not exist"); });
     }
 
     [TestMethod]
     public void get_a_int_variable_not_exist() {
         ScenarioEnvironment env = ScenarioEnvironment.New();
 
-        Assert.ThrowsException<ArgumentNullException>(() => { env.GetInt("not exist"); });
+        Assert.ThrowsExactly<ArgumentNullException>(() => { env.GetInt("not exist"); });
     }
 
     [TestMethod]
     public void get_a_double_variable_not_exist() {
         ScenarioEnvironment env = ScenarioEnvironment.New();
 
-        Assert.ThrowsException<ArgumentNullException>(() => { env.GetDouble("not exist"); });
+        Assert.ThrowsExactly<ArgumentNullException>(() => { env.GetDouble("not exist"); });
     }
 
     [TestMethod]
     public void get_a_bolean_variable_not_exist() {
         ScenarioEnvironment env = ScenarioEnvironment.New();
 
-        Assert.ThrowsException<ArgumentNullException>(() => { env.GetBool("not exist"); });
+        Assert.ThrowsExactly<ArgumentNullException>(() => { env.GetBool("not exist"); });
     }
 
     [TestMethod]
     public void get_a_object_variable_not_exist() {
         ScenarioEnvironment env = ScenarioEnvironment.New();
 
-        Assert.ThrowsException<ArgumentNullException>(() => { env.Get<Tuple<int, int>>("not exist"); });
+        Assert.ThrowsExactly<ArgumentNullException>(() => { env.Get<Tuple<int, int>>("not exist"); });
     }
 
     [TestMethod]

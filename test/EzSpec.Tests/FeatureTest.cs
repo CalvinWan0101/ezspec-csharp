@@ -75,14 +75,14 @@ public class FeatureTest {
 
         feature.NewRule("Rule's name");
 
-        Assert.ThrowsException<ArgumentException>(() => { feature.NewRule("Rule's name"); });
+        Assert.ThrowsExactly<ArgumentException>(() => { feature.NewRule("Rule's name"); });
     }
 
     [TestMethod]
     public void find_non_exist_rule() {
         Feature feature = Feature.New("Feature's name", "Feature's description");
 
-        Assert.ThrowsException<InvalidOperationException>(() => feature.WithRule("rule non-existent"));
+        Assert.ThrowsExactly<InvalidOperationException>(() => feature.WithRule("rule non-existent"));
     }
 
     [TestMethod]

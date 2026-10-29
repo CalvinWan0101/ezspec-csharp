@@ -77,7 +77,7 @@ public class TableTest {
     public void create_table_from_illegal_raw_data() {
         string rawData = "RFTYGUHIJOUYTGH*(&^123";
 
-        Assert.ThrowsException<SystemException>(() => Table.New(rawData));
+        Assert.ThrowsExactly<SystemException>(() => Table.New(rawData));
     }
 
     [TestMethod]
@@ -145,7 +145,7 @@ public class TableTest {
     public void get_row_by_first_column_with_illegal_column() {
         Table table = Table.New(header, rows);
 
-        Assert.ThrowsException<SystemException>(() => table.GetRow("10004"));
+        Assert.ThrowsExactly<SystemException>(() => table.GetRow("10004"));
     }
 
     [TestMethod]
