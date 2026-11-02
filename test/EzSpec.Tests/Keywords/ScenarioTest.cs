@@ -281,7 +281,7 @@ public class ScenarioTest {
                 .Given("a given step.", env => {
                 })
                 .When("I run when step and failed", Step.TerminateAfterFailure, env => {
-                    Assert.AreEqual(1, 2);
+                    Assert.Fail("Intentional step failure.");
                 })
                 .Then("this step should be skip", env => {
                 })
@@ -301,7 +301,7 @@ public class ScenarioTest {
                 .Given("a given step.", env => {
                 })
                 .When("I run when step and failed", Step.ContinuousAfterFailure, env => {
-                    Assert.AreEqual(1, 2);
+                    Assert.Fail("Intentional step failure.");
                 })
                 .Then("this step should not be skip", env => {
                 })
@@ -352,7 +352,7 @@ public class ScenarioTest {
         Assert.ThrowsExactly<EzSpecError>(() => {
             rule.NewBackground("Background's name")
                 .Given("a failure step", env => {
-                    Assert.IsTrue(false);
+                    Assert.Fail("Intentional step failure.");
                 });
 
             rule.NewScenario("Scenario's name")
@@ -408,7 +408,7 @@ public class ScenarioTest {
         Assert.ThrowsExactly<EzSpecError>(() => {
             rule.NewBackground("Background's name")
                 .Given("a failure step", env => {
-                    Assert.IsTrue(false);
+                    Assert.Fail("Intentional step failure.");
                 });
 
             rule.NewScenario("Scenario's name")
@@ -430,7 +430,7 @@ public class ScenarioTest {
                 .Given("a given step.", env => {
                 })
                 .When("I run when step and failed", Step.TerminateAfterFailure, env => {
-                    Assert.AreEqual(1, 2);
+                    Assert.Fail("Intentional step failure.");
                 })
                 .And("this step should not be skip", env => {
                 })
@@ -457,7 +457,7 @@ public class ScenarioTest {
                 .Given("a given step.", env => {
                 })
                 .When("I run when step and failed", Step.ContinuousAfterFailure, env => {
-                    Assert.AreEqual(1, 2);
+                    Assert.Fail("Intentional step failure.");
                 })
                 .And("this step shoul not be skip", env => {
                 })
@@ -566,13 +566,11 @@ public class ScenarioTest {
                 .Given("a given step", env => {
                 })
                 .When("I run when step", env => {
-                    Assert.IsTrue(true);
                 })
                 .Then("this step failure", Step.ContinuousAfterFailure, env => {
-                    Assert.IsTrue(false);
+                    Assert.Fail("Intentional step failure.");
                 })
                 .And("this step success", env => {
-                    Assert.IsTrue(true);
                 })
                 .But("nothing", env => {
                 })
@@ -598,13 +596,11 @@ public class ScenarioTest {
                 .Given("a given step line 1\na given step line 2", env => {
                 })
                 .When("I run when step line 1\nI run when step line 2", env => {
-                    Assert.IsTrue(true);
                 })
                 .Then("this step failure line 1\nthis step failure line 2", Step.ContinuousAfterFailure, env => {
-                    Assert.IsTrue(false);
+                    Assert.Fail("Intentional step failure.");
                 })
                 .And("this step success line 1\nthis step success line 2", env => {
-                    Assert.IsTrue(true);
                 })
                 .But("nothing line 1\nnothing line 2", env => {
                 })
@@ -637,15 +633,13 @@ public class ScenarioTest {
                 })
                 .When(@"I run when step line 1
                             I run when step line 2".AutoTrim(), env => {
-                    Assert.IsTrue(true);
                 })
                 .Then(@"this step failure line 1
                             this step failure line 2".AutoTrim(), Step.ContinuousAfterFailure, env => {
-                    Assert.IsTrue(false);
+                    Assert.Fail("Intentional step failure.");
                 })
                 .And(@"this step success line 1
                             this step success line 2".AutoTrim(), env => {
-                    Assert.IsTrue(true);
                 })
                 .But(@"nothing line 1
                             nothing line 2".AutoTrim(), env => {

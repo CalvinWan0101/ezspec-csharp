@@ -103,7 +103,7 @@ public class BackgroundTest {
         try {
             background.Given("given step", env => { })
                 .And("and a failure step", env => {
-                    Assert.IsTrue(false);
+                    Assert.Fail("Intentional step failure.");
                 });
             execute?.Invoke(background, new object[] { });
             Assert.Fail();
@@ -141,7 +141,7 @@ public class BackgroundTest {
         try {
             background.Given("given step", env => { })
                 .And("and a failure step", env => {
-                    Assert.IsTrue(false);
+                    Assert.Fail("Intentional step failure.");
                 });
             executeConcurrently?.Invoke(background, new object[] { });
             Assert.Fail();
@@ -163,7 +163,7 @@ public class BackgroundTest {
             background.Given("given step", env => { })
                 .And("and a success step", env => { })
                 .And("and a failure step", env => {
-                    Assert.IsTrue(false);
+                    Assert.Fail("Intentional step failure.");
                 })
                 .And("this step should be skipped", env => { });
             execute?.Invoke(background, new object[] { });
