@@ -10,9 +10,7 @@ public class Feature {
     private readonly IList<Rule> rules;
     private Rule defaultRule;
 
-    public string Name {
-        get { return name; }
-    }
+    public string Name => name;
 
     public string Description {
         get { return description; }

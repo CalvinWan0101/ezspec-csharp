@@ -9,9 +9,7 @@ public class Examples {
     private readonly string description;
     private readonly Table table;
 
-    public string Name {
-        get { return name; }
-    }
+    public string Name => name;
 
     public string Description {
         get { return description; }

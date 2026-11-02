@@ -11,9 +11,7 @@ public class Rule {
     private readonly IList<Scenario> scenarios;
     private Background? background;
 
-    public string Name {
-        get { return name; }
-    }
+    public string Name => name;
 
     public string Description {
         get { return description; }

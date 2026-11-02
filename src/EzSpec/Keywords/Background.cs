@@ -9,9 +9,7 @@ public class Background {
     private readonly IList<Step> steps;
     private ScenarioEnvironment env;
 
-    public string Name {
-        get { return name; }
-    }
+    public string Name => name;
     
     public ReadOnlyCollection<Step> Steps {
         get { return new ReadOnlyCollection<Step>(steps); }
