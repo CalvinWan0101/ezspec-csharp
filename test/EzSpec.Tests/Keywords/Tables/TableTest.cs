@@ -30,7 +30,6 @@ public class TableTest {
         Assert.AreEqual("name", table.Header.Get(1));
         Assert.AreEqual("score", table.Header.Get(2));
         Assert.AreEqual(0, table.Rows.Count);
-        Assert.AreEqual("", table.RawData);
     }
 
     [TestMethod]
@@ -46,7 +45,6 @@ public class TableTest {
         Assert.AreEqual("| 10001 | Joe    | 60  |", table.Rows[0].ToString(beautify));
         Assert.AreEqual("| 10002 | Calvin | 80  |", table.Rows[1].ToString(beautify));
         Assert.AreEqual("| 10003 | Howard | 100 |", table.Rows[2].ToString(beautify));
-        Assert.AreEqual("", table.RawData);
     }
 
     [TestMethod]
@@ -69,7 +67,6 @@ public class TableTest {
         Assert.AreEqual("| 10001 | Joe    | 60    |", table.Rows[0].ToString(beautify));
         Assert.AreEqual("| 10002 | Calvin | 80    |", table.Rows[1].ToString(beautify));
         Assert.AreEqual("| 10003 | Howard | 100   |", table.Rows[2].ToString(beautify));
-        Assert.AreEqual(rawData, table.RawData);
     }
 
     [TestMethod]
@@ -95,7 +92,6 @@ public class TableTest {
         Assert.AreEqual("| 10001 | Joe    | 60    |", newTable.Rows[0].ToString(beautify));
         Assert.AreEqual("| 10002 | Calvin | 80    |", newTable.Rows[1].ToString(beautify));
         Assert.AreEqual("| 10003 | Howard | 100   |", newTable.Rows[2].ToString(beautify));
-        Assert.AreEqual("", newTable.RawData);
     }
 
     [TestMethod]
@@ -119,7 +115,6 @@ public class TableTest {
         Assert.AreEqual("| 10001 | Joe    | 60    |", newTable.Rows[0].ToString(beautify));
         Assert.AreEqual("| 10002 | Calvin | 80    |", newTable.Rows[1].ToString(beautify));
         Assert.AreEqual("| 10003 | Howard | 100   |", newTable.Rows[2].ToString(beautify));
-        Assert.AreEqual(rawData, newTable.RawData);
     }
 
     [TestMethod]

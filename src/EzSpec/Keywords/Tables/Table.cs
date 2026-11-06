@@ -4,13 +4,8 @@ using System.Text;
 namespace EzSpec.Keywords.Tables;
 
 public class Table {
-    private string rawData;
     private Header header;
     private IList<Row> rows;
-
-    public string RawData {
-        get { return rawData; }
-    }
 
     public Header Header {
         get { return header; }
@@ -26,7 +21,6 @@ public class Table {
         foreach (Row row in rows) {
             this.rows.Add(Row.New(row));
         }
-        rawData = "";
     }
 
     private Table(string rawData) {
@@ -34,7 +28,6 @@ public class Table {
             throw new SystemException("The raw data contains no table.");
         }
 
-        this.rawData = rawData;
         rawData = rawData.Replace("\r\n", "\n");
         List<string> lines = rawData.Split('\n').ToList();
         lines = lines.FindAll(line => line.Contains("|"));
@@ -54,7 +47,6 @@ public class Table {
         foreach (Row row in table.rows) {
             rows.Add(Row.New(row));
         }
-        rawData = table.rawData;
     }
 
     public static Table New(Header header) {
