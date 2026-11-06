@@ -51,36 +51,10 @@ public class Row {
         return "";
     }
 
-    public Table GetTable(int index) {
-        return Table.New(columns[index]);
-    }
-
-    public Table GetTable(string columnName) {
-        for (int i = 0; i < columns.Count; i++) {
-            if (header.Get(i) == columnName) {
-                return Table.New(columns[i]);
-            }
-        }
-        throw new SystemException($"Unable to get the \"{columnName}\"");
-    }
-
     public override string ToString() {
         StringBuilder sb = new StringBuilder("|");
         foreach (string column in columns) {
-            if (Table.ContainsTable(column)) {
-                sb.Append("\t|");
-            } else {
-                sb.Append($"\t{column}\t|");
-            }
-        }
-
-        for (int i = 0; i < columns.Count; i++) {
-            if (Table.ContainsTable(columns[i])) {
-                sb.Append("\n");
-                sb.Append($"\t<{header.Get(i)}>\n");
-                sb.Append("\t");
-                sb.Append(Table.New(columns[i]).ToString().AddIndent("\t"));
-            }
+            sb.Append($"\t{column}\t|");
         }
         if (0 == columns.Count) {
             sb.Append("|");
@@ -95,24 +69,10 @@ public class Row {
 
         StringBuilder sb = new StringBuilder("|");
         for (int i = 0; i < columns.Count; i++) {
-            if (Table.ContainsTable(columns[i])) {
-                sb.Append(new string(' ', columnsLength[i]));
-                sb.Append("|");
-            } else {
-                sb.Append(" ");
-                sb.Append(columns[i]);
-                sb.Append(new string(' ', columnsLength[i] - columns[i].Length - 1));
-                sb.Append("|");
-            }
-        }
-
-        for (int i = 0; i < columns.Count; i++) {
-            if (Table.ContainsTable(columns[i])) {
-                sb.Append("\n");
-                sb.Append($"\t<{header.Get(i)}>\n");
-                sb.Append("\t");
-                sb.Append(Table.New(columns[i]).ToStringBeautify().AddIndent("\t"));
-            }
+            sb.Append(" ");
+            sb.Append(columns[i]);
+            sb.Append(new string(' ', columnsLength[i] - columns[i].Length - 1));
+            sb.Append("|");
         }
         if (0 == columns.Count) {
             sb.Append("|");

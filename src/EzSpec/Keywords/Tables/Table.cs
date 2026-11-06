@@ -123,9 +123,6 @@ public class Table {
     private int GetMaxColumnLength(int columnIndex) {
         int max = header.Get(columnIndex).Length;
         foreach (Row row in rows) {
-            if (ContainsTable(row.Get(columnIndex))) {
-                break;
-            }
             if (row.Get(columnIndex).Length > max) {
                 max = row.Get(columnIndex).Length;
             }

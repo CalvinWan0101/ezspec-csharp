@@ -1,5 +1,4 @@
 using EzSpec.Keywords.Tables;
-using EzSpec.Keywords;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EzSpec.Tests.Keywords.Tables;
@@ -99,56 +98,6 @@ public class RowTest {
         Assert.AreEqual("", row.GetOrEmpty("columnNotExist"));
     }
 
-    [TestMethod]
-    public void get_table_by_index() {
-        Header header = Header.New(new List<string>() {
-            "origin_struct", "delete_node", "except_struct"
-        });
-        Row row = Row.New(header, new List<string>() {
-                        "| name  |     path     | parent |\n" +
-                        "| users |    /users    |  null  |\n" +
-                        "| user1 | /users/user1 | users  |\n" +
-                        "| user2 | /users/user2 | users  |",
-                        "/users/user1",
-                        "| name  |     path     | parent |\n" +
-                        "| users |    /users    |  null  |\n" +
-                        "| user2 | /users/user2 | users  |"
-                  });
-
-        string except =
-                "|\tname\t|\tpath\t|\tparent\t|\n" +
-                "|\tusers\t|\t/users\t|\tnull\t|\n" +
-                "|\tuser1\t|\t/users/user1\t|\tusers\t|\n" +
-                "|\tuser2\t|\t/users/user2\t|\tusers\t|";
-
-        Assert.AreEqual(except, row.GetTable(0).ToString());
-    }
-
-    [TestMethod]
-    public void get_table_by_name() {
-        Header header = Header.New(new List<string>() {
-            "origin_struct", "delete_node", "except_struct"
-        });
-        Row row = Row.New(header, new List<string>() {
-                        "| name  |     path     | parent |\n" +
-                        "| users |    /users    |  null  |\n" +
-                        "| user1 | /users/user1 | users  |\n" +
-                        "| user2 | /users/user2 | users  |",
-                        "/users/user1",
-                        "| name  |     path     | parent |\n" +
-                        "| users |    /users    |  null  |\n" +
-                        "| user2 | /users/user2 | users  |"
-                  });
-
-        string except =
-                "|\tname\t|\tpath\t|\tparent\t|\n" +
-                "|\tusers\t|\t/users\t|\tnull\t|\n" +
-                "|\tuser1\t|\t/users/user1\t|\tusers\t|\n" +
-                "|\tuser2\t|\t/users/user2\t|\tusers\t|";
-
-        Assert.AreEqual(except, row.GetTable("origin_struct").ToString());
-    }
-
 
     [TestMethod]
     public void row_to_string() {
@@ -161,42 +110,23 @@ public class RowTest {
     }
 
     [TestMethod]
+    [DataRow("|")]
+    [DataRow("| name |\n| Joe |")]
+    public void table_like_cell_is_plain_text(string value) {
+        Row row = Row.New(header, new List<string>() { value, "data2" });
+
+        Assert.AreEqual(value, row.Get(0));
+        Assert.AreEqual(value, row.Get("column1"));
+        Assert.AreEqual($"|\t{value}\t|\tdata2\t|", row.ToString());
+        Assert.AreEqual($"| {value} | data2 |", row.ToString(new List<int>() { value.Length + 2, 7 }));
+    }
+
+    [TestMethod]
     public void empty_row_to_string() {
         List<string> rowData = new List<string>() { };
         Row row = Row.New(header, rowData);
 
         Assert.AreEqual("||", row.ToString());
-    }
-
-    [TestMethod]
-    public void row_contains_table_to_string() {
-        Header header = Header.New(new List<string>() {
-            "origin_struct", "delete_node", "except_struct"
-        });
-        Row row = Row.New(header, new List<string>() {
-                        "| name  |     path     | parent |\n" +
-                        "| users |    /users    |  null  |\n" +
-                        "| user1 | /users/user1 | users  |\n" +
-                        "| user2 | /users/user2 | users  |",
-                        "/users/user1",
-                        "| name  |     path     | parent |\n" +
-                        "| users |    /users    |  null  |\n" +
-                        "| user2 | /users/user2 | users  |"
-                  });
-
-        string except =
-                "|\t|\t/users/user1\t|\t|\n" +
-                "\t<origin_struct>\n" +
-                "\t|\tname\t|\tpath\t|\tparent\t|\n" +
-                "\t|\tusers\t|\t/users\t|\tnull\t|\n" +
-                "\t|\tuser1\t|\t/users/user1\t|\tusers\t|\n" +
-                "\t|\tuser2\t|\t/users/user2\t|\tusers\t|\n" +
-                "\t<except_struct>\n" +
-                "\t|\tname\t|\tpath\t|\tparent\t|\n" +
-                "\t|\tusers\t|\t/users\t|\tnull\t|\n" +
-                "\t|\tuser2\t|\t/users/user2\t|\tusers\t|";
-
-        Assert.AreEqual(except, row.ToString());
     }
 
     [TestMethod]
@@ -211,40 +141,6 @@ public class RowTest {
         };
 
         Assert.AreEqual("| data1    | data2         |", row.ToString(columnsLength));
-    }
-
-    [TestMethod]
-    public void row_contains_table_to_string_beautify() {
-        Header header = Header.New(new List<string>() {
-            "origin_struct", "delete_node", "except_struct"
-        });
-        Row row = Row.New(header, new List<string>() {
-                        "| name  |     path     | parent |\n" +
-                        "| users |    /users    |  null  |\n" +
-                        "| user1 | /users/user1 | users  |\n" +
-                        "| user2 | /users/user2 | users  |",
-                        "/users/user1",
-                        "| name  |     path     | parent |\n" +
-                        "| users |    /users    |  null  |\n" +
-                        "| user2 | /users/user2 | users  |"
-                  });
-        List<int> columnsLength = new List<int>() {
-            5, 14, 5
-        };
-
-        string except =
-                "|     | /users/user1 |     |\n" +
-                "\t<origin_struct>\n" +
-                "\t| name  | path         | parent |\n" +
-                "\t| users | /users       | null   |\n" +
-                "\t| user1 | /users/user1 | users  |\n" +
-                "\t| user2 | /users/user2 | users  |\n" +
-                "\t<except_struct>\n" +
-                "\t| name  | path         | parent |\n" +
-                "\t| users | /users       | null   |\n" +
-                "\t| user2 | /users/user2 | users  |";
-
-        Assert.AreEqual(except, row.ToString(columnsLength));
     }
 
     [TestMethod]

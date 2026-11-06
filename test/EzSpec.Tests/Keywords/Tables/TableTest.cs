@@ -1,5 +1,4 @@
 using EzSpec.Keywords.Tables;
-using EzSpec.Keywords;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace EzSpec.Tests.Keywords.Tables;
@@ -176,111 +175,25 @@ public class TableTest {
 
 
     [TestMethod]
-    public void table_in_table_to_string() {
-        Header header = Header.New(new List<string>() {
-            "origin_struct", "delete_node", "except_struct"
+    public void table_like_cells_are_formatted_as_plain_text() {
+        Header header = Header.New(new List<string>() { "value" });
+        Table table = Table.New(header, new List<Row>() {
+            Row.New(header, new List<string>() { "| x |" }),
+            Row.New(header, new List<string>() { "long text" })
         });
-        List<Row> rows = new List<Row>() {
-            Row.New(header, new List<string>(){
-                "| name  |     path     | parent |\n" +
-                "| users |    /users    |  null  |\n" +
-                "| user1 | /users/user1 | users  |\n" +
-                "| user2 | /users/user2 | users  |",
-                "/users/user1",
-                "| name  |     path     | parent |\n" +
-                "| users |    /users    |  null  |\n" +
-                "| user2 | /users/user2 | users  |"
-            }),
-            Row.New(header, new List<string>(){
-                "| name  |     path     | parent |\n" +
-                "| users |    /users    |  null  |\n" +
-                "| user1 | /users/user1 | users  |\n" +
-                "| user2 | /users/user2 | users  |",
-                "/users/user2",
-                "| name  |     path     | parent |\n" +
-                "| users |    /users    |  null  |\n" +
-                "| user1 | /users/user1 | users  |"
-            })
-        };
-        Table table = Table.New(header, rows);
 
-        string except =
-            "|\torigin_struct\t|\tdelete_node\t|\texcept_struct\t|\n" +
-            "|\t|\t/users/user1\t|\t|\n" +
-            "\t<origin_struct>\n" +
-            "\t|\tname\t|\tpath\t|\tparent\t|\n" +
-            "\t|\tusers\t|\t/users\t|\tnull\t|\n" +
-            "\t|\tuser1\t|\t/users/user1\t|\tusers\t|\n" +
-            "\t|\tuser2\t|\t/users/user2\t|\tusers\t|\n" +
-            "\t<except_struct>\n" +
-            "\t|\tname\t|\tpath\t|\tparent\t|\n" +
-            "\t|\tusers\t|\t/users\t|\tnull\t|\n" +
-            "\t|\tuser2\t|\t/users/user2\t|\tusers\t|\n" +
-            "|\t|\t/users/user2\t|\t|\n" +
-            "\t<origin_struct>\n" +
-            "\t|\tname\t|\tpath\t|\tparent\t|\n" +
-            "\t|\tusers\t|\t/users\t|\tnull\t|\n" +
-            "\t|\tuser1\t|\t/users/user1\t|\tusers\t|\n" +
-            "\t|\tuser2\t|\t/users/user2\t|\tusers\t|\n" +
-            "\t<except_struct>\n" +
-            "\t|\tname\t|\tpath\t|\tparent\t|\n" +
-            "\t|\tusers\t|\t/users\t|\tnull\t|\n" +
-            "\t|\tuser1\t|\t/users/user1\t|\tusers\t|";
-        Assert.AreEqual(except, table.ToString());
+        Assert.AreEqual("|\tvalue\t|\n|\t| x |\t|\n|\tlong text\t|", table.ToString());
+        Assert.AreEqual("| value     |\n| | x |     |\n| long text |", table.ToStringBeautify());
     }
 
     [TestMethod]
-    public void table_in_table_to_string_beautify() {
-        Header header = Header.New(new List<string>() {
-            "origin_struct", "delete_node", "except_struct"
+    public void table_like_cell_length_is_included_in_column_width() {
+        Header header = Header.New(new List<string>() { "value" });
+        Table table = Table.New(header, new List<Row>() {
+            Row.New(header, new List<string>() { "| name |" })
         });
-        List<Row> rows = new List<Row>() {
-            Row.New(header, new List<string>(){
-                "| name  |     path     | parent |\n" +
-                "| users |    /users    |  null  |\n" +
-                "| user1 | /users/user1 | users  |\n" +
-                "| user2 | /users/user2 | users  |",
-                "/users/user1",
-                "| name  |     path     | parent |\n" +
-                "| users |    /users    |  null  |\n" +
-                "| user2 | /users/user2 | users  |"
-            }),
-            Row.New(header, new List<string>(){
-                "| name  |     path     | parent |\n" +
-                "| users |    /users    |  null  |\n" +
-                "| user1 | /users/user1 | users  |\n" +
-                "| user2 | /users/user2 | users  |",
-                "/users/user2",
-                "| name  |     path     | parent |\n" +
-                "| users |    /users    |  null  |\n" +
-                "| user1 | /users/user1 | users  |"
-            })
-        };
-        Table table = Table.New(header, rows);
 
-        string except =
-            "| origin_struct | delete_node  | except_struct |\n" +
-            "|               | /users/user1 |               |\n" +
-            "\t<origin_struct>\n" +
-            "\t| name  | path         | parent |\n" +
-            "\t| users | /users       | null   |\n" +
-            "\t| user1 | /users/user1 | users  |\n" +
-            "\t| user2 | /users/user2 | users  |\n" +
-            "\t<except_struct>\n" +
-            "\t| name  | path         | parent |\n" +
-            "\t| users | /users       | null   |\n" +
-            "\t| user2 | /users/user2 | users  |\n" +
-            "|               | /users/user2 |               |\n" +
-            "\t<origin_struct>\n" +
-            "\t| name  | path         | parent |\n" +
-            "\t| users | /users       | null   |\n" +
-            "\t| user1 | /users/user1 | users  |\n" +
-            "\t| user2 | /users/user2 | users  |\n" +
-            "\t<except_struct>\n" +
-            "\t| name  | path         | parent |\n" +
-            "\t| users | /users       | null   |\n" +
-            "\t| user1 | /users/user1 | users  |";
-        Assert.AreEqual(except, table.ToStringBeautify());
+        Assert.AreEqual("| value    |\n| | name | |", table.ToStringBeautify());
     }
 
     [TestMethod]
